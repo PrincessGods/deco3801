@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for
-application = app = Flask(__name__)
+application = Flask(__name__)
 
 posts = [
     {
@@ -17,15 +17,15 @@ posts = [
     }
 ]
 
-@app.route("/")
+@application.route("/")
 
-@app.route("/home")
+@application.route("/home")
 def home():
     return render_template('index.html', posts = posts, title = "demo1")
 
-@app.route("/about")
+@application.route("/about")
 def about():
     return "About World!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
