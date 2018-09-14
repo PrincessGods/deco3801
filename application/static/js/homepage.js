@@ -9,10 +9,10 @@ function dropControl(){
         document.getElementById("dropdown_menu").style.position = "absolute";
     }
 
-    if(document.getElementById("dropdown_menu").style.height == "123px"){
+    if(document.getElementById("dropdown_menu").style.height == "82px"){
         document.getElementById("dropdown_menu").style.height = "0px";
     } else{
-        document.getElementById("dropdown_menu").style.height = "123px";
+        document.getElementById("dropdown_menu").style.height = "82px";
     }
 }
 
