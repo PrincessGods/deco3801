@@ -1,23 +1,34 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from application.config import Config
 
-application = Flask(__name__)
-application.config['SECRET_KEY'] = '3204436496843db0b799220bd0c151b2'
-application.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MySQL')
-db = SQLAlchemy(application)
-bcrypt = Bcrypt(application)
-login_manager = LoginManager(application)
-login_manager.login_view = 'login'
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
+login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
-application.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-application.config['MAIL_PORT'] = 587
-application.config['MAIL_USE_TLS'] = True
-application.config['MAIL_USERNAME'] = os.environ.get('MAIL_USER')
-application.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASS')
-mail = Mail(application)
+mail = Mail()
 
-from application import routes
+def create_app(config_class=Config):
+    application = Flask(__name__)
+    application.config.from_object(Config)
+
+    db.init_app(application)
+    bcrypt.init_app(application)
+    login_manager.init_app(application)
+    mail.init_app(application)
+
+    from application.main.routes import main
+    from application.users.routes import users
+    from application.hams.routes import hams
+    from application.errors.handlers import errors
+    
+    application.register_blueprint(main)
+    application.register_blueprint(users)
+    application.register_blueprint(hams)
+    application.register_blueprint(errors)
+
+    return application

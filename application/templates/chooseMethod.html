@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container my-5 rounded job_manage_box d-flex">
+    <div class="d-flex flex-column">
+        <h1 class="mb-5">Choose your method</h1>
+        <div class="content-section">
+            <form method="POST" action="">
+
+                <fieldset class="form-group">
+                    {% for i in range(details|length) %}
+                        <div class="form-group mb-5">
+                            <legend class="border-bottom pb-2 mt-3">
+                                <div class="d-flex">
+                                    <h3 class="mb-0 mr-3">{{ details[i].title }}</h3>
+                                    <div class="my-auto">{{ methods[i] }}</div>
+                                </div>
+                            </legend>
+                            <p class="text text-secondary">{{ details[i].description }}</p>
+                        </div>
+                    {% endfor %}
+                </fieldset>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+
+            </form>
+        </div>
+    </div>        
+</div>    
+
+{% endblock content %}

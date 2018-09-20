@@ -3,7 +3,6 @@ from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-
 from application.models import User
 
 class RegistrationForm(FlaskForm):
@@ -67,7 +66,7 @@ class UpdateProfileForm(FlaskForm):
         if email.data != current_user.email:
             email = User.query.filter_by(email=email.data).first()
             if email:
-                raise ValidationError('This eamil has been registered')    
+                raise ValidationError('This eamil has been registered')
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

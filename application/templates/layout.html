@@ -21,53 +21,59 @@
         <header id="topNav">
             <div class="container" id="header_container">
                 
-                <nav class="navbar navbar-expand-md navbar-dark bg-dark px-0 py-0">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-0 py-0">
                 
-                    <a class="navbar-brand py-2" href="#">CompanyName</a>
+                    <a class="navbar-brand py-2 font-weight-bold" href="{{ url_for('main.home') }}">CECEWSN</a>
                     
                     <!--Add here -->
-                    <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                    <button class="navbar-toggler my-2 " type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!--Add here -->
         
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav m-auto">
                             <li class="nav-item py-2">
-                                <a class="nav-link px-4" href="{{ url_for('home') }}">Home</a>
-                            </li>
-                            <li class="nav-item py-2">
-                                <a class="nav-link px-4" href="{{ url_for('profile') }}">About</a>
-                            </li>
-                            <!--
-                            <li class="nav-item dropdown py-2">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Products
-                                </a>
-                            -->
-                            <li class="nav-item dropdown py-2">
-                                <a class="nav-link dropdown-toggle px-4" href="#" onclick="dropControl()">My Account</a>
-                                <div class="dropdown_menu bg-dark py-0 d-flex" id="dropdown_menu">
-                                    {% if current_user.is_authenticated %}
-                                        <a class="dropdown-item py-2" id="dropdown-item3" href="{{ url_for('profile') }}">Profile</a>
-                                        <a class="dropdown-item py-2" href="{{ url_for('logout') }}">Log Out</a>
-                                    {% else %}
-                                        <a class="dropdown-item py-2" href="{{ url_for('register') }}">Sign In</a>
-                                        <a class="dropdown-item py-2" href="{{ url_for('login') }}">Log In</a>
-                                    {% endif %}
-                                </div>
-                                <!--
-                                <div class="dropdown-menu bg-dark py-0" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item py-2" id="dropdown-item1" href="#">Product 1</a>
-                                    <a class="dropdown-item py-2" href="#">Product 2</a>
-                                    <div class="dropdown-divider my-0"></div>
-                                    <a class="dropdown-item py-2" href="#">Another Product</a>
-                                </div>
-                                -->
+                                <a class="nav-link px-4" href="{{ url_for('main.home') }}">Home</a>
                             </li>
                             <li class="nav-item py-2">
-                                <a class="nav-link px-4" href="#">Contact</a>
+                                <a class="nav-link px-4" href="{{ url_for('hams.manageJobs') }}">Upload</a>
                             </li>
+                            <li class="nav-item py-2">
+                                <a class="nav-link px-4" href="{{ url_for('users.profile') }}">Documentation</a>
+                            </li>
+                            <li class="nav-item py-2">
+                                <a class="nav-link px-4" href="{{ url_for('users.profile') }}">Forum</a>
+                            </li>
+                            <li class="nav-item py-2">
+                                <a class="nav-link px-4" href="{{ url_for('users.profile') }}">Help</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav">
+                            {% if current_user.is_authenticated %}
+                                <li class="nav-item dropdown py-2">
+                                    <a class="nav-link dropdown-toggle px-4" href="#" onclick="dropControl()">My Account</a>
+                                    <div class="dropdown_menu bg-dark py-0 d-flex" id="dropdown_menu">
+                                        
+                                            <a class="dropdown-item py-2" id="dropdown-item3" href="{{ url_for('users.profile') }}">Profile</a>
+                                            <a class="dropdown-item py-2" href="{{ url_for('users.logout') }}">Log Out</a>
+                                        
+                                            <a class="dropdown-item py-2" href="{{ url_for('users.register') }}">Sign In</a>
+                                            <a class="dropdown-item py-2" href="{{ url_for('users.login') }}">Log In</a>
+                                        
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li class="nav-item py-2">
+                                    <a class="nav-link px-4" href="{{ url_for('users.register') }}">Sign In</a>
+                                </li>
+                                <li class="nav-item py-2">
+                                    <a class="nav-link px-4" href="{{ url_for('users.login') }}">Log In</a>
+                                </li>
+                            {% endif %}
+
+                            
                         </ul>
                     </div>
                 </nav>
@@ -85,6 +91,37 @@
         {% endwith %}
 
         {% block content %} {% endblock %}
+        
+        <footer class="container footer">
+            <div class="row m-auto p-2">
+                <div class="col-sm-9 col-md-3 mx-sm-auto pt-3 d-flex flex-column">
+                    <legend class="border-bottom mx-sm-auto mx-md-0">
+                        <h4>CECEWSN</h4>
+                    </legend>
+                    <p class="mx-sm-auto mx-md-0">Careers</p>
+                    <p class="mx-sm-auto mx-md-0">Press</p>
+                    <p class="mx-sm-auto mx-md-0">Policies</p>
+                    <p class="mx-sm-auto mx-md-0">Help</p>
+                </div>
+                <div class="col-sm-9 col-md-4 mx-sm-auto pt-3 d-flex flex-column">
+                    <legend class="border-bottom mx-sm-auto mx-md-0">
+                        <h4>Research</h4>
+                    </legend>
+                    <p class="mx-sm-auto mx-md-0">Why Searching</p>
+                    <p class="mx-sm-auto mx-md-0">Study</p>
+                    <p class="mx-sm-auto mx-md-0">Responsible Documentation</p>
+                    <p class="mx-sm-auto mx-md-0">Community Centre</p>
+                </div>
+                <div class="col-sm-9 col-md-4 mx-sm-auto pt-3 d-flex flex-column">
+                    <legend class="border-bottom mx-sm-auto mx-md-0">
+                        <h4>More</h4>
+                    </legend>
+                    <p class="mx-sm-auto mx-md-0">Terms</p>
+                    <p class="mx-sm-auto mx-md-0">Privacy</p>
+                    <p class="mx-sm-auto mx-md-0">Site Map</p>
+                </div>
+            </div>
+        </footer>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src = {{ url_for('static', filename='js/jquery.min.js') }}></script>

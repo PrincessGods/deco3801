@@ -1,0 +1,464 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container my-5 rounded job_manage_box d-flex">
+    <div class="d-flex flex-column w-100">
+        <div class="steps w-100 d-flex mb-5" id="stepImg">
+            <img class="col-9 m-auto" src="{{ url_for('static', filename='imgs/step1.png') }}" alt="Step-1">
+            <img style="display: none" class="col-9 m-auto" src="{{ url_for('static', filename='imgs/step2.png') }}" alt="Step-2">
+            <img style="display: none" class="col-9 m-auto" src="{{ url_for('static', filename='imgs/step3.png') }}" alt="Step-3">
+            <img style="display: none" class="col-9 m-auto" src="{{ url_for('static', filename='imgs/step4.png') }}" alt="Step-4">
+            <img style="display: none" class="col-9 m-auto" src="{{ url_for('static', filename='imgs/step5.png') }}" alt="Step-5">
+        </div>
+        <div class="content-section border rounded" id="topLabels">
+            <p class="text bg-secondary rounded-top p-3">Upload Files And Sample Information:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">HRMS Instruments:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">Chromatography:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">My Columns:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">Overview Settings:</p>
+            <form method="POST" action="">
+                <fieldset class="form-group px-5 py-2 d-flex flex-column" id="forms">
+                    <div id="form1">
+                        <legend class="border-bottom pb-2 mt-3 stepLable" style="display: none">
+                            Upload Files And Sample Information
+                        </legend>
+                        {% if method == 'LibrarySearch' %}
+                        <div class="form-group">
+                            {{ form.xlsxFile.label() }}
+                            {{ form.xlsxFile(class="form-control-file") }}
+                            {% if form.xlsxFile.errors %}
+                                {% for error in form.xlsxFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.VANFileLow.label() }}
+                            {{ form.VANFileLow(class="form-control-file") }}
+                            {% if form.VANFileLow.errors %}
+                                {% for error in form.VANFileLow.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.VANFileHigh.label() }}
+                            {{ form.VANFileHigh(class="form-control-file") }}
+                            {% if form.VANFileHigh.errors %}
+                                {% for error in form.VANFileHigh.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        {% elif method == 'ImportDeconv' %}
+                        <div class="form-group">
+                            {{ form.matFile.label() }}
+                            {{ form.matFile(class="form-control-file") }}
+                            {% if form.matFile.errors %}
+                                {% for error in form.matFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.adductsXlsxFile.label() }}
+                            {{ form.adductsXlsxFile(class="form-control-file") }}
+                            {% if form.adductsXlsxFile.errors %}
+                                {% for error in form.adductsXlsxFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.txtFile.label() }}
+                            {{ form.txtFile(class="form-control-file") }}
+                            {% if form.txtFile.errors %}
+                                {% for error in form.txtFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        {% else %}
+                        <div class="form-group">
+                            {{ form.xlsxFile.label() }}
+                            {{ form.xlsxFile(class="form-control-file") }}
+                            {% if form.xlsxFile.errors %}
+                                {% for error in form.xlsxFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.VANFileLow.label() }}
+                            {{ form.VANFileLow(class="form-control-file") }}
+                            {% if form.VANFileLow.errors %}
+                                {% for error in form.VANFileLow.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.VANFileHigh.label() }}
+                            {{ form.VANFileHigh(class="form-control-file") }}
+                            {% if form.VANFileHigh.errors %}
+                                {% for error in form.VANFileHigh.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.matFile.label() }}
+                            {{ form.matFile(class="form-control-file") }}
+                            {% if form.matFile.errors %}
+                                {% for error in form.matFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.adductsXlsxFile.label() }}
+                            {{ form.adductsXlsxFile(class="form-control-file") }}
+                            {% if form.adductsXlsxFile.errors %}
+                                {% for error in form.adductsXlsxFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.txtFile.label() }}
+                            {{ form.txtFile(class="form-control-file") }}
+                            {% if form.txtFile.errors %}
+                                {% for error in form.txtFile.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            {{ form.sampleLocation.label(class="form-control-label") }}
+
+                            {% if form.sampleLocation.errors %}
+                                {{ form.sampleLocation(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.sampleLocation.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sampleLocation(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.sampledata.label(class="form-control-label") }}
+
+                            {% if form.sampledata.errors %}
+                                {{ form.sampledata(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.sampledata.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sampledata(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.sampleType.label(class="form-control-label") }}
+
+                            {% if form.sampleType.errors %}
+                                {{ form.sampleType(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.sampleType.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sampleType(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div id="form2" style="display: none">
+                        <legend class="border-bottom pb-2 mt-5 stepLable" style="display: none">
+                            HRMS Instruments
+                        </legend>
+                        <div class="form-group">
+                            {{ form.brand.label(class="form-control-label") }}
+
+                            {% if form.brand.errors %}
+                                {{ form.brand(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.brand.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.brand(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.source.label(class="form-control-label") }}
+
+                            {% if form.source.errors %}
+                                {{ form.source(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.source.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.source(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.model.label(class="form-control-label") }}
+
+                            {% if form.model.errors %}
+                                {{ form.model(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.model.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.model(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.ionisation.label(class="form-control-label") }}
+
+                            {% if form.ionisation.errors %}
+                                {{ form.ionisation(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.ionisation.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.ionisation(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div id="form3" style="display: none">
+                        <legend class="border-bottom pb-2 mt-5 stepLable" style="display: none">
+                            Chromatography
+                        </legend>
+                        <div class="form-group">
+                            {{ form.systemBrand.label(class="form-control-label") }}
+
+                            {% if form.systemBrand.errors %}
+                                {{ form.systemBrand(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.systemBrand.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.systemBrand(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.systemClass.label(class="form-control-label") }}
+
+                            {% if form.systemClass.errors %}
+                                {{ form.systemClass(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.systemClass.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.systemClass(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div id='component'>
+                            <div class="form-group">
+                                {{ form.componentBrand.label(class="form-control-label") }}
+
+                                {% if form.componentBrand.errors %}
+                                    {{ form.componentBrand(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.componentBrand.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.componentBrand(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.component.label(class="form-control-label") }}
+
+                                {% if form.component.errors %}
+                                    {{ form.component(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.component.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.component(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.componentModel.label(class="form-control-label") }}
+
+                                {% if form.componentModel.errors %}
+                                    {{ form.componentModel(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.componentModel.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.componentModel(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div id="form4" style="display: none">
+                        <legend class="border-bottom pb-2 mt-5 stepLable" style="display: none">
+                            My Columns
+                        </legend>
+                        <div class="form-group">
+                            {{ form.colBrand.label(class="form-control-label") }}
+
+                            {% if form.colBrand.errors %}
+                                {{ form.colBrand(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.colBrand.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.colBrand(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.colPhase.label(class="form-control-label") }}
+
+                            {% if form.colPhase.errors %}
+                                {{ form.colPhase(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.colPhase.errors %}
+                                </div>
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                            {% else %}
+                                {{ form.colPhase(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.colPoreSizeA.label(class="form-control-label") }}
+
+                            {% if form.colPoreSizeA.errors %}
+                                {{ form.colPoreSizeA(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.colPoreSizeA.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.colPoreSizeA(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.colPoreSizeU.label(class="form-control-label") }}
+
+                            {% if form.colPoreSizeU.errors %}
+                                {{ form.colPoreSizeU(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.colPoreSizeU.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.colPoreSizeU(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.colLength.label(class="form-control-label") }}
+
+                            {% if form.colLength.errors %}
+                                {{ form.colLength(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.colLength.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.colLength(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.colDiameter.label(class="form-control-label") }}
+
+                            {% if form.colDiameter.errors %}
+                                {{ form.colDiameter(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.colDiameter.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.colDiameter(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div id="saveJobBtn" style="display: none">
+                        {{ form.submit(class="btn btn-outline-info ml-auto mt-4") }}
+                    </div>
+                        
+                </fieldset>
+
+            </form>
+        </div>
+        <div class="mt-4 mx-auto">
+            <button style="display: none" class="btn btn-primary mr-3" id="prevStep">Prev Step</button>
+            <button class="btn btn-primary" id="nextStep">Next Step</button>
+        </div>
+    </div>        
+</div>    
+
+{% endblock content %}
