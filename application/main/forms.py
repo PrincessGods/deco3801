@@ -5,5 +5,5 @@ from wtforms.validators import DataRequired, EqualTo, ValidationError
 
 class HomeSearchForm(FlaskForm):
     search = StringField('Search', validators=[DataRequired()]
-                            , render_kw={"placeholder": "Search this site"})
+                            , render_kw={"placeholder": os.environ.get('MySQL')})
     submit = SubmitField('Search')
