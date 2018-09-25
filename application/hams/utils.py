@@ -7,7 +7,7 @@ def save_Target(form_Target, user):
     random_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_Target.filename)
     fn = random_hex + f_ext
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3')
     dir_n = user + '/unprocessed/test/Target/' + fn
     bucket_name = 'deco3801'
 
@@ -30,7 +30,7 @@ def save_Low_Energy(form_Low_Energy, user):
     random_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_Low_Energy.filename)
     fn = random_hex + f_ext
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3')
     dir_n = user + '/unprocessed/test/Low Energy/' + fn
     bucket_name = 'deco3801'
 
@@ -53,7 +53,7 @@ def save_High_Energy(form_High_Energy, user):
     random_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_High_Energy.filename)
     fn = random_hex + f_ext
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3')
     dir_n = user + '/unprocessed/test/High Energy/' + fn
     bucket_name = 'deco3801'
 
@@ -75,7 +75,7 @@ def save_Spectra(form_Spectra, user):
     random_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_Spectra.filename)
     fn = random_hex + f_ext
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3')
     dir_n = user + '/unprocessed/test/User Spectra/' + fn
     bucket_name = 'deco3801'
 
