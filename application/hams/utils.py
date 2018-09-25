@@ -11,7 +11,7 @@ def save_Target(form_Target, user):
     dir_n = user + '/unprocessed/test/Target/' + fn
     bucket_name = 'deco3801'
 
-    s3.upload_file(fn, bucket_name, dir_n)
+    s3.put_object(bucket_name, dir_n)
 
     # new_path = (current_app.root_path +
     #             '/static/data/' + user + 
@@ -34,7 +34,7 @@ def save_Low_Energy(form_Low_Energy, user):
     dir_n = user + '/unprocessed/test/Low Energy/' + fn
     bucket_name = 'deco3801'
 
-    s3.upload_file(fn, bucket_name, dir_n)
+    s3.put_object(bucket_name, dir_n)
 
     # new_path = (current_app.root_path +
     #             '/static/data/' + user + 
@@ -57,7 +57,7 @@ def save_High_Energy(form_High_Energy, user):
     dir_n = user + '/unprocessed/test/High Energy/' + fn
     bucket_name = 'deco3801'
 
-    s3.upload_file(fn, bucket_name, dir_n)
+    s3.put_object(bucket_name, dir_n)
     # new_path = (current_app.root_path +
     #             '/static/data/' + user + 
     #             '/unprocessed/test/High Energy/')
@@ -79,7 +79,7 @@ def save_Spectra(form_Spectra, user):
     dir_n = user + '/unprocessed/test/User Spectra/' + fn
     bucket_name = 'deco3801'
 
-    s3.upload_file(fn, bucket_name, dir_n)
+    s3.put_object(bucket_name, dir_n)
     # new_path = (current_app.root_path +
     #             '/static/data/' + user + 
     #             '/unprocessed/test/User Spectra/')
