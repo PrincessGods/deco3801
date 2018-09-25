@@ -6,7 +6,7 @@
         <h1 class="mb-5">Choose your method</h1>
         <div class="content-section">
             <form method="POST" action="">
-
+                {{ form.hidden_tag() }}
                 <fieldset class="form-group">
                     {% for i in range(details|length) %}
                         <div class="form-group mb-5">

@@ -7,7 +7,8 @@
             <div class="carousel-item active h-100">
                 <div class="d-flex h-100 mx-auto" id="slide1">
 
-                    <form method="POST" action="" enctype="multipart/form-data" class="m-auto col-sm-10 col-md-8 col-lg-6" >
+                    <form method="POST" action="" class="m-auto col-sm-10 col-md-8 col-lg-6" >
+                        {{ form.hidden_tag() }}
                         <fieldset class="form-group m-auto">
                             <div class="form-group d-flex shadow">
                                 {% if form.search.errors %}

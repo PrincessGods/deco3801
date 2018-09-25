@@ -9,16 +9,19 @@ main = Blueprint('main', __name__)
 @main.route("/home", methods=['GET', 'POST'])
 def home():
     form = HomeSearchForm()
-    if request.method == 'POST':
+    if form.validate_on_submit():
         return redirect(url_for('users.profile'))
     return render_template('index.html', title = "QAEHS", form = form)
 
-@main.route("/search")
+@main.route("/search/", methods=['GET', 'POST'])
 def search():
     form = HomeSearchForm()
     if form.validate_on_submit():
         return redirect(url_for('users.profile'))
-    else:
-        return redirect(url_for('users.login'))
-    return render_template('profile.html')
+    return render_template('index.html', title = "QAEHS", form = form)
+    #if form.validate_on_submit():
+    #    return redirect(url_for('users.profile'))
+    #else:
+    #    return redirect(url_for('users.login'))
+    
 

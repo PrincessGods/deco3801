@@ -16,146 +16,104 @@
             <p class="text bg-secondary rounded-top p-3" style="display: none">Chromatography:</p>
             <p class="text bg-secondary rounded-top p-3" style="display: none">My Columns:</p>
             <p class="text bg-secondary rounded-top p-3" style="display: none">Overview Settings:</p>
-            <form method="POST" action="">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
                 <fieldset class="form-group px-5 py-2 d-flex flex-column" id="forms">
                     <div id="form1">
                         <legend class="border-bottom pb-2 mt-3 stepLable" style="display: none">
                             Upload Files And Sample Information
                         </legend>
+                        
                         {% if method == 'LibrarySearch' %}
-                        <div class="form-group">
-                            {{ form.xlsxFile.label() }}
-                            {{ form.xlsxFile(class="form-control-file") }}
-                            {% if form.xlsxFile.errors %}
-                                {% for error in form.xlsxFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.xlsxFile.label() }}
+                                {{ form.xlsxFile(class="form-control-file") }}
+                                {% if form.xlsxFile.errors %}
+                                    {% for error in form.xlsxFile.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form.VANFileLow.label() }}
-                            {{ form.VANFileLow(class="form-control-file") }}
-                            {% if form.VANFileLow.errors %}
-                                {% for error in form.VANFileLow.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.VANFileLow.label() }}
+                                {{ form.VANFileLow(class="form-control-file") }}
+                                {% if form.VANFileLow.errors %}
+                                    {% for error in form.VANFileLow.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form.VANFileHigh.label() }}
-                            {{ form.VANFileHigh(class="form-control-file") }}
-                            {% if form.VANFileHigh.errors %}
-                                {% for error in form.VANFileHigh.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.VANFileHigh.label() }}
+                                {{ form.VANFileHigh(class="form-control-file") }}
+                                {% if form.VANFileHigh.errors %}
+                                    {% for error in form.VANFileHigh.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
                         {% elif method == 'ImportDeconv' %}
-                        <div class="form-group">
-                            {{ form.matFile.label() }}
-                            {{ form.matFile(class="form-control-file") }}
-                            {% if form.matFile.errors %}
-                                {% for error in form.matFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form.adductsXlsxFile.label() }}
-                            {{ form.adductsXlsxFile(class="form-control-file") }}
-                            {% if form.adductsXlsxFile.errors %}
-                                {% for error in form.adductsXlsxFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form.txtFile.label() }}
-                            {{ form.txtFile(class="form-control-file") }}
-                            {% if form.txtFile.errors %}
-                                {% for error in form.txtFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.txtFile.label() }}
+                                {{ form.txtFile(class="form-control-file") }}
+                                {% if form.txtFile.errors %}
+                                    {% for error in form.txtFile.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
                         {% else %}
-                        <div class="form-group">
-                            {{ form.xlsxFile.label() }}
-                            {{ form.xlsxFile(class="form-control-file") }}
-                            {% if form.xlsxFile.errors %}
-                                {% for error in form.xlsxFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.xlsxFile.label() }}
+                                {{ form.xlsxFile(class="form-control-file") }}
+                                {% if form.xlsxFile.errors %}
+                                    {% for error in form.xlsxFile.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form.VANFileLow.label() }}
-                            {{ form.VANFileLow(class="form-control-file") }}
-                            {% if form.VANFileLow.errors %}
-                                {% for error in form.VANFileLow.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.VANFileLow.label() }}
+                                {{ form.VANFileLow(class="form-control-file") }}
+                                {% if form.VANFileLow.errors %}
+                                    {% for error in form.VANFileLow.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form.VANFileHigh.label() }}
-                            {{ form.VANFileHigh(class="form-control-file") }}
-                            {% if form.VANFileHigh.errors %}
-                                {% for error in form.VANFileHigh.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        
-                        <div class="form-group">
-                            {{ form.matFile.label() }}
-                            {{ form.matFile(class="form-control-file") }}
-                            {% if form.matFile.errors %}
-                                {% for error in form.matFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.VANFileHigh.label() }}
+                                {{ form.VANFileHigh(class="form-control-file") }}
+                                {% if form.VANFileHigh.errors %}
+                                    {% for error in form.VANFileHigh.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form.adductsXlsxFile.label() }}
-                            {{ form.adductsXlsxFile(class="form-control-file") }}
-                            {% if form.adductsXlsxFile.errors %}
-                                {% for error in form.adductsXlsxFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form.txtFile.label() }}
-                            {{ form.txtFile(class="form-control-file") }}
-                            {% if form.txtFile.errors %}
-                                {% for error in form.txtFile.errors %}
-                                    <span class="text-danger">{{ error }}</span>
-                                    <br>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.txtFile.label() }}
+                                {{ form.txtFile(class="form-control-file") }}
+                                {% if form.txtFile.errors %}
+                                    {% for error in form.txtFile.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                         {% endif %}
 
                         <div class="form-group">

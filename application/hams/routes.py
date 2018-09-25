@@ -1,9 +1,9 @@
 from flask import render_template, url_for, redirect, request, Blueprint, flash
-from application.hams.forms import SelectMethodForm, AcquisitionForm
+from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv
 from application.models import User
 from application import db
-from flask_login import login_required
-##from application.hams.utils import 
+from application.hams.utils import save_Target, save_Low_Energy, save_High_Energy, save_Spectra
+from flask_login import login_required, current_user
 
 hams = Blueprint('hams', __name__)
 
@@ -36,7 +36,7 @@ def manageJobs():
 def chooseMethod():
     form = SelectMethodForm()
     methodList = getMethodList()
-    if request.method == 'POST':
+    if form.validate_on_submit():
         chosenMethod = form.methods.data
         return redirect(url_for('hams.acquisition', chosenMethod = chosenMethod))
         
@@ -45,11 +45,42 @@ def chooseMethod():
 
 @hams.route("/acquisition/<chosenMethod>", methods=['GET', 'POST'])
 def acquisition(chosenMethod):
-    form = AcquisitionForm()
-    if request.method == 'POST':
+    if chosenMethod == 'LibrarySearch':
+        form = LibrarySearch()
+    elif chosenMethod == 'ImportDeconv':
+        form = ImportDeconv()
+    else:
+        form = DeconvLibrarySearch()
+
+    if form.validate_on_submit():
+        if chosenMethod == 'LibrarySearch':
+            xlsxFile = save_Target(form.xlsxFile.data, current_user.username)
+            #current_user.Target = xlsxFile
+
+            VANFileLow = save_Low_Energy(form.VANFileLow.data, current_user.username)
+            #current_user.Low_Energy = VANFileLow
+        
+            VANFileHigh = save_High_Energy(form.VANFileHigh.data, current_user.username)
+            #current_user.High_Energy = VANFileHigh
+
+        elif chosenMethod == 'ImportDeconv':
+            txtFile = save_Spectra(form.txtFile.data, current_user.username)
+            #current_user.Spectra = txtFile
+
+        else:
+            xlsxFile = save_Target(form.xlsxFile.data, current_user.username)
+            #current_user.Target = xlsxFile
+
+            VANFileLow = save_Low_Energy(form.VANFileLow.data, current_user.username)
+            #current_user.Low_Energy = VANFileLow
+        
+            VANFileHigh = save_High_Energy(form.VANFileHigh.data, current_user.username)
+            #current_user.High_Energy = VANFileHigh
+
+            txtFile = save_Spectra(form.txtFile.data, current_user.username)
+            #current_user.Spectra = txtFile
+
         return redirect(url_for('hams.saveJob'))
-    #else:
-        #flash('Save Unsuccessful. Please complete the form', 'info')
     return render_template('acquisition.html', title = "HAMS", form = form, method = chosenMethod) 
 
 @hams.route("/saveJob", methods=['GET', 'POST'])
