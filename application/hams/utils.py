@@ -11,11 +11,11 @@ def save_datafile(form_datafile, user):
     bucket_name = 'deco3801'
     dir_n = user + '/unprocessed/test/Other/' + fn
 
-    if form_datafile.label == 'Target':
+    if form_datafile.id == 'xlsxFile':
         dir_n = user + '/unprocessed/test/Target/' + fn
-    elif form_datafile.label == 'HRMS Data (Low Energy)':
+    elif form_datafile.id == 'VANFileLow':
         dir_n = user + '/unprocessed/test/Low Energy/' + fn
-    elif form_datafile.label == 'HRMS Data (High Energy)':
+    elif form_datafile.id == 'VANFileHigh':
         dir_n = user + '/unprocessed/test/High Energy/' + fn
     else:
         user + '/unprocessed/test/User Spectra/' + fn
