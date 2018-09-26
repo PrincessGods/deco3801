@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, request, Blueprint, flash
 from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv
 from application.models import User
 from application import db
-from application.hams.utils import save_Target, save_Low_Energy, save_High_Energy, save_Spectra
+from application.hams.utils import save_datafile
 from flask_login import login_required, current_user
 
 hams = Blueprint('hams', __name__)

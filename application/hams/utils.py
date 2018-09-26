@@ -3,92 +3,64 @@ import os
 import boto3
 from flask import url_for, current_app, request
 
-def save_Target(form_Target, user):
+def save_datafile(form_datafile, user):
     random_hex = secrets.token_hex(8)
-    f_name, f_ext = os.path.splitext(form_Target.filename)
+    f_name, f_ext = os.path.splitext(form_datafile.data.filename)
     fn = random_hex + f_ext
     s3 = boto3.client('s3')
-    dir_n = user + '/unprocessed/test/Target/' + fn
     bucket_name = 'deco3801'
 
-    s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_Target)
+    if form_datafile.label == 'Target':
+        dir_n = user + '/unprocessed/test/Target/' + fn
+    elif form_datafile.label == 'HRMS Data (Low Energy)':
+        dir_n = user + '/unprocessed/test/Low Energy/' + fn
+    elif form_datafile.label == 'HRMS Data (High Energy)':
+        dir_n = user + '/unprocessed/test/High Energy/' + fn
+    else:
+        user + '/unprocessed/test/User Spectra/' + fn
 
-    # new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/Target/')
-    # if not os.path.exists(new_path):
-    #     os.makedirs(new_path)
+    s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_datafile.data)
 
-    # file_path = os.path.join(current_app.root_path,
-    #                         'static/data/', user,
-    #                         'unprocessed/test/Target/', fn)
-    # form_Target.save(file_path)
+    """ if form_datafile.label == 'Target':
+        new_path = (current_app.root_path +
+                '/static/data/' + user + 
+                '/unprocessed/test/Target/')
+    elif form_datafile.label == 'HRMS Data (Low Energy)':
+        new_path = (current_app.root_path +
+                '/static/data/' + user + 
+                '/unprocessed/test/Low Energy/')
+    elif form_datafile.label == 'HRMS Data (High Energy)':
+        new_path = (current_app.root_path +
+                '/static/data/' + user + 
+                '/unprocessed/test/High Energy/')
+    else:
+        new_path = (current_app.root_path +
+                '/static/data/' + user + 
+                '/unprocessed/test/User Spectra/')
+    
+    if not os.path.exists(new_path):
+        os.makedirs(new_path)
 
-    return fn
+    if form_datafile.label == 'Target':
+        file_path = os.path.join(current_app.root_path,
+                            'static/data/', user,
+                            'unprocessed/test/Target/', fn)
 
-def save_Low_Energy(form_Low_Energy, user):
-    random_hex = secrets.token_hex(8)
-    f_name, f_ext = os.path.splitext(form_Low_Energy.filename)
-    fn = random_hex + f_ext
-    s3 = boto3.client('s3')
-    dir_n = user + '/unprocessed/test/Low Energy/' + fn
-    bucket_name = 'deco3801'
+    elif form_datafile.label == 'HRMS Data (Low Energy)':
+        file_path = os.path.join(current_app.root_path,
+                            'static/data/', user,
+                            'unprocessed/test/Low Energy/', fn)
 
-    s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_Low_Energy)
+    elif form_datafile.label == 'HRMS Data (High Energy)':
+        file_path = os.path.join(current_app.root_path,
+                            'static/data/', user,
+                            'unprocessed/test/High Energy/', fn)
 
-    # new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/Low Energy/')
-    # if not os.path.exists(new_path):
-    #     os.makedirs(new_path)
+    else:
+        file_path = os.path.join(current_app.root_path,
+                            'static/data/', user,
+                            'unprocessed/test/User Spectra/', fn)
 
-    # file_path = os.path.join(current_app.root_path,
-    #                         'static/data/', user,
-    #                         'unprocessed/test/Low Energy/', fn)
-    # form_Low_Energy.save(file_path)
-
-    return fn
-
-def save_High_Energy(form_High_Energy, user):
-    random_hex = secrets.token_hex(8)
-    f_name, f_ext = os.path.splitext(form_High_Energy.filename)
-    fn = random_hex + f_ext
-    s3 = boto3.client('s3')
-    dir_n = user + '/unprocessed/test/High Energy/' + fn
-    bucket_name = 'deco3801'
-
-    s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_High_Energy)
-    # new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/High Energy/')
-    # if not os.path.exists(new_path):
-    #     os.makedirs(new_path)
-
-    # file_path = os.path.join(current_app.root_path,
-    #             'static/data/', user,
-    #             'unprocessed/test/High Energy/', fn)
-    # form_High_Energy.save(file_path)
-
-    return fn
-
-def save_Spectra(form_Spectra, user):
-    random_hex = secrets.token_hex(8)
-    f_name, f_ext = os.path.splitext(form_Spectra.filename)
-    fn = random_hex + f_ext
-    s3 = boto3.client('s3')
-    dir_n = user + '/unprocessed/test/User Spectra/' + fn
-    bucket_name = 'deco3801'
-
-    s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_Spectra)
-    # new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/User Spectra/')
-    # if not os.path.exists(new_path):
-    #     os.makedirs(new_path)
-
-    # file_path = os.path.join(current_app.root_path,
-    #             'static/data/', user,
-    #             'unprocessed/test/User Spectra/', fn)
-    # form_Spectra.save(file_path)
+    form_datafile.data.save(file_path) """
 
     return fn
