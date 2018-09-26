@@ -54,30 +54,30 @@ def acquisition(chosenMethod):
 
     if form.validate_on_submit():
         if chosenMethod == 'LibrarySearch':
-            xlsxFile = save_Target(form.xlsxFile.data, current_user.username)
+            xlsxFile = save_datafile(form.xlsxFile.data, current_user.username)
             #current_user.Target = xlsxFile
 
-            VANFileLow = save_Low_Energy(form.VANFileLow.data, current_user.username)
+            VANFileLow = save_datafile(form.VANFileLow.data, current_user.username)
             #current_user.Low_Energy = VANFileLow
         
-            VANFileHigh = save_High_Energy(form.VANFileHigh.data, current_user.username)
+            VANFileHigh = save_datafile(form.VANFileHigh.data, current_user.username)
             #current_user.High_Energy = VANFileHigh
 
         elif chosenMethod == 'ImportDeconv':
-            txtFile = save_Spectra(form.txtFile.data, current_user.username)
+            txtFile = save_datafile(form.txtFile.data, current_user.username)
             #current_user.Spectra = txtFile
 
         else:
-            xlsxFile = save_Target(form.xlsxFile.data, current_user.username)
+            xlsxFile = save_datafile(form.xlsxFile.data, current_user.username)
             #current_user.Target = xlsxFile
 
-            VANFileLow = save_Low_Energy(form.VANFileLow.data, current_user.username)
+            VANFileLow = save_datafile(form.VANFileLow.data, current_user.username)
             #current_user.Low_Energy = VANFileLow
         
-            VANFileHigh = save_High_Energy(form.VANFileHigh.data, current_user.username)
+            VANFileHigh = save_datafile(form.VANFileHigh.data, current_user.username)
             #current_user.High_Energy = VANFileHigh
 
-            txtFile = save_Spectra(form.txtFile.data, current_user.username)
+            txtFile = save_datafile(form.txtFile.data, current_user.username)
             #current_user.Spectra = txtFile
 
         return redirect(url_for('hams.saveJob'))
