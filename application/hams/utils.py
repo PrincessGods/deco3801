@@ -18,7 +18,7 @@ def save_datafile(form_datafile, user):
     elif form_datafile.id == 'VANFileHigh':
         dir_n = user + '/unprocessed/test/High Energy/' + fn
     else:
-        user + '/unprocessed/test/User Spectra/' + fn
+        dir_n = user + '/unprocessed/test/User Spectra/' + fn
 
     s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_datafile.data)
 
