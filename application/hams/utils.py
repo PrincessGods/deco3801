@@ -9,6 +9,7 @@ def save_datafile(form_datafile, user):
     fn = random_hex + f_ext
     s3 = boto3.client('s3')
     bucket_name = 'deco3801'
+    dir_n = user + '/unprocessed/test/Other/' + fn
 
     if form_datafile.label == 'Target':
         dir_n = user + '/unprocessed/test/Target/' + fn
