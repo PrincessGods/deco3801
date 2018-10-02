@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container mt-2">
+    <div class="container mt-4">
         <div class="content-section">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
@@ -52,7 +52,7 @@
 
         <div class="border-top pt-3">
             <small class="text-muted">
-                Need An Account? <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Now</a>
+                Need An Account? <a class="ml-2 text-primary" href="{{ url_for('users.register') }}">Sign Up Now</a>
             </small>
             
             <br>

@@ -1,3 +1,9 @@
+body{
+  min-height: calc(100vh);
+  display: flex;
+  flex-flow: column;
+}
+
 #topNav {
   width: 100%;
   background-color: #6f9fd8; }
@@ -60,12 +66,34 @@
   border-radius: 10px 10px 0 0;
 }
 
-.footer h4, p{
-  color: #fff;
+.footer h4, a{
+  color: #fff !important;
 }
 
-.job_manage_box{
+.job_manage_box {
   min-height: 500px;
+}
+
+.selected {
+  font-weight: 600 !important;
+  border: 1px solid #dee2e6 !important;
+  border-left: 2.5px solid #e47114 !important;
+}
+
+.not-selected:hover {
+  background-color: #f5f5f5;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.pro-pic {
+  font-weight: 600 !important;
+}
+
+#imgPreview {
+  width: 450px;
+  height: 450px;
+  background: none;
 }
 
 /*!

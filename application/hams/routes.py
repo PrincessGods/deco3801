@@ -29,10 +29,12 @@ def getMethodList():
     return methodList
 
 @hams.route("/manageJobs")
+@login_required
 def manageJobs():
     return render_template('manageJobs.html', title = "HAMS")
 
 @hams.route("/chooseMethod", methods=['GET', 'POST'])
+@login_required
 def chooseMethod():
     form = SelectMethodForm()
     methodList = getMethodList()
@@ -44,6 +46,7 @@ def chooseMethod():
                              details = details, methods = methodList)
 
 @hams.route("/acquisition/<chosenMethod>", methods=['GET', 'POST'])
+@login_required
 def acquisition(chosenMethod):
     if chosenMethod == 'LibrarySearch':
         form = LibrarySearch()
@@ -84,6 +87,7 @@ def acquisition(chosenMethod):
     return render_template('acquisition.html', title = "HAMS", form = form, method = chosenMethod) 
 
 @hams.route("/saveJob", methods=['GET', 'POST'])
+@login_required
 def saveJob():
     return render_template('saveJob.html', title = "HAMS")
 

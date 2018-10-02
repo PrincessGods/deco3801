@@ -21,13 +21,13 @@ function dropControl(){
 }
 
 $(document).ready(function(){
-  //resize font size when resolution change
-  $(window).resize(function(){
-    winWidth = $( window ).width();
-    $(".carousel-inner").css("font-size", winWidth/25.6);
-  })
+    //resize font size when resolution change
+    $(window).resize(function(){
+        winWidth = $( window ).width();
+        $(".carousel-inner").css("font-size", winWidth/25.6);
+    })
 
-  $('#nextStep').click(function(e){
+    $('#nextStep').click(function(e){
         currentStep.next().show();
         currentStep.hide();
         currentStep = currentStep.next();
@@ -55,9 +55,9 @@ $(document).ready(function(){
         }
         
         e.preventDefault();
-  })
+    })
 
-  $('#prevStep').click(function(e){
+    $('#prevStep').click(function(e){
         if(currentStep.get(0).id == "saveJobBtn"){
             for(var i = 0; i < ($('#forms').children()).length; i++){
                 $($('#forms').children().get(i)).hide(); 
@@ -80,5 +80,27 @@ $(document).ready(function(){
         currentStepLabel = currentStepLabel.prev();
 
         e.preventDefault();
-  })
+    })
+
+    $('#up-pic').click(function(e){
+        $('#picture').trigger('click'); 
+        e.preventDefault();
+    })
+
+    $('#picture').change(function(){
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("picture").files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            $('#imgPreview').css("background", "url(" + oFREvent.target.result + ") 50% center/cover");
+            //$('#imgPreview').attr('src', oFREvent.target.result).show();
+        };
+
+        $('#PreviewModal').modal("show");
+    })
+
+    $('#saveimg').click(function(e){
+        $('#PreviewModal').modal("hide"); 
+        e.preventDefault();
+    })
 });

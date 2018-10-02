@@ -11,11 +11,17 @@ def save_picture(form_picture):
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(current_app.root_path, 
                                 'static/imgs', picture_fn)
-
-    output_size = (300, 300)
     thumbnail_picture = Image.open(form_picture)
+
+    output_size = (400, 400)
     thumbnail_picture.thumbnail(output_size)
-    thumbnail_picture.save(picture_path)
+    width, height = thumbnail_picture.size
+    if width < height:
+        CENTER = 0, height//2 - width//2, width, height//2 + width//2
+    else:
+        CENTER = width//2 - height//2, 0, width//2 + height//2, height
+
+    thumbnail_picture.crop(CENTER).save(picture_path)
 
     return picture_fn
 
