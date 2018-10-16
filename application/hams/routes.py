@@ -1,8 +1,8 @@
 from flask import render_template, url_for, redirect, request, Blueprint, flash
-from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv
+from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv, AlgorithmnForm
 from application.models import User
 from application import db
-from application.hams.utils import save_datafile
+from application.hams.utils import save_datafile, LibrarySearch_Al, DeconvLibrarySearch_Al, ImportDeconv_Al
 from flask_login import login_required, current_user
 
 hams = Blueprint('hams', __name__)
@@ -56,7 +56,7 @@ def acquisition(chosenMethod):
         form = DeconvLibrarySearch()
 
     if form.validate_on_submit():
-        if chosenMethod == 'LibrarySearch':
+        if chosenMethod == 'ImportDeconv':
             xlsxFile = save_datafile(form.xlsxFile, current_user.username)
             #current_user.Target = xlsxFile
 
@@ -66,7 +66,7 @@ def acquisition(chosenMethod):
             VANFileHigh = save_datafile(form.VANFileHigh, current_user.username)
             #current_user.High_Energy = VANFileHigh
 
-        elif chosenMethod == 'ImportDeconv':
+        elif chosenMethod == 'LibrarySearch':
             txtFile = save_datafile(form.txtFile, current_user.username)
             #current_user.Spectra = txtFile
 
@@ -83,12 +83,20 @@ def acquisition(chosenMethod):
             txtFile = save_datafile(form.txtFile, current_user.username)
             #current_user.Spectra = txtFile
 
-        return redirect(url_for('hams.saveJob'))
+        return redirect(url_for('hams.saveJob', chosenMethod = chosenMethod))
     return render_template('acquisition.html', title = "HAMS", form = form, method = chosenMethod) 
 
-@hams.route("/saveJob", methods=['GET', 'POST'])
+@hams.route("/saveJob/<chosenMethod>", methods=['GET', 'POST'])
 @login_required
-def saveJob():
-    return render_template('saveJob.html', title = "HAMS")
+def saveJob(chosenMethod):
+    form = AlgorithmnForm()
+    if form.validate_on_submit():
+        if chosenMethod == 'ImportDeconv':
+            ImportDeconv_Al()
+        elif chosenMethod == 'LibrarySearch':
+            LibrarySearch_Al("ESI", "POSITIVE")
+        else:
+            DeconvLibrarySearch_Al()
 
-##@hams.route("/createNewJob")
+        return redirect(url_for('users.profile'))
+    return render_template('saveJob.html', title = "HAMS", form = form)

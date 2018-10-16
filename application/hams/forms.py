@@ -75,3 +75,6 @@ class DeconvLibrarySearch(AcquisitionForm):
 
     txtFile = FileField('User Spectra',
                             validators=[FileRequired(), FileAllowed(['txt'])])
+
+class AlgorithmnForm(FlaskForm):
+    submit = SubmitField('Process Job Now')

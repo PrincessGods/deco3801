@@ -11,11 +11,11 @@
             <img style="display: none" class="col-9 m-auto" src="{{ url_for('static', filename='imgs/step5.png') }}" alt="Step-5">
         </div>
         <div class="content-section border rounded" id="topLabels">
-            <p class="text bg-secondary rounded-top p-3">Upload Files And Sample Information:</p>
-            <p class="text bg-secondary rounded-top p-3" style="display: none">HRMS Instruments:</p>
-            <p class="text bg-secondary rounded-top p-3" style="display: none">Chromatography:</p>
-            <p class="text bg-secondary rounded-top p-3" style="display: none">My Columns:</p>
-            <p class="text bg-secondary rounded-top p-3" style="display: none">Overview Settings:</p>
+            <p class="text text-light bg-secondary rounded-top p-3">Upload Files And Sample Information:</p>
+            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">HRMS Instruments:</p>
+            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">Chromatography:</p>
+            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">My Columns:</p>
+            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">Overview Settings:</p>
             <form method="POST" action="" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group px-5 py-2 d-flex flex-column" id="forms">
@@ -24,7 +24,7 @@
                             Upload Files And Sample Information
                         </legend>
                         
-                        {% if method == 'LibrarySearch' %}
+                        {% if method == 'ImportDeconv' %}
                             <div class="form-group">
                                 {{ form.xlsxFile.label() }}
                                 {{ form.xlsxFile(class="form-control-file") }}
@@ -58,7 +58,7 @@
                                 {% endif %}
                             </div>
 
-                        {% elif method == 'ImportDeconv' %}
+                        {% elif method == 'LibrarySearch' %}
                             <div class="form-group">
                                 {{ form.txtFile.label() }}
                                 {{ form.txtFile(class="form-control-file") }}
