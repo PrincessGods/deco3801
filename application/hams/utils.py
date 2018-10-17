@@ -9,8 +9,8 @@ def save_datafile(form_datafile, user):
     random_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_datafile.data.filename)
     fn = random_hex + f_ext
-    s3 = boto3.client('s3', aws_access_key_id='AKIAJNCIGVIXH7R4MQVA', 
-                        aws_secret_access_key='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')
+    s3 = boto3.client('s3', aws_access_key_id='', 
+                        aws_secret_access_key='')
     bucket_name = 'deco3801'
     dir_n = user + '/unprocessed/test/Other/' + fn
 
@@ -34,8 +34,8 @@ def ImportDeconv_Al():
     random_hex = secrets.token_hex(8)
 
 def LibrarySearch_Al(source, mode):
-    s3 = boto3.resource('s3', region_name="ap-southeast-2", aws_access_key_id='AKIAJNCIGVIXH7R4MQVA', 
-                        aws_secret_access_key='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')
+    s3 = boto3.resource('s3', region_name="ap-southeast-2", aws_access_key_id='', 
+                        aws_secret_access_key='')
     dir_n = user + '/unprocessed/test/User Spectra/' + fn
     output_ulsa = join(current_app.root_path, 
                          'static/tamplate', 'ULSA')
