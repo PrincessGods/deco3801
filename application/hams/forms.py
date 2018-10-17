@@ -50,6 +50,10 @@ class AcquisitionForm(FlaskForm):
     submit = SubmitField('Save Job')
     
 class LibrarySearch(AcquisitionForm):
+    txtFile = FileField('User Spectra',
+                            validators=[FileRequired(), FileAllowed(['txt'])])
+
+class ImportDeconv(AcquisitionForm):
     xlsxFile = FileField('Target',
                         validators=[FileRequired(), FileAllowed(['xlsx'])])
 
@@ -58,10 +62,6 @@ class LibrarySearch(AcquisitionForm):
 
     VANFileHigh = FileField('HRMS Data (High Energy)',
                             validators=[FileRequired(), FileAllowed(['cdf'])])
-
-class ImportDeconv(AcquisitionForm):
-    txtFile = FileField('User Spectra',
-                            validators=[FileRequired(), FileAllowed(['txt'])])
 
 class DeconvLibrarySearch(AcquisitionForm):
     xlsxFile = FileField('Target',

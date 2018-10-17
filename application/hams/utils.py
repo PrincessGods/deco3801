@@ -33,31 +33,34 @@ def ImportDeconv_Al():
     random_hex = secrets.token_hex(8)
 
 def LibrarySearch_Al(source, mode):
-    # this ’data_path ’ will depend on where you save data
-    data_path = join('~ ', 'data', 'qaehs', 'sim', 'data')
+    s3 = boto3.resource('s3')
+    dir_n = user + '/unprocessed/test/User Spectra/' + fn
+    s3.meta.client.download_file('deco3801', 'hello.txt', '/tmp/hello.txt')
+    # # this ’data_path ’ will depend on where you save data
+    # data_path = join('~ ', 'data', 'qaehs', 'sim', 'data')
 
-    path_MB = join(current_app.root_path, 
-                    'static/MassBank_matlab', 
-                    'MassBank_matlab.mat')
+    # path_MB = join(current_app.root_path, 
+    #                 'static/MassBank_matlab', 
+    #                 'MassBank_matlab.mat')
 
-    source = source #'ESI'
-    mode = mode #'POSITIVE'
+    # source = source #'ESI'
+    # mode = mode #'POSITIVE'
 
-    path_adducts = join(current_app.root_path, 
-                         'static/Pre-required_data/adducts', 
-                         'Pos_adducts.xlsx')
+    # path_adducts = join(current_app.root_path, 
+    #                      'static/Pre-required_data/adducts', 
+    #                      'Pos_adducts.xlsx')
 
-    path_to_spec = join(data_path, 'deconv')
+    # path_to_spec = join(data_path, 'deconv')
 
-    output_ulsa = join(current_app.root_path, 
-                        'static/tamplate', 'ULSA')
+    # output_ulsa = join(current_app.root_path, 
+    #                     'static/tamplate', 'ULSA')
 
-    # start up the matlab runtime engine
-    l = LibrarySearch_v1.initialize()
+    # # start up the matlab runtime engine
+    # l = LibrarySearch_v1.initialize()
 
-    # this is how you run the script
-    l.LibrarySearch_v1(path_MB, source, mode, path_adducts,
-        path_to_spec, output_ulsa, nargout=0)
+    # # this is how you run the script
+    # l.LibrarySearch_v1(path_MB, source, mode, path_adducts,
+    #     path_to_spec, output_ulsa, nargout=0)
 
-    # never forget to terminate !!!
-    l.terminate ()
+    # # never forget to terminate !!!
+    # l.terminate ()
