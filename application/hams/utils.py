@@ -9,7 +9,8 @@ def save_datafile(form_datafile, user):
     random_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_datafile.data.filename)
     fn = random_hex + f_ext
-    s3 = boto3.client('s3')
+    s3 = boto3.client('s3', aws_access_key_id='AKIAJNCIGVIXH7R4MQVA', 
+                        aws_secret_access_key='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')
     bucket_name = 'deco3801'
     dir_n = user + '/unprocessed/test/Other/' + fn
 
@@ -33,9 +34,12 @@ def ImportDeconv_Al():
     random_hex = secrets.token_hex(8)
 
 def LibrarySearch_Al(source, mode):
-    s3 = boto3.resource('s3')
+    s3 = boto3.resource('s3', aws_access_key_id='AKIAJNCIGVIXH7R4MQVA', 
+                        aws_secret_access_key='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')
     dir_n = user + '/unprocessed/test/User Spectra/' + fn
-    s3.meta.client.download_file('deco3801', 'hello.txt', '/tmp/hello.txt')
+    output_ulsa = join(current_app.root_path, 
+                         'static/tamplate', 'ULSA')
+    s3.meta.client.download_file('deco3801', '/unprocessed/test/User Spectra/bdce1266ab2d94a9.txt', output_ulsa + '/test.txt')
     # # this ’data_path ’ will depend on where you save data
     # data_path = join('~ ', 'data', 'qaehs', 'sim', 'data')
 
