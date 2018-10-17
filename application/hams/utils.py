@@ -34,12 +34,12 @@ def ImportDeconv_Al():
     random_hex = secrets.token_hex(8)
 
 def LibrarySearch_Al(source, mode):
-    s3 = boto3.client('s3', region_name="ap-southeast-2", aws_access_key_id='AKIAJNCIGVIXH7R4MQVA', 
+    s3 = boto3.resource('s3', region_name="ap-southeast-2", aws_access_key_id='AKIAJNCIGVIXH7R4MQVA', 
                         aws_secret_access_key='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')
-    #dir_n = user + '/unprocessed/test/User Spectra/' + fn
+    dir_n = user + '/unprocessed/test/User Spectra/' + fn
     output_ulsa = join(current_app.root_path, 
                          'static/tamplate', 'ULSA')
-    s3.download_file('deco3801', '/unprocessed/test/User Spectra/bdce1266ab2d94a9.txt', output_ulsa + '/test.txt')
+    s3.meta.client.download_file('deco3801', '/unprocessed/test/User Spectra/bdce1266ab2d94a9.txt', output_ulsa + '/test.txt')
     # # this ’data_path ’ will depend on where you save data
     # data_path = join('~ ', 'data', 'qaehs', 'sim', 'data')
 
