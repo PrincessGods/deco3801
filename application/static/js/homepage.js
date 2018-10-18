@@ -40,7 +40,7 @@ $(document).ready(function(){
         currentStepLabel.hide();
         currentStepLabel = currentStepLabel.next();
 
-        if(currentStep.get(0).id != "form1"){
+        if(currentStep.get(0).id != "form0"){
             $('#prevStep').show();
         }
 
@@ -65,6 +65,10 @@ $(document).ready(function(){
             
             $('#nextStep').show();
             $('.stepLable').hide();
+        }
+
+        if(currentStep.prev().get(0).id == "form0"){
+            $('#prevStep').hide();
         }
         
         currentStep.prev().show();
