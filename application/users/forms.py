@@ -87,14 +87,8 @@ class UpdateProfileForm(FlaskForm):
 
     submit = SubmitField('Update Profile')
 
-    def validate_username(self, username):
-        if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
-            if user:
-                raise ValidationError('This username has been registered')
-
     def validate_email(self, email):
-        if email.data != current_user.email:
+        if email.data != current_user.user_email:
             email = User.query.filter_by(email=email.data).first()
             if email:
                 raise ValidationError('This eamil has been registered')
