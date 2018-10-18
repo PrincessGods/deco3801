@@ -8,6 +8,11 @@ from application.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
+def getUserIcon():
+    if current_user.is_authenticated:
+        user_icon = url_for('static', filename='imgs/' + current_user.user_icon)
+        return user_icon
+
 @users.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -88,7 +93,7 @@ def profile():
         form.organisation.data = current_user.user_organisation
         form.afflication.data = current_user.user_affilication
 
-    user_icon = url_for('static', filename='imgs/' + current_user.user_icon)
+    user_icon = getUserIcon()
     return render_template('profile.html', title = "My Profile", 
                             icon = user_icon, form = form)
 

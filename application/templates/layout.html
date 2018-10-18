@@ -53,11 +53,12 @@
                         <ul class="navbar-nav">
                             {% if current_user.is_authenticated %}
                                 <li class="nav-item dropdown py-2">
-                                    <a class="nav-link dropdown-toggle px-4" href="#" onclick="dropControl()">My Account</a>
+                                    <p id="iconPath" style="display: none">{{ icon }}</p>
+                                    <div class="nav-link px-auto" id="u_icon" onclick="dropControl()"></div>
                                     <div class="dropdown_menu bg-dark py-0 d-flex" id="dropdown_menu">
                                         
-                                            <a class="dropdown-item py-2" id="dropdown-item3" href="{{ url_for('users.profile') }}">Profile</a>
-                                            <a class="dropdown-item py-2" href="{{ url_for('users.logout') }}">Log Out</a>
+                                            <a class="dropdown-item py-2 border-buttom" id="dropdown-item3" href="{{ url_for('users.profile') }}">Profile</a>
+                                            <a class="dropdown-item py-2 border-0" href="{{ url_for('users.logout') }}">Log Out</a>
                                         
                                             <a class="dropdown-item py-2" href="{{ url_for('users.register') }}">Sign In</a>
                                             <a class="dropdown-item py-2" href="{{ url_for('users.login') }}">Log In</a>

@@ -28,26 +28,35 @@ def getMethodList():
         methodList.append(method)
     return methodList
 
+def getUserIcon():
+    if current_user.is_authenticated:
+        user_icon = url_for('static', filename='imgs/' + current_user.user_icon)
+        return user_icon
+
 @hams.route("/manageJobs")
 @login_required
 def manageJobs():
-    return render_template('manageJobs.html', title = "HAMS")
+    user_icon = getUserIcon()
+    return render_template('manageJobs.html',icon = user_icon, title = "HAMS")
 
 @hams.route("/chooseMethod", methods=['GET', 'POST'])
 @login_required
 def chooseMethod():
     form = SelectMethodForm()
     methodList = getMethodList()
+    user_icon = getUserIcon()
     if form.validate_on_submit():
         chosenMethod = form.methods.data
         return redirect(url_for('hams.acquisition', chosenMethod = chosenMethod))
         
     return render_template('chooseMethod.html', title = "HAMS", form = form,
-                             details = details, methods = methodList)
+                             details = details, methods = methodList, icon = user_icon)
 
 @hams.route("/acquisition/<chosenMethod>", methods=['GET', 'POST'])
 @login_required
 def acquisition(chosenMethod):
+    user_icon = getUserIcon()
+
     if chosenMethod == 'LibrarySearch':
         form = LibrarySearch()
     elif chosenMethod == 'ImportDeconv':
@@ -157,12 +166,13 @@ def acquisition(chosenMethod):
         
 
         return redirect(url_for('hams.saveJob', chosenMethod = chosenMethod))
-    return render_template('acquisition.html', title = "HAMS", form = form, method = chosenMethod) 
+    return render_template('acquisition.html', title = "HAMS", form = form, method = chosenMethod, icon = user_icon) 
 
 @hams.route("/saveJob/<chosenMethod>", methods=['GET', 'POST'])
 @login_required
 def saveJob(chosenMethod):
     form = AlgorithmnForm()
+    user_icon = getUserIcon()
     if form.validate_on_submit():
         if chosenMethod == 'ImportDeconv':
             ImportDeconv_Al()
@@ -172,4 +182,4 @@ def saveJob(chosenMethod):
             DeconvLibrarySearch_Al()
 
         return redirect(url_for('users.profile'))
-    return render_template('saveJob.html', title = "HAMS", form = form)
+    return render_template('saveJob.html', title = "HAMS", form = form, icon = user_icon)

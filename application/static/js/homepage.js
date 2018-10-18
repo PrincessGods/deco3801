@@ -107,4 +107,8 @@ $(document).ready(function(){
         $('#PreviewModal').modal("hide"); 
         e.preventDefault();
     })
+
+    $('#u_icon').ready(function(){
+        $('#u_icon').css("background", "url(" + $('#iconPath').text() + ") 50% center/cover");
+    })
 });
