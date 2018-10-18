@@ -14,21 +14,36 @@
             <form method="POST" action="" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group mb-4">
-                    <legend class="border-bottom mb-4">My Profile</legend>
+                    <legend class="border-bottom mb-4 pb-1">My Profile</legend>
                     <div class="d-flex">
                         <div class="w-50">
                             <div class="form-group w-100">
-                                {{ form.username.label(class="form-control-label") }}
+                                {{ form.first_name.label(class="form-control-label") }}
                 
-                                {% if form.username.errors %}
-                                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                                {% if form.first_name.errors %}
+                                    {{ form.first_name(class="form-control form-control-lg is-invalid") }}
                                     <div class="invalid-feedback">
-                                        {% for error in form.username.errors %}
+                                        {% for error in form.first_name.errors %}
                                             <span>{{ error }}</span>
                                         {% endfor %}
                                     </div>
                                 {% else %}
-                                    {{ form.username(class="form-control form-control-lg") }}
+                                    {{ form.first_name(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.last_name.label(class="form-control-label") }}
+
+                                {% if form.last_name.errors %}
+                                    {{ form.last_name(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.last_name.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.last_name(class="form-control form-control-lg") }}
                                 {% endif %}
                             </div>
                 
@@ -47,25 +62,50 @@
                                 {% endif %}
                             </div>
 
-                            <div class="form-group w-100">
-                                <label class="form-control-label" for="title">Title</label>
-                                <select class="form-control form-control-lg" id="title" name="title">
-                                    <option value="mr" selected>Mr.</option>
-                                    <option value="miss">Miss</option>
-                                    <option value="other">Other</option>
-                                </select>
+                            <div class="form-group">
+                                {{ form.location.label(class="form-control-label") }}
+
+                                {% if form.location.errors %}
+                                    {{ form.location(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.location.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.location(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
 
-                            <div class="form-group w-100">
-                                <label class="form-control-label" for="affliation">Affliation</label>
-                                <input class="form-control form-control-lg" id="affliation" name="affliation" require type="text" value="0451234567">
+                            <div class="form-group">
+                                {{ form.organisation.label(class="form-control-label") }}
+
+                                {% if form.organisation.errors %}
+                                    {{ form.organisation(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.organisation.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.organisation(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
-                            
-                            <div class="form-group w-100">
-                                <label class="form-control-label" for="position">Position</label>
-                                <input class="form-control form-control-lg" id="position" name="position" require type="text" value="St. Lucia">
+
+                            <div class="form-group">
+                                {{ form.afflication.label(class="form-control-label") }}
+
+                                {% if form.afflication.errors %}
+                                    {{ form.afflication(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.afflication.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.afflication(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
-                        </div>
 
                         <div class="media d-flex w-50">
                             <div class="w-50 d-flex flex-column mx-auto">

@@ -11,11 +11,11 @@
             <img style="display: none" class="col-9 m-auto" src="{{ url_for('static', filename='imgs/step5.png') }}" alt="Step-5">
         </div>
         <div class="content-section border rounded" id="topLabels">
-            <p class="text text-light bg-secondary rounded-top p-3">Upload Files And Sample Information:</p>
-            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">HRMS Instruments:</p>
-            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">Chromatography:</p>
-            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">My Columns:</p>
-            <p class="text text-light bg-secondary rounded-top p-3" style="display: none">Overview Settings:</p>
+            <p class="text bg-secondary rounded-top p-3">Upload Files And Type In Some Sample Informations:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">HRMS Instruments:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">Chromatography:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">My Columns:</p>
+            <p class="text bg-secondary rounded-top p-3" style="display: none">Overview Settings:</p>
             <form method="POST" action="" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group px-5 py-2 d-flex flex-column" id="forms">
@@ -116,293 +116,654 @@
                             </div>
                         {% endif %}
 
-                        <div class="form-group">
-                            {{ form.sampleLocation.label(class="form-control-label") }}
+                         <!--The part of the sample location-->
+                         <!--Sample type-->
+                         <div class="form-group">
+                            {{ form.sample_type.label(class="form-control-label") }}
 
-                            {% if form.sampleLocation.errors %}
-                                {{ form.sampleLocation(class="form-control form-control-lg is-invalid") }}
+                            {% if form.sample_type.errors %}
+                                {{ form.sample_type(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.sampleLocation.errors %}
+                                    {% for error in form.sample_type.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.sampleLocation(class="form-control form-control-lg") }}
+                                {{ form.sample_type(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
-                        <div class="form-group">
-                            {{ form.sampledata.label(class="form-control-label") }}
+                        <!--Sample city-->
+                         <div class="form-group">
+                            {{ form.sample_city.label(class="form-control-label") }}
 
-                            {% if form.sampledata.errors %}
-                                {{ form.sampledata(class="form-control form-control-lg is-invalid") }}
+                            {% if form.sample_city.errors %}
+                                {{ form.sample_city(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.sampledata.errors %}
+                                    {% for error in form.sample_city.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.sampledata(class="form-control form-control-lg") }}
+                                {{ form.sample_city(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
-                        <div class="form-group">
-                            {{ form.sampleType.label(class="form-control-label") }}
 
-                            {% if form.sampleType.errors %}
-                                {{ form.sampleType(class="form-control form-control-lg is-invalid") }}
+                         <!--Sample country-->
+                         <div class="form-group">
+                            {{ form.sample_country.label(class="form-control-label") }}
+
+                            {% if form.sample_country.errors %}
+                                {{ form.sample_country(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.sampleType.errors %}
+                                    {% for error in form.sample_country.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.sampleType(class="form-control form-control-lg") }}
+                                {{ form.sample_country(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
+
+                        <!--Sample location longitude-->
+                        <div class="form-group">
+                            {{ form.sample_location_longitude.label(class="form-control-label") }}
+
+                            {% if form.sample_location_longitude.errors %}
+                                {{ form.sample_location_longitude(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.sample_location_longitude.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sample_location_longitude(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        
+                        <!--Sample location altitude-->
+                        <div class="form-group">
+                            {{ form.sample_location_altitude.label(class="form-control-label") }}
+
+                            {% if form.sample_location_altitude.errors %}
+                                {{ form.sample_location_altitude(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.sample_location_altitude.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sample_location_altitude(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+
+                        <!--Sample location latitude-->
+                        <div class="form-group">
+                            {{ form.sample_location_latitude.label(class="form-control-label") }}
+
+                            {% if form.sample_location_latitude.errors %}
+                                {{ form.sample_location_latitude(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.sample_location_latitude.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sample_location_latitude(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                         <!--Sample location datum-->
+                        <div class="form-group">
+                            {{ form.sample_location_datum.label(class="form-control-label") }}
+
+                            {% if form.sample_location_datum.errors %}
+                                {{ form.sample_location_datum(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in sample_location_datum.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.sample_location_datum(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-check">
+                            {{ form.sample_private(class="form-check-input") }}
+                            {{ form.sample_private.label(class="form-check-label") }}
+                        </div>
+
                     </div>
+                    <!--The part of the sample location is over-->
 
+                    <!--Input of HRMS Instruments-->
                     <div id="form2" style="display: none">
                         <legend class="border-bottom pb-2 mt-5 stepLable" style="display: none">
                             HRMS Instruments
                         </legend>
-                        <div class="form-group">
-                            {{ form.brand.label(class="form-control-label") }}
 
-                            {% if form.brand.errors %}
-                                {{ form.brand(class="form-control form-control-lg is-invalid") }}
+                        <!--System Class-->
+                        <div class="form-group">
+                            {{ form.hrms_system_class.label(class="form-control-label") }}
+
+                            {% if form.hrms_system_class.errors %}
+                                {{ form.hrms_system_class(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.brand.errors %}
+                                    {% for error in form.hrms_system_class.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.brand(class="form-control form-control-lg") }}
+                                {{ form.hrms_system_class(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                        <!--System Model-->
                         <div class="form-group">
-                            {{ form.source.label(class="form-control-label") }}
+                            {{ form.hrms_system_model.label(class="form-control-label") }}
 
-                            {% if form.source.errors %}
-                                {{ form.source(class="form-control form-control-lg is-invalid") }}
+                            {% if form.hrms_system_model.errors %}
+                                {{ form.hrms_system_model(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
                                     {% for error in form.source.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.source(class="form-control form-control-lg") }}
+                                {{ form.hrms_system_model(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                        <!--System Brand-->
                         <div class="form-group">
-                            {{ form.model.label(class="form-control-label") }}
+                            {{ form.hrms_system_brand.label(class="form-control-label") }}
 
-                            {% if form.model.errors %}
-                                {{ form.model(class="form-control form-control-lg is-invalid") }}
+                            {% if form.hrms_system_brand.errors %}
+                                {{ form.hrms_system_brand(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
                                     {% for error in form.model.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.model(class="form-control form-control-lg") }}
+                                {{ form.hrms_system_brand(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                        <!--HRMS source-->
                         <div class="form-group">
-                            {{ form.ionisation.label(class="form-control-label") }}
+                            {{ form.hrms_source.label(class="form-control-label") }}
 
-                            {% if form.ionisation.errors %}
-                                {{ form.ionisation(class="form-control form-control-lg is-invalid") }}
+                            {% if form.hrms_source.errors %}
+                                {{ form.hrms_source(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.ionisation.errors %}
+                                    {% for error in form.hrms_source.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.ionisation(class="form-control form-control-lg") }}
+                                {{ form.hrms_source(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
-                    </div>
 
+                        <!--HRMS mode-->
+                        <div class="form-group">
+                            {{ form.hrms_mode.label(class="form-control-label") }}
+
+                            {% if form.hrms_mode.errors %}
+                                {{ form.hrms_mode(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.hrms_mode.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.hrms_mode(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                         <!--HRMS source gas 1-->
+                        <div class="form-group">
+                            {{ form.hrms_source_gas1.label(class="form-control-label") }}
+
+                            {% if form.hrms_source_gas1.errors %}
+                                {{ form.hrms_source_gas1(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.hrms_source_gas1.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.hrms_source_gas1(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                         <!--HRMS source gas 2-->
+                        <div class="form-group">
+                            {{ form.hrms_source_gas2.label(class="form-control-label") }}
+
+                            {% if form.hrms_source_gas2.errors %}
+                                {{ form.hrms_source_gas2(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.hrms_source_gas2.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.hrms_source_gas2(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <!--HRMS curtain gas -->
+                        <div class="form-group">
+                            {{ form.hrms_curtain_gas.label(class="form-control-label") }}
+
+                            {% if form.hrms_curtain_gas.errors %}
+                                {{ form.hrms_curtain_gas(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.hrms_curtain_gas.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.hrms_curtain_gas(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <!--HRMS ionisation -->
+                        <div class="form-group">
+                            {{ form.hrms_ionisation.label(class="form-control-label") }}
+
+                            {% if form.hrms_ionisation.errors %}
+                                {{ form.hrms_ionisation(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.hrms_ionisation.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.hrms_ionisation(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <!--HRMS voltage -->
+                        <div class="form-group">
+                            {{ form.hrms_voltage.label(class="form-control-label") }}
+
+                            {% if form.hrms_voltage.errors %}
+                                {{ form.hrms_voltage(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.hrms_voltage.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.hrms_voltage(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <!--HRMS polarity -->
+                        <div class="form-group">
+                            {{ form.hrms_polarity.label(class="form-control-label") }}
+
+                            {% if form.hrms_polarity.errors %}
+                                {{ form.hrms_polarity(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.hrms_polarity.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.hrms_polarity(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <!--Input of HRMS Instruments part is over-->
+
+
+ <!--Input of Chromatography-->
                     <div id="form3" style="display: none">
                         <legend class="border-bottom pb-2 mt-5 stepLable" style="display: none">
                             Chromatography
                         </legend>
-                        <div class="form-group">
-                            {{ form.systemBrand.label(class="form-control-label") }}
 
-                            {% if form.systemBrand.errors %}
-                                {{ form.systemBrand(class="form-control form-control-lg is-invalid") }}
+                        <!--Chromatography brand-->
+                        <div class="form-group">
+                            {{ form.chrom_system_brand.label(class="form-control-label") }}
+
+                            {% if form.chrom_system_brand.errors %}
+                                {{ form.chrom_system_brand(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.systemBrand.errors %}
+                                    {% for error in form.chrom_system_brand.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.systemBrand(class="form-control form-control-lg") }}
+                                {{ form.chrom_system_brand(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                        <!--Chromatography model-->
                         <div class="form-group">
-                            {{ form.systemClass.label(class="form-control-label") }}
+                            {{ form.chrom_system_model.label(class="form-control-label") }}
 
-                            {% if form.systemClass.errors %}
-                                {{ form.systemClass(class="form-control form-control-lg is-invalid") }}
+                            {% if form.chrom_system_model.errors %}
+                                {{ form.chrom_system_model(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.systemClass.errors %}
+                                    {% for error in form.chrom_system_model.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.systemClass(class="form-control form-control-lg") }}
+                                {{ form.chrom_system_model(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <!--Chromatography system-->
+                        <div class="form-group">
+                            {{ form.chrom_system_class.label(class="form-control-label") }}
+
+                            {% if form.chrom_system_class.errors %}
+                                {{ form.chrom_system_class(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.chrom_system_class.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.chrom_system_class(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                         <!--Chromatography component type-->
+                        <div class="form-group">
+                            {{ form.chrom_component_type.label(class="form-control-label") }}
+
+                            {% if form.chrom_component_type.errors %}
+                                {{ form.chrom_component_type(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.chrom_component_type.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.chrom_component_type(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
                         <div id='component'>
+                            <!--Chromatography sample injection volume-->
                             <div class="form-group">
-                                {{ form.componentBrand.label(class="form-control-label") }}
+                                {{ form.chrom_sample_injection_volume.label(class="form-control-label") }}
 
-                                {% if form.componentBrand.errors %}
-                                    {{ form.componentBrand(class="form-control form-control-lg is-invalid") }}
+                                {% if form.chrom_sample_injection_volume.errors %}
+                                    {{ form.chrom_sample_injection_volume(class="form-control form-control-lg is-invalid") }}
                                     <div class="invalid-feedback">
-                                        {% for error in form.componentBrand.errors %}
+                                        {% for error in form.chrom_sample_injection_volume.errors %}
                                             <span>{{ error }}</span>
                                         {% endfor %}
                                     </div>
                                 {% else %}
-                                    {{ form.componentBrand(class="form-control form-control-lg") }}
+                                    {{ form.chrom_sample_injection_volume(class="form-control form-control-lg") }}
                                 {% endif %}
                             </div>
 
+                            <!--Chromatography mobile phase a-->
                             <div class="form-group">
-                                {{ form.component.label(class="form-control-label") }}
+                                {{ form.chrom_mobile_phase_a.label(class="form-control-label") }}
 
-                                {% if form.component.errors %}
-                                    {{ form.component(class="form-control form-control-lg is-invalid") }}
+                                {% if form.chrom_mobile_phase_a.errors %}
+                                    {{ form.chrom_mobile_phase_a(class="form-control form-control-lg is-invalid") }}
                                     <div class="invalid-feedback">
-                                        {% for error in form.component.errors %}
+                                        {% for error in form.chrom_mobile_phase_a.errors %}
                                             <span>{{ error }}</span>
                                         {% endfor %}
                                     </div>
                                 {% else %}
-                                    {{ form.component(class="form-control form-control-lg") }}
+                                    {{ form.chrom_mobile_phase_a(class="form-control form-control-lg") }}
                                 {% endif %}
                             </div>
 
+                            <!--Chromatography mobile phase b-->
                             <div class="form-group">
-                                {{ form.componentModel.label(class="form-control-label") }}
+                                {{ form.chrom_mobile_phase_b.label(class="form-control-label") }}
 
-                                {% if form.componentModel.errors %}
-                                    {{ form.componentModel(class="form-control form-control-lg is-invalid") }}
+                                {% if form.chrom_mobile_phase_b.errors %}
+                                    {{ form.chrom_mobile_phase_b(class="form-control form-control-lg is-invalid") }}
                                     <div class="invalid-feedback">
-                                        {% for error in form.componentModel.errors %}
+                                        {% for error in form.chrom_mobile_phase_b.errors %}
                                             <span>{{ error }}</span>
                                         {% endfor %}
                                     </div>
                                 {% else %}
-                                    {{ form.componentModel(class="form-control form-control-lg") }}
+                                    {{ form.chrom_mobile_phase_b(class="form-control form-control-lg") }}
                                 {% endif %}
                             </div>
+
+                            <!--Chromatography mobile phase b-->
+                            <div class="form-group">
+                                {{ form.chrom_event_stage.label(class="form-control-label") }}
+
+                                {% if form.chrom_event_stage.errors %}
+                                    {{ form.chrom_event_stage(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.chrom_event_stage.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.chrom_event_stage(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <!--Chromatography event stage-->
+                            <div class="form-group">
+                                {{ form.chrom_event_stage.label(class="form-control-label") }}
+
+                                {% if form.chrom_event_stage.errors %}
+                                    {{ form.chrom_event_stage(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.chrom_event_stage.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.chrom_event_stage(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <!--Chromatography flow rate-->
+                            <div class="form-group">
+                                {{ form.chrom_flow_rate.label(class="form-control-label") }}
+
+                                {% if form.chrom_flow_rate.errors %}
+                                    {{ form.chrom_flow_rate(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.chrom_flow_rate.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.chrom_flow_rate(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <!--Chromatography gradient a or b-->
+                            <div class="form-group">
+                                {{ form.chrom_gradient_a_or_b.label(class="form-control-label") }}
+
+                                {% if form.chrom_gradient_a_or_b.errors %}
+                                    {{ form.chrom_gradient_a_or_b(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.chrom_gradient_a_or_b.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.chrom_gradient_a_or_b(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <!--Chromatography a or b-->
+                            <div class="form-group">
+                                {{ form.chrom_a_or_b.label(class="form-control-label") }}
+
+                                {% if form.chrom_a_or_b.errors %}
+                                    {{ form.chrom_a_or_b(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.chrom_a_or_b.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.chrom_a_or_b(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <!--Chromatography oven temperature-->
+                            <div class="form-group">
+                                {{ form.chrom_oven_temperature.label(class="form-control-label") }}
+
+                                {% if form.chrom_oven_temperature.errors %}
+                                    {{ form.chrom_oven_temperature(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.chrom_oven_temperature.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.chrom_oven_temperature(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
                         </div>
                     </div>
+                   <!--Input of Chromatography part is over-->
 
-                    
+                   <!--Input of Column-->
                     <div id="form4" style="display: none">
                         <legend class="border-bottom pb-2 mt-5 stepLable" style="display: none">
                             My Columns
                         </legend>
-                        <div class="form-group">
-                            {{ form.colBrand.label(class="form-control-label") }}
 
-                            {% if form.colBrand.errors %}
-                                {{ form.colBrand(class="form-control form-control-lg is-invalid") }}
+                        <!--Column phase-->
+                        <div class="form-group">
+                            {{ form.column_phase.label(class="form-control-label") }}
+
+                            {% if form.column_phase.errors %}
+                                {{ form.column_phase(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.colBrand.errors %}
+                                    {% for error in form.column_phase.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.colBrand(class="form-control form-control-lg") }}
+                                {{ form.column_phase(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                        <!--Column particle size-->
                         <div class="form-group">
-                            {{ form.colPhase.label(class="form-control-label") }}
+                            {{ form.column_particle_size.label(class="form-control-label") }}
 
-                            {% if form.colPhase.errors %}
-                                {{ form.colPhase(class="form-control form-control-lg is-invalid") }}
+                            {% if form.column_particle_size.errors %}
+                                {{ form.column_particle_size(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.colPhase.errors %}
-                                </div>
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                            {% else %}
-                                {{ form.colPhase(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form.colPoreSizeA.label(class="form-control-label") }}
-
-                            {% if form.colPoreSizeA.errors %}
-                                {{ form.colPoreSizeA(class="form-control form-control-lg is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.colPoreSizeA.errors %}
+                                    {% for error in form.column_particle_size.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.colPoreSizeA(class="form-control form-control-lg") }}
+                                {{ form.column_particle_size(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                        <!--Column length-->
                         <div class="form-group">
-                            {{ form.colPoreSizeU.label(class="form-control-label") }}
+                            {{ form.column_length.label(class="form-control-label") }}
 
-                            {% if form.colPoreSizeU.errors %}
-                                {{ form.colPoreSizeU(class="form-control form-control-lg is-invalid") }}
+                            {% if form.column_length.errors %}
+                                {{ form.column_length(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.colPoreSizeU.errors %}
+                                    {% for error in form.column_length.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.colPoreSizeU(class="form-control form-control-lg") }}
+                                {{ form.column_length(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                         <!--Column pore size-->
                         <div class="form-group">
-                            {{ form.colLength.label(class="form-control-label") }}
+                            {{ form.column_pore_size.label(class="form-control-label") }}
 
-                            {% if form.colLength.errors %}
-                                {{ form.colLength(class="form-control form-control-lg is-invalid") }}
+                            {% if form.column_pore_size.errors %}
+                                {{ form.column_pore_size(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.colLength.errors %}
+                                    {% for error in form.column_pore_size.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.colLength(class="form-control form-control-lg") }}
+                                {{ form.column_pore_size(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
 
+                          <!--Column inner diameter-->
                         <div class="form-group">
-                            {{ form.colDiameter.label(class="form-control-label") }}
+                            {{ form.column_inner_diameter.label(class="form-control-label") }}
 
-                            {% if form.colDiameter.errors %}
-                                {{ form.colDiameter(class="form-control form-control-lg is-invalid") }}
+                            {% if form.column_inner_diameter.errors %}
+                                {{ form.column_inner_diameter(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.colDiameter.errors %}
+                                    {% for error in form.column_inner_diameter.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.colDiameter(class="form-control form-control-lg") }}
+                                {{ form.column_inner_diameter(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
+
+                          <!--Column brand-->
+                        <div class="form-group">
+                            {{ form.column_brand.label(class="form-control-label") }}
+
+                            {% if form.column_brand.errors %}
+                                {{ form.column_brand(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.column_brand.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.column_brand(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                         <!--Column model-->
+                        <div class="form-group">
+                            {{ form.column_model.label(class="form-control-label") }}
+
+                            {% if form.column_model.errors %}
+                                {{ form.column_model(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.column_model.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.column_model(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+    
                     </div>
+                   <!--Input of Input of Column part is over-->
+
                     
                     <div id="saveJobBtn" style="display: none">
                         {{ form.submit(class="btn btn-outline-info ml-auto mt-4") }}

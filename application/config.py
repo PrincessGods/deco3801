@@ -2,7 +2,7 @@ import os
 
 class Config:
     SECRET_KEY = '3204436496843db0b799220bd0c151b2'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://DECO3801Mars:DECO3801mars@deco3801rdstesting.c18plumnhyns.ap-southeast-2.rds.amazonaws.com/test'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@localhost/deco3801'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True

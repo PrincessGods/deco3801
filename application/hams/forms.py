@@ -1,57 +1,122 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_login import current_user
-from wtforms import StringField, SubmitField, RadioField
+from wtforms import StringField, SubmitField, RadioField, FloatField, BooleanField
 from wtforms.validators import DataRequired, EqualTo, ValidationError
 from application.models import User
 
 class SelectMethodForm(FlaskForm):
-    methods = RadioField('methods', validators=[DataRequired()], choices=[('LibrarySearch', ''), ("ImportDeconv", ""), 
+    methods = RadioField('methods', validators=[DataRequired()], choices=[('LibrarySearch', ''), ('ImportDeconv', ''), 
                                 ('DeconvLibrarySearch', '')], default='LibrarySearch')
     submit = SubmitField('Choose')
-
-class AcquisitionForm(FlaskForm):
-    sampleLocation = StringField('Sample Location', validators=[DataRequired()])
-
-    sampleType = StringField('Sample Type', validators=[DataRequired()])
-
-    sampledata = StringField('Sample Data', validators=[DataRequired()])
-
-    brand = StringField('Brand', validators=[DataRequired()])
-
-    source = StringField('Source', validators=[DataRequired()])
-
-    model = StringField('Model', validators=[DataRequired()])
-
-    ionisation = StringField('Ionisation', validators=[DataRequired()])
-
-    systemBrand = StringField('System Brand', validators=[DataRequired()])
-
-    systemClass = StringField('System Class', validators=[DataRequired()])
-
-    componentBrand = StringField('Component Brand', validators=[DataRequired()])
-
-    component = StringField('Component', validators=[DataRequired()])
-
-    componentModel = StringField('Component Model', validators=[DataRequired()])
-
-    colBrand = StringField('Brand', validators=[DataRequired()])
-
-    colPhase = StringField('Phase', validators=[DataRequired()])
-
-    colPoreSizeA = StringField('Pore Size (Å)', validators=[DataRequired()])
-
-    colPoreSizeU = StringField('Particle Size (µm)', validators=[DataRequired()])
-
-    colLength = StringField('Length (mm)', validators=[DataRequired()])
-
-    colDiameter = StringField('Inner Diameter (mm)', validators=[DataRequired()])
-
-    submit = SubmitField('Save Job')
     
+class AcquisitionForm(FlaskForm):
+    ##input of sample information, the table to input: sample information and sample location
+    ## input table:sample location
+    sample_location_longitude = FloatField('Sample Location Longitude', validators=[DataRequired()])
+
+    sample_location_altitude = FloatField('Sample Location Altitude', validators=[DataRequired()])
+
+    sample_location_latitude = FloatField('Sample Location Latitude', validators=[DataRequired()])
+
+    sample_location_datum = FloatField('Location Datum', validators=[DataRequired()])
+
+    ## input table:sample information
+    ##sample_raw_hrms_file_path = ??
+    ##sample_targets_file_path = ??
+    ##samplle_matrix = ??
+    sample_private = BooleanField('Sample is Private?')
+
+    sample_type = StringField('Sample Type', validators=[DataRequired()])
+
+    sample_city = StringField('City of the Sample', validators=[DataRequired()])
+
+    sample_country = StringField('Country of the Sample', validators=[DataRequired()])
+
+    ##input for threshold setting
+    ##input table: threshold_setting
+   
+
+   
+    ## input of columns, the table to input: analytical_column
+    column_phase = FloatField('Column Phase', validators=[DataRequired()])
+
+    column_particle_size = FloatField('Column Particle Size', validators=[DataRequired()])
+
+    column_length = FloatField('Column Length', validators=[DataRequired()])
+
+    column_pore_size = FloatField('Column Pore Size', validators=[DataRequired()])
+
+    column_inner_diameter = FloatField('Column Inner Diameter (mm)', validators=[DataRequired()])
+
+    column_brand = StringField('Column Brand', validators=[DataRequired()])
+
+    column_model = StringField('Column Model', validators=[DataRequired()])
+
+
+    ## input of HRMS instruments, table to input: acquisition_hrms, ms_system
+    ## input table: ms_system
+    hrms_system_class = StringField('HRMS Instruments Class', validators=[DataRequired()])
+
+    hrms_system_model = StringField('HRMS Instruments Model', validators=[DataRequired()])
+
+    hrms_system_brand = StringField('HRMS Instruments Brand', validators=[DataRequired()])
+
+    ## input table: acquisition_hrms
+    hrms_source = FloatField('HRMS Instruments Source', validators=[DataRequired()])
+
+    hrms_mode = StringField('HRMS Mode', validators=[DataRequired()])
+
+    hrms_source_gas1 = FloatField('HRMS Source Gas 1', validators=[DataRequired()])
+
+    hrms_source_gas2 = FloatField('HRMS Source Gas 2', validators=[DataRequired()])
+
+    hrms_curtain_gas = FloatField('HRMS Curtain Gas', validators=[DataRequired()])
+
+    hrms_ionisation = FloatField('HRMS Ionisation', validators=[DataRequired()])
+
+    hrms_voltage = FloatField('HRMS Source Voltage', validators=[DataRequired()])
+
+    hrms_polarity = FloatField('HRMS Source Polarity', validators=[DataRequired()])
+
+    ## input of Chromatography System, table to input: chromatographic_condition, chrom_time, lc_system
+    ##input table: chromatographic_condition
+    chrom_sample_injection_volume = FloatField('Injection Volume (uL)', validators=[DataRequired()])
+
+    chrom_mobile_phase_a = FloatField('Chrom Mobile Phase A', validators=[DataRequired()])
+
+    chrom_mobile_phase_b = FloatField('Chrom Mobile Phase B', validators=[DataRequired()])
+
+    ##input table: chrom_time
+    chrom_event_stage = StringField('Chrom Event Stage', validators=[DataRequired()])
+
+    chrom_flow_rate = FloatField('Chrom Flow rate(ml)', validators=[DataRequired()])
+
+    chrom_gradient_a_or_b = FloatField('Chrom Gradient A/B', validators=[DataRequired()])
+
+    chrom_a_or_b = StringField('Chrom A/B', validators=[DataRequired()])
+
+    chrom_oven_temperature = FloatField('Chrom Oven Temp °C', validators=[DataRequired()])
+
+    ##input table: lc_system
+    chrom_system_brand = StringField('Chrom System Brand', validators=[DataRequired()])
+
+    chrom_system_model = StringField('Chrom System Model', validators=[DataRequired()])
+
+    chrom_system_class = StringField('Chrom System Class', validators=[DataRequired()])
+
+    chrom_component_type = StringField('Chrom System Component', validators=[DataRequired()])
+
+   
+
+
+    ## Submit button
+    submit = SubmitField('Save Job')
+
 class LibrarySearch(AcquisitionForm):
+    ## LibrarySearch reqested input files
     txtFile = FileField('User Spectra',
-                            validators=[FileRequired(), FileAllowed(['txt'])])
+                                validators=[FileRequired(), FileAllowed(['txt'])])
 
 class ImportDeconv(AcquisitionForm):
     xlsxFile = FileField('Target',
@@ -75,6 +140,8 @@ class DeconvLibrarySearch(AcquisitionForm):
 
     txtFile = FileField('User Spectra',
                             validators=[FileRequired(), FileAllowed(['txt'])])
+
+
 
 class AlgorithmnForm(FlaskForm):
     submit = SubmitField('Process Job Now')

@@ -17,8 +17,15 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(
                             form.password.data).decode('utf-8')
-        user = User(username = form.username.data, 
-                        email = form.email.data, password = hashed_password)
+        user = User(user_firstname = form.first_name.data, 
+                    user_lastname = form.last_name.data, 
+                    user_email = form.email.data,
+                    user_password = hashed_password,
+                    user_location = form.location.data,
+                    user_organisation = form.organisation.data,
+                    user_affilication = form.afflication.data,
+                    user_receive_notification = form.receive_notification.data,
+                    user_private = form.private_account.data)
         db.session.add(user)
         db.session.commit()
 
@@ -34,9 +41,8 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter((User.email==form.email.data) | 
-                                (User.username==form.email.data)).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
+        user = User.query.filter(User.user_email==form.email.data).first()
+        if user and bcrypt.check_password_hash(user.user_password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             ##flash('You have been logged in!', 'success')
@@ -62,20 +68,29 @@ def profile():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-            current_user.u_icon = picture_file
+            current_user.user_icon = picture_file
 
-        current_user.username = form.username.data
-        current_user.email = form.email.data
+        current_user.user_firstname = form.first_name.data
+        current_user.user_lastname = form.last_name.data
+        current_user.user_email = form.email.data
+        current_user.user_location = form.location.data
+        current_user.user_affilication = form.afflication.data
+        current_user.user_organisation = form.organisation.data
+        
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('users.profile'))
     elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.email.data = current_user.email
+        form.first_name.data = current_user.user_firstname
+        form.last_name.data = current_user.user_lastname
+        form.email.data = current_user.user_email
+        form.location.data = current_user.user_location
+        form.organisation.data = current_user.user_organisation
+        form.afflication.data = current_user.user_affilication
 
-    u_icon = url_for('static', filename='imgs/' + current_user.u_icon)
+    user_icon = url_for('static', filename='imgs/' + current_user.user_icon)
     return render_template('profile.html', title = "My Profile", 
-                            icon = u_icon, form = form)
+                            icon = user_icon, form = form)
 
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():

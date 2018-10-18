@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, request, Blueprint, flash
 from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv, AlgorithmnForm
-from application.models import User
+from application.models import User, Acquisition_Hrms, Ms_System, Sample_Information, Sample_Location, Analytical_Column, Chromatographic_Condition, Chrom_Time, Lc_System
 from application import db
 from application.hams.utils import save_datafile, LibrarySearch_Al, DeconvLibrarySearch_Al, ImportDeconv_Al
 from flask_login import login_required, current_user
@@ -57,31 +57,104 @@ def acquisition(chosenMethod):
 
     if form.validate_on_submit():
         if chosenMethod == 'ImportDeconv':
-            xlsxFile = save_datafile(form.xlsxFile, current_user.username)
+            xlsxFile = save_datafile(form.xlsxFile, current_user.user_email)
             #current_user.Target = xlsxFile
 
-            VANFileLow = save_datafile(form.VANFileLow, current_user.username)
+            VANFileLow = save_datafile(form.VANFileLow, current_user.user_email)
             #current_user.Low_Energy = VANFileLow
         
-            VANFileHigh = save_datafile(form.VANFileHigh, current_user.username)
+            VANFileHigh = save_datafile(form.VANFileHigh, current_user.user_email)
             #current_user.High_Energy = VANFileHigh
 
         elif chosenMethod == 'LibrarySearch':
-            txtFile = save_datafile(form.txtFile, current_user.username)
+            txtFile = save_datafile(form.txtFile, current_user.user_email)
             #current_user.Spectra = txtFile
 
         else:
-            xlsxFile = save_datafile(form.xlsxFile, current_user.username)
+            xlsxFile = save_datafile(form.xlsxFile, current_user.user_email)
             #current_user.Target = xlsxFile
 
-            VANFileLow = save_datafile(form.VANFileLow, current_user.username)
+            VANFileLow = save_datafile(form.VANFileLow, current_user.user_email)
             #current_user.Low_Energy = VANFileLow
         
-            VANFileHigh = save_datafile(form.VANFileHigh, current_user.username)
+            VANFileHigh = save_datafile(form.VANFileHigh, current_user.user_email)
             #current_user.High_Energy = VANFileHigh
 
-            txtFile = save_datafile(form.txtFile, current_user.username)
+            txtFile = save_datafile(form.txtFile, current_user.user_email)
             #current_user.Spectra = txtFile
+
+        #Main tables
+        acquisition_hrms = Acquisition_Hrms(hrms_mode = form.hrms_mode.data, 
+                    hrms_source_gas1 = form.hrms_source_gas1.data, 
+                    hrms_source_gas2 = form.hrms_source_gas2.data,
+                    hrms_curtain_gas = form.hrms_curtain_gas.data,
+                    hrms_ionisation = form.hrms_ionisation.data,
+                    hrms_voltage = form.hrms_voltage.data,
+                    hrms_polarity = form.hrms_polarity.data,
+                    hrms_source = form.hrms_source.data)
+
+        sample_information = Sample_Information(user_id = getattr(current_user,'id'), 
+                    sample_private = form.sample_private.data, 
+                    sample_type = form.sample_type.data,
+                    sample_city = form.sample_city.data,
+                    sample_country  = form.sample_country.data)
+
+        analytical_column = Analytical_Column(user_id = getattr(current_user,'id'), 
+                    column_phase = form.column_phase.data, 
+                    column_praticle_size = form.column_particle_size.data,
+                    column_length = form.column_length.data,
+                    column_pore_size  = form.column_pore_size.data,
+                    column_inner_diameter  = form.column_inner_diameter.data,
+                    column_brand  = form.column_brand.data,
+                    column_model  = form.column_model.data)
+
+        db.session.add(acquisition_hrms)
+        db.session.add(sample_information)
+        db.session.add(analytical_column)
+        db.session.commit()
+
+        #Sub tables
+        ms_system = Ms_System(acqui_hrms_id = getattr(acquisition_hrms,'id'),
+                    system_class = form.hrms_system_class.data,
+                    system_model = form.hrms_system_model.data,
+                    system_brand = form.hrms_system_brand.data)
+
+        sample_location = Sample_Location(sample_id = getattr(sample_information,'id'),
+                    location_longitude = form.sample_location_longitude.data,
+                    location_altitude = form.sample_location_altitude.data,
+                    location_latitude = form.sample_location_latitude.data,
+                    location_datum = form.sample_location_datum.data)
+
+        chromatographic_condition = Chromatographic_Condition(column_id = getattr(analytical_column,'id'), 
+                    sample_injection_volume = form.chrom_sample_injection_volume.data, 
+                    mobile_phase_a = form.chrom_mobile_phase_a.data,
+                    mobile_phase_b = form.chrom_mobile_phase_b.data)
+
+        db.session.add(ms_system)
+        db.session.add(sample_location)
+        db.session.add(chromatographic_condition)
+        db.session.commit()
+
+
+        chrom_time = Chrom_Time(acqui_chrom_id = getattr(chromatographic_condition,'id'), 
+                    event_stage = form.chrom_event_stage.data, 
+                    flow_rate = form.chrom_flow_rate.data,
+                    gradient_a_or_b = form.chrom_gradient_a_or_b.data,
+                    a_or_b = form.chrom_a_or_b.data,
+                    oven_temp = form.chrom_oven_temperature.data)
+
+        lc_system = Lc_System(acqui_chrom_id = getattr(chromatographic_condition,'id'),
+                    user_id = getattr(current_user,'id'),
+                    system_brand = form.chrom_system_brand.data, 
+                    system_model = form.chrom_system_model.data,
+                    system_chrom_class = form.chrom_system_class.data,
+                    system_component_type = form.chrom_component_type.data)
+
+        db.session.add(chrom_time)
+        db.session.add(lc_system)
+        db.session.commit()
+
+        
 
         return redirect(url_for('hams.saveJob', chosenMethod = chosenMethod))
     return render_template('acquisition.html', title = "HAMS", form = form, method = chosenMethod) 
