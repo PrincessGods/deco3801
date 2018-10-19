@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_login import current_user
 from wtforms import StringField, SubmitField, RadioField, FloatField, BooleanField
-from wtforms.validators import DataRequired, EqualTo, ValidationError
+from wtforms.validators import DataRequired, EqualTo, ValidationError, , NumberRange
 from application.models import User
 
 class SelectMethodForm(FlaskForm):
@@ -13,13 +13,13 @@ class SelectMethodForm(FlaskForm):
 class AcquisitionForm(FlaskForm):
     ##input of sample information, the table to input: sample information and sample location
     ## input table:sample location
-    sample_location_longitude = FloatField('Sample Location Longitude', validators=[DataRequired()])
+    sample_location_longitude = FloatField('Sample Location Longitude', validators=[DataRequired(), NumberRange()])
 
-    sample_location_altitude = FloatField('Sample Location Altitude', validators=[DataRequired()])
+    sample_location_altitude = FloatField('Sample Location Altitude', validators=[DataRequired(), NumberRange()])
 
-    sample_location_latitude = FloatField('Sample Location Latitude', validators=[DataRequired()])
+    sample_location_latitude = FloatField('Sample Location Latitude', validators=[DataRequired(), NumberRange()])
 
-    sample_location_datum = FloatField('Location Datum', validators=[DataRequired()])
+    sample_location_datum = FloatField('Location Datum', validators=[DataRequired(), NumberRange()])
 
     ## input table:sample information
     ##sample_raw_hrms_file_path = ??
@@ -39,15 +39,15 @@ class AcquisitionForm(FlaskForm):
 
    
     ## input of columns, the table to input: analytical_column
-    column_phase = FloatField('Column Phase', validators=[DataRequired()])
+    column_phase = FloatField('Column Phase', validators=[DataRequired(), NumberRange()])
 
-    column_particle_size = FloatField('Column Particle Size', validators=[DataRequired()])
+    column_particle_size = FloatField('Column Particle Size', validators=[DataRequired(), NumberRange()])
 
-    column_length = FloatField('Column Length', validators=[DataRequired()])
+    column_length = FloatField('Column Length', validators=[DataRequired(), NumberRange()])
 
-    column_pore_size = FloatField('Column Pore Size', validators=[DataRequired()])
+    column_pore_size = FloatField('Column Pore Size', validators=[DataRequired(), NumberRange()])
 
-    column_inner_diameter = FloatField('Column Inner Diameter (mm)', validators=[DataRequired()])
+    column_inner_diameter = FloatField('Column Inner Diameter (mm)', validators=[DataRequired(), NumberRange()])
 
     column_brand = StringField('Column Brand', validators=[DataRequired()])
 
@@ -63,40 +63,40 @@ class AcquisitionForm(FlaskForm):
     hrms_system_brand = StringField('HRMS Instruments Brand', validators=[DataRequired()])
 
     ## input table: acquisition_hrms
-    hrms_source = FloatField('HRMS Instruments Source', validators=[DataRequired()])
+    hrms_source = FloatField('HRMS Instruments Source', validators=[DataRequired(), NumberRange()])
 
     hrms_mode = StringField('HRMS Mode', validators=[DataRequired()])
 
-    hrms_source_gas1 = FloatField('HRMS Source Gas 1', validators=[DataRequired()])
+    hrms_source_gas1 = FloatField('HRMS Source Gas 1', validators=[DataRequired(), NumberRange()])
 
-    hrms_source_gas2 = FloatField('HRMS Source Gas 2', validators=[DataRequired()])
+    hrms_source_gas2 = FloatField('HRMS Source Gas 2', validators=[DataRequired(), NumberRange()])
 
-    hrms_curtain_gas = FloatField('HRMS Curtain Gas', validators=[DataRequired()])
+    hrms_curtain_gas = FloatField('HRMS Curtain Gas', validators=[DataRequired(), NumberRange()])
 
-    hrms_ionisation = FloatField('HRMS Ionisation', validators=[DataRequired()])
+    hrms_ionisation = FloatField('HRMS Ionisation', validators=[DataRequired(), NumberRange()])
 
-    hrms_voltage = FloatField('HRMS Source Voltage', validators=[DataRequired()])
+    hrms_voltage = FloatField('HRMS Source Voltage', validators=[DataRequired(), NumberRange()])
 
-    hrms_polarity = FloatField('HRMS Source Polarity', validators=[DataRequired()])
+    hrms_polarity = FloatField('HRMS Source Polarity', validators=[DataRequired(), NumberRange()])
 
     ## input of Chromatography System, table to input: chromatographic_condition, chrom_time, lc_system
     ##input table: chromatographic_condition
-    chrom_sample_injection_volume = FloatField('Injection Volume (uL)', validators=[DataRequired()])
+    chrom_sample_injection_volume = FloatField('Injection Volume (uL)', validators=[DataRequired(), NumberRange()])
 
-    chrom_mobile_phase_a = FloatField('Chrom Mobile Phase A', validators=[DataRequired()])
+    chrom_mobile_phase_a = FloatField('Chrom Mobile Phase A', validators=[DataRequired(), NumberRange()])
 
-    chrom_mobile_phase_b = FloatField('Chrom Mobile Phase B', validators=[DataRequired()])
+    chrom_mobile_phase_b = FloatField('Chrom Mobile Phase B', validators=[DataRequired(), NumberRange()])
 
     ##input table: chrom_time
     chrom_event_stage = StringField('Chrom Event Stage', validators=[DataRequired()])
 
-    chrom_flow_rate = FloatField('Chrom Flow rate(ml)', validators=[DataRequired()])
+    chrom_flow_rate = FloatField('Chrom Flow rate(ml)', validators=[DataRequired(), NumberRange()])
 
-    chrom_gradient_a_or_b = FloatField('Chrom Gradient A/B', validators=[DataRequired()])
+    chrom_gradient_a_or_b = FloatField('Chrom Gradient A/B', validators=[DataRequired(), NumberRange()])
 
     chrom_a_or_b = StringField('Chrom A/B', validators=[DataRequired()])
 
-    chrom_oven_temperature = FloatField('Chrom Oven Temp °C', validators=[DataRequired()])
+    chrom_oven_temperature = FloatField('Chrom Oven Temp °C', validators=[DataRequired(), NumberRange()])
 
     ##input table: lc_system
     chrom_system_brand = StringField('Chrom System Brand', validators=[DataRequired()])
