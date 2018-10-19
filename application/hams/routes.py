@@ -181,11 +181,12 @@ def acquisition(chosenMethod):
 def saveJob(chosenMethod):
     form = AlgorithmnForm()
     user_icon = getUserIcon()
+    j_id = getJobID()
     if form.validate_on_submit():
         if chosenMethod == 'ImportDeconv':
             ImportDeconv_Al()
         elif chosenMethod == 'LibrarySearch':
-            LibrarySearch_Al("ESI", "POSITIVE", current_user.user_email, testID)
+            LibrarySearch_Al("ESI", "POSITIVE", current_user.user_email, j_id)
         else:
             DeconvLibrarySearch_Al()
 
