@@ -128,6 +128,7 @@ def acquisition(chosenMethod):
         db.session.add(sample_information)
         db.session.add(analytical_column)
         db.session.add(job)
+        db.session.commit()
 
         #Sub tables
         ms_system = Ms_System(acqui_hrms_id = getattr(acquisition_hrms,'id'),
@@ -149,6 +150,7 @@ def acquisition(chosenMethod):
         db.session.add(ms_system)
         db.session.add(sample_location)
         db.session.add(chromatographic_condition)
+        db.session.commit()
 
         chrom_time = Chrom_Time(acqui_chrom_id = getattr(chromatographic_condition,'id'), 
                     event_stage = form.chrom_event_stage.data, 
