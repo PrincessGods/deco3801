@@ -80,13 +80,13 @@ def acquisition(chosenMethod):
             fileList.append(form.VANFileLow)
             fileList.append(form.VANFileHigh)
 
-            save_datafile(fileList, current_user.user_email, j_id)
+            save_datafile(fileList, current_user.user_email, j_id, chooseMethod)
 
         elif chosenMethod == 'LibrarySearch':
             fileList = []
             fileList.append(form.txtFile)
 
-            save_datafile(fileList, current_user.user_email, j_id)
+            save_datafile(fileList, current_user.user_email, j_id, chooseMethod)
 
         else:
             fileList = []
@@ -95,7 +95,7 @@ def acquisition(chosenMethod):
             fileList.append(form.VANFileHigh)
             fileList.append(form.txtFile)
 
-            save_datafile(fileList, current_user.user_email, j_id)
+            save_datafile(fileList, current_user.user_email, j_id, chooseMethod)
 
         #Main tables
         acquisition_hrms = Acquisition_Hrms(hrms_mode = form.hrms_mode.data, 

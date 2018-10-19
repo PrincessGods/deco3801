@@ -19,15 +19,24 @@ def run_before(lastfunc, *args1, **kwargs1):
         return wrapped_func
     return run
 
-def save_datafile(fileList, user, JobID):
+def save_datafile(fileList, user, JobID, method):
     for form_datafile in fileList:
         f_name, f_ext = os.path.splitext(form_datafile.data.filename)
         fn = f_name + f_ext
 
         MetaDataToS3(form_datafile, user, fn, JobID)
         DownloadFromS3(user, form_datafile, JobID)
-
-    LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
+    
+    if chosenMethod == 'ImportDeconv':
+        ImportDeconv_Al() 
+    elif chosenMethod == 'LibrarySearch':
+        command = 'sudo mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
+        subprocess.call(command, shell=True)
+        
+        LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
+    else:
+        DeconvLibrarySearch_Al()
+    
     ProcessedDataToS3(user, JobID)
     
     return fn
@@ -55,9 +64,6 @@ def LibrarySearch_Al(source, mode, user, JobID):
                          'Pos_adducts.xlsx')
 
     path_to_spec = '/home/ubuntu/deco3801/application/static/data/unprocessed/' + user + '/' + JobID + '/User_Spectra'
-
-    command = 'sudo mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
-    subprocess.call(command, shell=True)
 
     output_ulsa = join(current_app.root_path, 
                         'static/data/template', user,
