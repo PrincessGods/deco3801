@@ -93,7 +93,7 @@ def LibrarySearch_Al(source, mode, user):
                         'unprocessed/test/User Spectra')
 
     path_MB = join(current_app.root_path, 
-                    'static/MassBank_matlab', 
+                    'static/Pre-required_data', 
                     'MassBank_matlab.mat')
 
     source = source #'ESI'
