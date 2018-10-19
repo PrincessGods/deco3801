@@ -87,8 +87,7 @@ def MetaDataToS3(file, user, fn, JobID):
 
 def DownloadFromS3(user, file, JobID):
     if file.id == 'xlsxFile':
-        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID +
-                    '/unprocessed/Target ../static/data/unprocessed/' + user + '/' + JobID + '/Target'
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/Target ../static/data/unprocessed/' + user + '/' + JobID + '/Target'
     elif file.id == 'VANFileLow':
         command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID +
                     '/unprocessed/Low_Energy ../static/data/unprocessed/' + user +  '/' + JobID + '/Low_Energy'
