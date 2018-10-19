@@ -45,7 +45,7 @@ class User(db.Model, UserMixin):
 class Job(db.Model, UserMixin):
     j_id = db.Column(db.String(10), primary_key=True)
     u_id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, nullable=False, default='CURRENT_TIMESTAMP')
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

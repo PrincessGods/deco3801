@@ -6,19 +6,6 @@ from os.path import join
 from flask import url_for, current_app, request
 import subprocess
 
-def run_before(lastfunc, *args1, **kwargs1):
-    def run(func):
-        def wrapped_func(*args, **kwargs):
-            try:
-                result = func(*args, **kwargs)
-            except:
-                result = None
-            finally:
-                lastfunc(*args1, **kwargs1)
-                return result
-        return wrapped_func
-    return run
-
 def save_datafile(fileList, user, JobID, method):
     for form_datafile in fileList:
         f_name, f_ext = os.path.splitext(form_datafile.data.filename)
@@ -27,7 +14,6 @@ def save_datafile(fileList, user, JobID, method):
         MetaDataToS3(form_datafile, user, fn, JobID)
         DownloadFromS3(user, form_datafile, JobID)
     
-    print(method)
     if method == 'ImportDeconv':
         ImportDeconv_Al() 
     elif method == 'LibrarySearch':
@@ -39,6 +25,7 @@ def save_datafile(fileList, user, JobID, method):
         DeconvLibrarySearch_Al()
     
     ProcessedDataToS3(user, JobID)
+    RemoveFromEBS(user)
     
     return fn
 
@@ -112,4 +99,6 @@ def ProcessedDataToS3(user, JobID):
 
     subprocess.call(command, shell=True)
 
-#def RemoveFromEBS(user):
+def RemoveFromEBS(user):
+    command = 'sudo rm -R -p /home/ubuntu/deco3801/application/static/data/template/' + user
+    subprocess.call(command, shell=True)
