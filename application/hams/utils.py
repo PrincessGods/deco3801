@@ -29,47 +29,47 @@ def save_datafile(form_datafile, user):
 
     s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_datafile.data)
 
-    if form_datafile.id == 'xlsxFile':
-        new_path = (current_app.root_path +
-                '/static/data/' + user + 
-                '/unprocessed/test/Target/')
-    elif form_datafile.id == 'VANFileLow':
-        new_path = (current_app.root_path +
-                '/static/data/' + user + 
-                '/unprocessed/test/Low Energy/')
-    elif form_datafile.id == 'VANFileHigh':
-        new_path = (current_app.root_path +
-                '/static/data/' + user + 
-                '/unprocessed/test/High Energy/')
-    else:
-        new_path = (current_app.root_path +
-                '/static/data/' + user + 
-                '/unprocessed/test/User Spectra/')
+    # if form_datafile.id == 'xlsxFile':
+    #     new_path = (current_app.root_path +
+    #             '/static/data/' + user + 
+    #             '/unprocessed/test/Target/')
+    # elif form_datafile.id == 'VANFileLow':
+    #     new_path = (current_app.root_path +
+    #             '/static/data/' + user + 
+    #             '/unprocessed/test/Low Energy/')
+    # elif form_datafile.id == 'VANFileHigh':
+    #     new_path = (current_app.root_path +
+    #             '/static/data/' + user + 
+    #             '/unprocessed/test/High Energy/')
+    # else:
+    #     new_path = (current_app.root_path +
+    #             '/static/data/' + user + 
+    #             '/unprocessed/test/User Spectra/')
     
-    if not os.path.exists(new_path):
-        os.makedirs(new_path)
+    # if not os.path.exists(new_path):
+    #     os.makedirs(new_path)
 
-    if form_datafile.id == 'xlsxFile':
-        file_path = os.path.join(current_app.root_path,
-                            'static/data/', user,
-                            'unprocessed/test/Target/', fn)
+    # if form_datafile.id == 'xlsxFile':
+    #     file_path = os.path.join(current_app.root_path,
+    #                         'static/data/', user,
+    #                         'unprocessed/test/Target/', fn)
 
-    elif form_datafile.id == 'VANFileLow':
-        file_path = os.path.join(current_app.root_path,
-                            'static/data/', user,
-                            'unprocessed/test/Low Energy/', fn)
+    # elif form_datafile.id == 'VANFileLow':
+    #     file_path = os.path.join(current_app.root_path,
+    #                         'static/data/', user,
+    #                         'unprocessed/test/Low Energy/', fn)
 
-    elif form_datafile.id == 'VANFileHigh':
-        file_path = os.path.join(current_app.root_path,
-                            'static/data/', user,
-                            'unprocessed/test/High Energy/', fn)
+    # elif form_datafile.id == 'VANFileHigh':
+    #     file_path = os.path.join(current_app.root_path,
+    #                         'static/data/', user,
+    #                         'unprocessed/test/High Energy/', fn)
 
-    else:
-        file_path = os.path.join(current_app.root_path,
-                            'static/data/', user,
-                            'unprocessed/test/User Spectra/', fn)
+    # else:
+    #     file_path = os.path.join(current_app.root_path,
+    #                         'static/data/', user,
+    #                         'unprocessed/test/User Spectra/', fn)
 
-    form_datafile.data.save(file_path)
+    # form_datafile.data.save(file_path)
     
     return fn
 
