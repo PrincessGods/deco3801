@@ -43,7 +43,7 @@ class RegistrationForm(FlaskForm):
 
     submit = SubmitField('Sign Up')
 
-    def validate_email(self, user_email):
+    def validate_email(self, email):
         email = User.query.filter_by(user_email=email.data).first()
         if email:
             raise ValidationError('This eamil has been registered')
@@ -87,7 +87,7 @@ class UpdateProfileForm(FlaskForm):
 
     submit = SubmitField('Update Profile')
 
-    def validate_email(self, user_email):
+    def validate_email(self, email):
         if email.data != current_user.user_email:
             email = User.query.filter_by(user_email=email.data).first()
             if email:
