@@ -26,8 +26,9 @@ def save_datafile(fileList, user, JobID):
 
         MetaDataToS3(form_datafile, user, fn, JobID)
         DownloadFromS3(user, form_datafile, JobID)
-        LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
-        ProcessedDataToS3(user, JobID)
+        
+    LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
+    ProcessedDataToS3(user, JobID)
     
     return fn
 
