@@ -64,7 +64,6 @@ def chooseMethod():
 @login_required
 def acquisition(chosenMethod):
     user_icon = getUserIcon()
-    j_id = getJobID()
 
     if chosenMethod == 'LibrarySearch':
         form = LibrarySearch()
@@ -74,6 +73,8 @@ def acquisition(chosenMethod):
         form = DeconvLibrarySearch()
 
     if form.validate_on_submit():
+        j_id = getJobID()
+
         if chosenMethod == 'ImportDeconv':
             fileList = []
             fileList.append(form.xlsxFile)
