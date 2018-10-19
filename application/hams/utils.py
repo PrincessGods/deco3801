@@ -26,7 +26,7 @@ def save_datafile(fileList, user, JobID):
 
         MetaDataToS3(form_datafile, user, fn, JobID)
         DownloadFromS3(user, form_datafile, JobID)
-        
+
     LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
     ProcessedDataToS3(user, JobID)
     
@@ -41,7 +41,7 @@ def ImportDeconv_Al():
 def LibrarySearch_Al(source, mode, user, JobID):
     data_path = join(current_app.root_path,
                         'static/data/unprocessed/', user,
-                        JobID, '/User Spectra')
+                        JobID, '/User_Spectra')
 
     path_MB = join(current_app.root_path, 
                     'static/data/Pre-required_data', 
