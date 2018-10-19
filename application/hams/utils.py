@@ -31,7 +31,7 @@ def save_datafile(fileList, user, JobID, method):
     if method == 'ImportDeconv':
         ImportDeconv_Al() 
     elif method == 'LibrarySearch':
-        command = 'sudo mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
+        command = 'mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
         subprocess.call(command, shell=True)
 
         LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
