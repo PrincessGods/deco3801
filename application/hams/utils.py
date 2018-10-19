@@ -27,6 +27,7 @@ def save_datafile(fileList, user, JobID, method):
         MetaDataToS3(form_datafile, user, fn, JobID)
         DownloadFromS3(user, form_datafile, JobID)
     
+    print(method)
     if method == 'ImportDeconv':
         ImportDeconv_Al() 
     elif method == 'LibrarySearch':
@@ -43,14 +44,11 @@ def save_datafile(fileList, user, JobID, method):
 
 def DeconvLibrarySearch_Al():
     random_hex = secrets.token_hex(8)
-    print('DeconvLibrarySearch_Al')
-
+    
 def ImportDeconv_Al():
     random_hex = secrets.token_hex(8)
-    print('ImportDeconv_Al')
 
 def LibrarySearch_Al(source, mode, user, JobID):
-    print('LibrarySearch_Al')
     data_path = join(current_app.root_path,
                         'static/data/unprocessed', user,
                         JobID, 'User_Spectra')
