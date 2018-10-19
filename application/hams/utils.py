@@ -8,7 +8,7 @@ from flask import url_for, current_app, request
 def save_datafile(form_datafile, user):
     random_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_datafile.data.filename)
-    
+    fn = "Other" + f_ext
     s3 = boto3.client('s3', aws_access_key_id='', 
                         aws_secret_access_key='')
     bucket_name = 'deco3801'
