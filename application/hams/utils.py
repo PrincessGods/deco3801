@@ -90,7 +90,7 @@ def LibrarySearch_Al(source, mode, user):
     # this ’data_path ’ will depend on where you save data
     data_path = join(current_app.root_path,
                         'static/data/', user,
-                        'unprocessed/test/User Spectra/User_Spectra.txt')
+                        'unprocessed/test/User Spectra')
 
     path_MB = join(current_app.root_path, 
                     'static/MassBank_matlab', 
