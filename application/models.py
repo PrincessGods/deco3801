@@ -43,7 +43,7 @@ class User(db.Model, UserMixin):
         return f"User('{self.user_firstname}', '{self.user_lastname}','{self.user_email}', '{self.user_icon}')"
 
 class Job(db.Model, UserMixin):
-    j_id = db.Column(db.Integer, primary_key=True)
+    j_id = db.Column(db.String(10), primary_key=True)
     u_id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, nullable=False, default='CURRENT_TIMESTAMP')
 
