@@ -4,72 +4,28 @@ import boto3
 import LibrarySearch_v1
 from os.path import join
 from flask import url_for, current_app, request
+import subprocess
 
-def save_datafile(form_datafile, user):
-    random_hex = secrets.token_hex(8)
-    f_name, f_ext = os.path.splitext(form_datafile.data.filename)
-    fn = "Other" + f_ext
-    s3 = boto3.client('s3', aws_access_key_id='', 
-                        aws_secret_access_key='')
-    bucket_name = 'deco3801'
-    dir_n = user + '/unprocessed/test/Other/' + fn
+def run_before(lastfunc, *args1, **kwargs1):
+    def run(func):
+        def wrapped_func(*args, **kwargs):
+            try:
+                result = func(*args, **kwargs)
+            except:
+                result = None
+            finally:
+                lastfunc(*args1, **kwargs1)
+                return result
+        return wrapped_func
+    return run
 
-    if form_datafile.id == 'xlsxFile':
-        fn = "Target" + f_ext
-        dir_n = user + '/unprocessed/test/Target/' + fn
-    elif form_datafile.id == 'VANFileLow':
-        fn = "Low_Energy" + f_ext
-        dir_n = user + '/unprocessed/test/Low Energy/' + fn
-    elif form_datafile.id == 'VANFileHigh':
-        fn = "High_Energy" + f_ext
-        dir_n = user + '/unprocessed/test/High Energy/' + fn
-    else:
-        fn = "User_Spectra" + f_ext
-        dir_n = user + '/unprocessed/test/User Spectra/' + fn
+def save_datafile(fileList, user, JobID):
+    for form_datafile in fileList:
+        f_name, f_ext = os.path.splitext(form_datafile.data.filename)
+        fn = f_name + f_ext
 
-    s3.put_object(Bucket=bucket_name, Key=dir_n, Body=form_datafile.data)
-
-    # if form_datafile.id == 'xlsxFile':
-    #     new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/Target/')
-    # elif form_datafile.id == 'VANFileLow':
-    #     new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/Low Energy/')
-    # elif form_datafile.id == 'VANFileHigh':
-    #     new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/High Energy/')
-    # else:
-    #     new_path = (current_app.root_path +
-    #             '/static/data/' + user + 
-    #             '/unprocessed/test/User Spectra/')
-    
-    # if not os.path.exists(new_path):
-    #     os.makedirs(new_path)
-
-    # if form_datafile.id == 'xlsxFile':
-    #     file_path = os.path.join(current_app.root_path,
-    #                         'static/data/', user,
-    #                         'unprocessed/test/Target/', fn)
-
-    # elif form_datafile.id == 'VANFileLow':
-    #     file_path = os.path.join(current_app.root_path,
-    #                         'static/data/', user,
-    #                         'unprocessed/test/Low Energy/', fn)
-
-    # elif form_datafile.id == 'VANFileHigh':
-    #     file_path = os.path.join(current_app.root_path,
-    #                         'static/data/', user,
-    #                         'unprocessed/test/High Energy/', fn)
-
-    # else:
-    #     file_path = os.path.join(current_app.root_path,
-    #                         'static/data/', user,
-    #                         'unprocessed/test/User Spectra/', fn)
-
-    # form_datafile.data.save(file_path)
+        MetaDataToS3(form_datafile, user, fn, JobID)
+        DownloadFromS3(user, form_datafile, JobID)
     
     return fn
 
@@ -79,18 +35,10 @@ def DeconvLibrarySearch_Al():
 def ImportDeconv_Al():
     random_hex = secrets.token_hex(8)
 
-def LibrarySearch_Al(source, mode, user):
-    # s3 = boto3.resource('s3', region_name="ap-southeast-2", aws_access_key_id='', 
-    #                     aws_secret_access_key='')
-    # dir_n = user + '/unprocessed/test/User Spectra/' + fn
-    # output_ulsa = join(current_app.root_path, 
-    #                      'static/tamplate', 'ULSA')
-    # s3.meta.client.download_file('deco3801', '/unprocessed/test/User Spectra/bdce1266ab2d94a9.txt', output_ulsa + '/test.txt')
-
-    # this ’data_path ’ will depend on where you save data
+def LibrarySearch_Al(source, mode, user, JobID):
     data_path = join(current_app.root_path,
-                        'static/data/', user,
-                        'unprocessed/test/User Spectra')
+                        'static/data/unprocessed/', user,
+                        JobID, '/User Spectra')
 
     path_MB = join(current_app.root_path, 
                     'static/data/Pre-required_data', 
@@ -105,8 +53,12 @@ def LibrarySearch_Al(source, mode, user):
 
     path_to_spec = data_path
 
+    command = 'mkdir ../static/data/template/' + user + '/' + JobID + '/ULSA'
+    subprocess.call(command, shell=True)
+
     output_ulsa = join(current_app.root_path, 
-                        'static/data/tamplate', 'ULSA')
+                        'static/data/template/', user,
+                        JobID, 'ULSA')
 
     # start up the matlab runtime engine
     l = LibrarySearch_v1.initialize()
@@ -117,3 +69,42 @@ def LibrarySearch_Al(source, mode, user):
 
     # never forget to terminate !!!
     l.terminate ()
+
+def MetaDataToS3(file, user, fn, JobID):
+    s3 = boto3.client('s3')
+    bucket_name = 'deco3801mars'
+
+    if file.id == 'xlsxFile':
+        dir_n = user + '/' + JobID + '/unprocessed/Target/' + fn
+    elif file.id == 'VANFileLow':
+        dir_n = user + '/' + JobID + '/unprocessed/Low_Energy/' + fn
+    elif file.id == 'VANFileHigh':
+        dir_n = user + '/' + JobID + '/unprocessed/High_Energy/' + fn
+    else:
+        dir_n = user + '/' + JobID + '/unprocessed/User_Spectra/' + fn
+
+    s3.put_object(Bucket=bucket_name, Key=dir_n, Body=file.data)
+
+def DownloadFromS3(user, file, JobID):
+    if file.id == 'xlsxFile':
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID +
+                    '/unprocessed/Target ../static/data/unprocessed/' + user + '/' + JobID + '/Target'
+    elif file.id == 'VANFileLow':
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID +
+                    '/unprocessed/Low_Energy ../static/data/unprocessed/' + user +  '/' + JobID + '/Low_Energy'
+    elif file.id == 'VANFileHigh':
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID +
+                    '/unprocessed/High_Energy ../static/data/unprocessed/' + user +  '/' + JobID + '/High_Energy'
+    else:
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID +
+                    '/unprocessed/User_Spectra ../static/data/unprocessed/' + user +  '/' + JobID + '/User_Spectra'
+
+    subprocess.call(command, shell=True)
+
+def ProcessedDataToS3(file, user, fn, JobID):
+    command = 'aws s3 cp --recursive ../static/data/unprocessed/' + user + '/' + JobID + 
+                's3://deco3801mars/' + user + '/' + JobID + '/processed'
+
+    subprocess.call(command, shell=True)
+
+#def RemoveFromEBS(user):

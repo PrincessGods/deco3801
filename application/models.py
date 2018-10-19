@@ -42,6 +42,11 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.user_firstname}', '{self.user_lastname}','{self.user_email}', '{self.user_icon}')"
 
+class Job(db.Model):
+    j_id = db.Column(db.Integer, primary_key=True)
+    u_id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, nullable=False, default='CURRENT_TIMESTAMP')
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)

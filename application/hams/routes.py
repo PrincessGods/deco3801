@@ -1,9 +1,10 @@
 from flask import render_template, url_for, redirect, request, Blueprint, flash
 from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv, AlgorithmnForm
-from application.models import User, Acquisition_Hrms, Ms_System, Sample_Information, Sample_Location, Analytical_Column, Chromatographic_Condition, Chrom_Time, Lc_System
+from application.models import User, Acquisition_Hrms, Ms_System, Sample_Information, Sample_Location, Analytical_Column, Chromatographic_Condition, Chrom_Time, Lc_System, Job
 from application import db
 from application.hams.utils import save_datafile, LibrarySearch_Al, DeconvLibrarySearch_Al, ImportDeconv_Al
 from flask_login import login_required, current_user
+import secrets
 
 hams = Blueprint('hams', __name__)
 
@@ -33,6 +34,13 @@ def getUserIcon():
         user_icon = url_for('static', filename='imgs/' + current_user.user_icon)
         return user_icon
 
+def getJobID():
+    random_hex = secrets.token_hex(8)
+    while Job.query.filter_by(j_id=random_hex).first():
+        random_hex = secrets.token_hex(8)
+
+    return random_hex
+
 @hams.route("/manageJobs")
 @login_required
 def manageJobs():
@@ -56,6 +64,7 @@ def chooseMethod():
 @login_required
 def acquisition(chosenMethod):
     user_icon = getUserIcon()
+    j_id = getJobID()
 
     if chosenMethod == 'LibrarySearch':
         form = LibrarySearch()
@@ -66,31 +75,27 @@ def acquisition(chosenMethod):
 
     if form.validate_on_submit():
         if chosenMethod == 'ImportDeconv':
-            xlsxFile = save_datafile(form.xlsxFile, current_user.user_email)
-            #current_user.Target = xlsxFile
+            fileList = []
+            fileList.append(form.xlsxFile)
+            fileList.append(form.VANFileLow)
+            fileList.append(form.VANFileHigh)
 
-            VANFileLow = save_datafile(form.VANFileLow, current_user.user_email)
-            #current_user.Low_Energy = VANFileLow
-        
-            VANFileHigh = save_datafile(form.VANFileHigh, current_user.user_email)
-            #current_user.High_Energy = VANFileHigh
+            save_datafile(fileList, current_user.user_email, j_id)
 
         elif chosenMethod == 'LibrarySearch':
-            txtFile = save_datafile(form.txtFile, current_user.user_email)
-            #current_user.Spectra = txtFile
+            fileList = []
+            fileList.append(form.txtFile)
+
+            save_datafile(fileList, current_user.user_email, j_id)
 
         else:
-            xlsxFile = save_datafile(form.xlsxFile, current_user.user_email)
-            #current_user.Target = xlsxFile
+            fileList = []
+            fileList.append(form.xlsxFile)
+            fileList.append(form.VANFileLow)
+            fileList.append(form.VANFileHigh)
+            fileList.append(form.txtFile)
 
-            VANFileLow = save_datafile(form.VANFileLow, current_user.user_email)
-            #current_user.Low_Energy = VANFileLow
-        
-            VANFileHigh = save_datafile(form.VANFileHigh, current_user.user_email)
-            #current_user.High_Energy = VANFileHigh
-
-            txtFile = save_datafile(form.txtFile, current_user.user_email)
-            #current_user.Spectra = txtFile
+            save_datafile(fileList, current_user.user_email, j_id)
 
         #Main tables
         acquisition_hrms = Acquisition_Hrms(hrms_mode = form.hrms_mode.data, 
@@ -116,11 +121,13 @@ def acquisition(chosenMethod):
                     column_inner_diameter  = form.column_inner_diameter.data,
                     column_brand  = form.column_brand.data,
                     column_model  = form.column_model.data)
+        
+        job = Job(j_id = j_id, u_id = getattr(current_user,'id'))
 
         db.session.add(acquisition_hrms)
         db.session.add(sample_information)
         db.session.add(analytical_column)
-        db.session.commit()
+        db.session.add(job)
 
         #Sub tables
         ms_system = Ms_System(acqui_hrms_id = getattr(acquisition_hrms,'id'),
@@ -142,8 +149,6 @@ def acquisition(chosenMethod):
         db.session.add(ms_system)
         db.session.add(sample_location)
         db.session.add(chromatographic_condition)
-        db.session.commit()
-
 
         chrom_time = Chrom_Time(acqui_chrom_id = getattr(chromatographic_condition,'id'), 
                     event_stage = form.chrom_event_stage.data, 
@@ -161,9 +166,8 @@ def acquisition(chosenMethod):
 
         db.session.add(chrom_time)
         db.session.add(lc_system)
-        db.session.commit()
 
-        
+        db.session.commit()
 
         return redirect(url_for('hams.saveJob', chosenMethod = chosenMethod))
     return render_template('acquisition.html', title = "HAMS", form = form, method = chosenMethod, icon = user_icon) 
