@@ -232,7 +232,7 @@
                             {% if form.sample_location_datum.errors %}
                                 {{ form.sample_location_datum(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in sample_location_datum.errors %}
+                                    {% for error in form.sample_location_datum.errors %}
                                         <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
