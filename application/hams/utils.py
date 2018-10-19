@@ -108,7 +108,7 @@ def DownloadFromS3(user, file, JobID):
     subprocess.call(command, shell=True)
 
 def ProcessedDataToS3(user, JobID):
-    command = 'sudo aws s3 cp --recursive application/static/data/unprocessed/' + user + '/' + JobID + 's3://deco3801mars/' + user + '/' + JobID + '/processed'
+    command = 'sudo aws s3 cp --recursive application/static/data/template/' + user + '/' + JobID + ' s3://deco3801mars/' + user + '/' + JobID + '/processed'
 
     subprocess.call(command, shell=True)
 
