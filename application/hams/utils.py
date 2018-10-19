@@ -53,7 +53,7 @@ def LibrarySearch_Al(source, mode, user, JobID):
 
     path_to_spec = data_path
 
-    command = 'mkdir ../static/data/template/' + user + '/' + JobID + '/ULSA'
+    command = 'mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
     subprocess.call(command, shell=True)
 
     output_ulsa = join(current_app.root_path, 
@@ -87,18 +87,18 @@ def MetaDataToS3(file, user, fn, JobID):
 
 def DownloadFromS3(user, file, JobID):
     if file.id == 'xlsxFile':
-        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/Target ../static/data/unprocessed/' + user + '/' + JobID + '/Target'
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/Target application/static/data/unprocessed/' + user + '/' + JobID + '/Target'
     elif file.id == 'VANFileLow':
-        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/Low_Energy ../static/data/unprocessed/' + user +  '/' + JobID + '/Low_Energy'
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/Low_Energy application/static/data/unprocessed/' + user +  '/' + JobID + '/Low_Energy'
     elif file.id == 'VANFileHigh':
-        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/High_Energy ../static/data/unprocessed/' + user +  '/' + JobID + '/High_Energy'
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/High_Energy application/static/data/unprocessed/' + user +  '/' + JobID + '/High_Energy'
     else:
-        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/User_Spectra ../static/data/unprocessed/' + user +  '/' + JobID + '/User_Spectra'
+        command = 'sudo aws s3 sync s3://deco3801mars/' + user + '/' + JobID + '/unprocessed/User_Spectra application/static/data/unprocessed/' + user +  '/' + JobID + '/User_Spectra'
 
     subprocess.call(command, shell=True)
 
 def ProcessedDataToS3(file, user, fn, JobID):
-    command = 'aws s3 cp --recursive ../static/data/unprocessed/' + user + '/' + JobID + 's3://deco3801mars/' + user + '/' + JobID + '/processed'
+    command = 'aws s3 cp --recursive application/static/data/unprocessed/' + user + '/' + JobID + 's3://deco3801mars/' + user + '/' + JobID + '/processed'
 
     subprocess.call(command, shell=True)
 
