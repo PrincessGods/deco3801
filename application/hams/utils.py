@@ -56,7 +56,7 @@ def LibrarySearch_Al(source, mode, user, JobID):
 
     path_to_spec = '/home/ubuntu/deco3801/application/static/data/unprocessed/' + user + '/' + JobID + '/User_Spectra'
 
-    command = 'mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
+    command = 'sudo mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
     subprocess.call(command, shell=True)
 
     output_ulsa = join(current_app.root_path, 
