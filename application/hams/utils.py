@@ -40,8 +40,8 @@ def ImportDeconv_Al():
 
 def LibrarySearch_Al(source, mode, user, JobID):
     data_path = join(current_app.root_path,
-                        'static/data/unprocessed/', user,
-                        JobID, '/User_Spectra')
+                        'static/data/unprocessed', user,
+                        JobID, 'User_Spectra')
 
     path_MB = join(current_app.root_path, 
                     'static/data/Pre-required_data', 
@@ -60,7 +60,7 @@ def LibrarySearch_Al(source, mode, user, JobID):
     subprocess.call(command, shell=True)
 
     output_ulsa = join(current_app.root_path, 
-                        'static/data/template/', user,
+                        'static/data/template', user,
                         JobID, 'ULSA')
 
     # start up the matlab runtime engine
