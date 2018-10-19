@@ -26,6 +26,8 @@ def save_datafile(fileList, user, JobID):
 
         MetaDataToS3(form_datafile, user, fn, JobID)
         DownloadFromS3(user, form_datafile, JobID)
+        LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
+        ProcessedDataToS3(user, JobID)
     
     return fn
 
@@ -97,8 +99,8 @@ def DownloadFromS3(user, file, JobID):
 
     subprocess.call(command, shell=True)
 
-def ProcessedDataToS3(file, user, fn, JobID):
-    command = 'aws s3 cp --recursive application/static/data/unprocessed/' + user + '/' + JobID + 's3://deco3801mars/' + user + '/' + JobID + '/processed'
+def ProcessedDataToS3(user, JobID):
+    command = 'sudo aws s3 cp --recursive application/static/data/unprocessed/' + user + '/' + JobID + 's3://deco3801mars/' + user + '/' + JobID + '/processed'
 
     subprocess.call(command, shell=True)
 
