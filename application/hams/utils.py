@@ -106,7 +106,7 @@ def LibrarySearch_Al(source, mode, user):
     path_to_spec = data_path
 
     output_ulsa = join(current_app.root_path, 
-                        'static/tamplate')
+                        'static/data/tamplate', 'ULSA')
 
     # start up the matlab runtime engine
     l = LibrarySearch_v1.initialize()
