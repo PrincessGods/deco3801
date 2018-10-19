@@ -7,7 +7,6 @@ from flask_login import login_required, current_user
 import secrets
 
 hams = Blueprint('hams', __name__)
-testID = None
 
 details = [
     {
@@ -66,7 +65,6 @@ def chooseMethod():
 def acquisition(chosenMethod):
     user_icon = getUserIcon()
     j_id = getJobID()
-    testID = j_id
 
     if chosenMethod == 'LibrarySearch':
         form = LibrarySearch()

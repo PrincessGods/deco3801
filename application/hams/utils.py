@@ -54,7 +54,7 @@ def LibrarySearch_Al(source, mode, user, JobID):
                          'static/data/Pre-required_data/adducts', 
                          'Pos_adducts.xlsx')
 
-    path_to_spec = data_path
+    path_to_spec = '/home/ubuntu/deco3801/application/static/data/unprocessed/' + user + '/' + JobID + '/User_Spectra'
 
     command = 'mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
     subprocess.call(command, shell=True)
