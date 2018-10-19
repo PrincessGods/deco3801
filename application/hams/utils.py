@@ -27,12 +27,12 @@ def save_datafile(fileList, user, JobID, method):
         MetaDataToS3(form_datafile, user, fn, JobID)
         DownloadFromS3(user, form_datafile, JobID)
     
-    if chosenMethod == 'ImportDeconv':
+    if method == 'ImportDeconv':
         ImportDeconv_Al() 
-    elif chosenMethod == 'LibrarySearch':
+    elif method == 'LibrarySearch':
         command = 'sudo mkdir application/static/data/template/' + user + '/' + JobID + '/ULSA'
         subprocess.call(command, shell=True)
-        
+
         LibrarySearch_Al('ESI', 'POSITIVE', user, JobID)
     else:
         DeconvLibrarySearch_Al()
