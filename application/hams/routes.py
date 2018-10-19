@@ -177,7 +177,7 @@ def saveJob(chosenMethod):
         if chosenMethod == 'ImportDeconv':
             ImportDeconv_Al()
         elif chosenMethod == 'LibrarySearch':
-            LibrarySearch_Al("ESI", "POSITIVE")
+            LibrarySearch_Al("ESI", "POSITIVE", current_user.user_email)
         else:
             DeconvLibrarySearch_Al()
 
