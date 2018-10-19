@@ -103,7 +103,7 @@ def LibrarySearch_Al(source, mode, user):
                          'static/Pre-required_data/adducts', 
                          'Pos_adducts.xlsx')
 
-    path_to_spec = join(data_path, 'deconv')
+    path_to_spec = data_path
 
     output_ulsa = join(current_app.root_path, 
                         'static/tamplate', 'ULSA')
