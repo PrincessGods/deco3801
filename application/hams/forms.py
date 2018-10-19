@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_login import current_user
 from wtforms import StringField, SubmitField, RadioField, FloatField, BooleanField
-from wtforms.validators import DataRequired, EqualTo, ValidationError, , NumberRange
+from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange
 from application.models import User
 
 class SelectMethodForm(FlaskForm):
