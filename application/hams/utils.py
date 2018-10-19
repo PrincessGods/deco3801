@@ -93,14 +93,14 @@ def LibrarySearch_Al(source, mode, user):
                         'unprocessed/test/User Spectra')
 
     path_MB = join(current_app.root_path, 
-                    'static/Pre-required_data', 
+                    'static/data/Pre-required_data', 
                     'MassBank_matlab.mat')
 
     source = source #'ESI'
     mode = mode #'POSITIVE'
 
     path_adducts = join(current_app.root_path, 
-                         'static/Pre-required_data/adducts', 
+                         'static/data/Pre-required_data/adducts', 
                          'Pos_adducts.xlsx')
 
     path_to_spec = data_path
