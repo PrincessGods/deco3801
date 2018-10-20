@@ -2,6 +2,8 @@ import secrets
 import os
 import boto3
 import LibrarySearch_v1
+import ImportDeconv_v1
+import DeconvLibrarySearch_v1
 from os.path import join
 from flask import url_for, current_app, request
 import subprocess
