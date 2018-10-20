@@ -182,6 +182,8 @@ def RemoveFromEBS(user):
     subprocess.call(command, shell=True)
 
 def DownloadFromS3ToLocal(user, JobID):
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3')
     key = user + '/' + JobID + '/processed/ULSA/ULSA_01540052918.43.csv'
-    s3.meta.client.download_file('deco3801mars', key, 'application/download.csv')
+    url = s3.get_object('deco3801mars', key)['WebsiteRedirectLocation']
+    return url
+    #s3.meta.client.download_file('deco3801mars', key, 'application/download.csv')

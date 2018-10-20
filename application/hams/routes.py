@@ -223,6 +223,6 @@ def saveJob(chosenMethod):
     user_icon = getUserIcon()
     j_id = getJobID()
     if form.validate_on_submit():
-        DownloadFromS3ToLocal(current_user.user_email, "12f4096091b0f8cc")
-        return redirect(url_for('users.profile'))
+        url = DownloadFromS3ToLocal(current_user.user_email, "12f4096091b0f8cc")
+        print(url)
     return render_template('saveJob.html', title = "HAMS", form = form, icon = user_icon)
