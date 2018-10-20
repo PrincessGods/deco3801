@@ -5,6 +5,7 @@ from application import db
 from application.hams.utils import save_datafile_L, save_datafile_D, save_datafile_DL, DownloadFromS3ToLocal
 from flask_login import login_required, current_user
 import secrets
+from urllib.request import urlopen
 
 hams = Blueprint('hams', __name__)
 
@@ -225,7 +226,5 @@ def saveJob(chosenMethod):
     if form.validate_on_submit():
         url = DownloadFromS3ToLocal(current_user.user_email, "12f4096091b0f8cc")
         print(url)
-        r = requests.get(url)
-        with open('download.csv', 'wb') as f:
-            f.write(r.content)
+        urlopen(url)
     return render_template('saveJob.html', title = "HAMS", form = form, icon = user_icon)
