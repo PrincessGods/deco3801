@@ -135,7 +135,7 @@ def acquisition(chosenMethod):
                 p_max = form.P_Max.data,
                 retention_time_tollerance = form.Retention_Time_Tollerance.data,
                 ms_p_w = form.Ms_P_W.data,
-                mass_tol = form.Mass_Tol.data，
+                mass_tol = form.Mass_Tol.data,
                 mass_window = form.Mass_Window.data,
                 signal_to_noise = form.Signal_to_Noise.data
             )
