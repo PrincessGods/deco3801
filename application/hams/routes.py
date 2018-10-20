@@ -109,16 +109,16 @@ def acquisition(chosenMethod):
             fileList.append(form.txtFile)
 
             d_set = []
-            d_set.append(form.Max_W.data)
-            d_set.append(form.Min_Int.data)
-            d_set.append(form.Retention_Window.data)
-            d_set.append(form.R_Min.data)
-            d_set.append(form.P_Max.data)
-            d_set.append(form.Retention_Time_Tollerance.data)
-            d_set.append(form.Ms_P_W.data)
-            d_set.append(form.Mass_Tol.data)
-            d_set.append(form.Mass_Window.data)
-            d_set.append(form.Signal_to_Noise.data)
+            d_set.append(float(form.Max_W.data))
+            d_set.append(int(form.Min_Int.data))
+            d_set.append(float(form.Retention_Window.data))
+            d_set.append(float(form.R_Min.data))
+            d_set.append(float(form.P_Max.data))
+            d_set.append(int(form.Retention_Time_Tollerance.data))
+            d_set.append(float(form.Ms_P_W.data))
+            d_set.append(float(form.Mass_Tol.data))
+            d_set.append(float(form.Mass_Window.data))
+            d_set.append(float(form.Signal_to_Noise.data))
 
             #source =
             #mode = 
