@@ -225,5 +225,5 @@ def saveJob(chosenMethod):
     if form.validate_on_submit():
         url = DownloadFromS3ToLocal(current_user.user_email, "12f4096091b0f8cc")
         print(url)
-        return render_template('download.html', title = "HAMS", url = url, icon = user_icon)
+        url_for(url)
     return render_template('saveJob.html', title = "HAMS", form = form, icon = user_icon)
