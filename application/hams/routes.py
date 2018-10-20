@@ -36,7 +36,7 @@ def getUserIcon():
 
 def getJobID():
     random_hex = secrets.token_hex(8)
-    while Job.query.filter_by(j_id=random_hex).first():
+    while Sample_Information.query.filter_by(sample_job_number=random_hex).first():
         random_hex = secrets.token_hex(8)
 
     return random_hex

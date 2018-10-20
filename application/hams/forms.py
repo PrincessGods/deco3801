@@ -130,7 +130,7 @@ class ImportDeconv(AcquisitionForm):
 
     Max_W = FloatField('Max_W', validators=[DataRequired(), NumberRange()], default=15.0)
 
-    Min_Int = IntegerField('Min_Int', validators=[DataRequired(), NumberRange()], default=800.0)
+    Min_Int = IntegerField('Min_Int', validators=[DataRequired(), NumberRange()], default=800)
 
     Retention_Window = FloatField('Retention_Window', validators=[DataRequired(), NumberRange()], default=0.01)
 
@@ -138,7 +138,7 @@ class ImportDeconv(AcquisitionForm):
 
     P_Max = FloatField('P_Max', validators=[DataRequired(), NumberRange()], default=0.05)
 
-    Retention_Time_Tollerance = IntegerField('Retention_Time_Tollerance', validators=[DataRequired(), NumberRange()], default=3.0)
+    Retention_Time_Tollerance = IntegerField('Retention_Time_Tollerance', validators=[DataRequired(), NumberRange()], default=3)
 
     Ms_P_W = FloatField('Ms_P_W', validators=[DataRequired(), NumberRange()], default=15.0)
 
@@ -163,7 +163,7 @@ class DeconvLibrarySearch(AcquisitionForm):
 
     Max_W = FloatField('Max_W', validators=[DataRequired(), NumberRange()], default=15.0)
 
-    Min_Int = IntegerField('Min_Int', validators=[DataRequired(), NumberRange()], default=800.0)
+    Min_Int = IntegerField('Min_Int', validators=[DataRequired(), NumberRange()], default=800)
 
     Retention_Window = FloatField('Retention_Window', validators=[DataRequired(), NumberRange()], default=0.01)
 
@@ -171,7 +171,7 @@ class DeconvLibrarySearch(AcquisitionForm):
 
     P_Max = FloatField('P_Max', validators=[DataRequired(), NumberRange()], default=0.05)
 
-    Retention_Time_Tollerance = IntegerField('Retention_Time_Tollerance', validators=[DataRequired(), NumberRange()], default=3.0)
+    Retention_Time_Tollerance = IntegerField('Retention_Time_Tollerance', validators=[DataRequired(), NumberRange()], default=3)
 
     Ms_P_W = FloatField('Ms_P_W', validators=[DataRequired(), NumberRange()], default=15.0)
 
