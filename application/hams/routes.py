@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, request, Blueprint, flash
 from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv, AlgorithmnForm
 from application.models import User, Acquisition_Hrms, Ms_System, Sample_Information, Sample_Location, Analytical_Column, Chromatographic_Condition, Chrom_Time, Lc_System, Threshold_Setting
 from application import db
-from application.hams.utils import save_datafile, LibrarySearch_Al, DeconvLibrarySearch_Al, ImportDeconv_Al
+from application.hams.utils import save_datafile_L, save_datafile_D, save_datafile_D
 from flask_login import login_required, current_user
 import secrets
 
@@ -75,7 +75,6 @@ def acquisition(chosenMethod):
     if form.validate_on_submit():
         j_id = getJobID()
         
-
         if chosenMethod == 'ImportDeconv':
             fileList = []
             fileList.append(form.xlsxFile)
@@ -224,12 +223,6 @@ def saveJob(chosenMethod):
     user_icon = getUserIcon()
     j_id = getJobID()
     if form.validate_on_submit():
-        if chosenMethod == 'ImportDeconv':
-            ImportDeconv_Al()
-        elif chosenMethod == 'LibrarySearch':
-            LibrarySearch_Al("ESI", "POSITIVE", current_user.user_email, j_id)
-        else:
-            DeconvLibrarySearch_Al()
 
         return redirect(url_for('users.profile'))
     return render_template('saveJob.html', title = "HAMS", form = form, icon = user_icon)
