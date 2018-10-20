@@ -23,7 +23,7 @@
                 <fieldset class="form-group px-5 py-2 d-flex flex-column" id="forms">
                     <div id="form0">
                         <legend class="border-bottom pb-2 mt-3 stepLable" style="display: none">
-                            Upload Files And Sample Information
+                            Upload Files
                         </legend>
                         
                         {% if method == 'ImportDeconv' %}
@@ -59,6 +59,161 @@
                                     {% endfor %}
                                 {% endif %}
                             </div>
+
+                            <legend class="border-bottom pb-2 mt-5 stepLable">
+                                D_Set Import
+                            </legend>
+
+                            <div class="form-group">
+                                {{ form.Max_W.label(class="form-control-label") }}
+    
+                                {% if form.Max_W.errors %}
+                                    {{ form.Max_W(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Max_W.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Max_W(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Min_Int.label(class="form-control-label") }}
+    
+                                {% if form.Min_Int.errors %}
+                                    {{ form.Min_Int(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Min_Int.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Min_Int(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Retention_Window.label(class="form-control-label") }}
+    
+                                {% if form.Retention_Window.errors %}
+                                    {{ form.Retention_Window(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Retention_Window.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Retention_Window(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.R_Min.label(class="form-control-label") }}
+    
+                                {% if form.R_Min.errors %}
+                                    {{ form.R_Min(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.R_Min.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.R_Min(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.P_Max.label(class="form-control-label") }}
+    
+                                {% if form.P_Max.errors %}
+                                    {{ form.P_Max(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.P_Max.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.P_Max(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Retention_Time_Tollerance.label(class="form-control-label") }}
+    
+                                {% if form.Retention_Time_Tollerance.errors %}
+                                    {{ form.Retention_Time_Tollerance(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Retention_Time_Tollerance.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Retention_Time_Tollerance(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Ms_P_W.label(class="form-control-label") }}
+    
+                                {% if form.Ms_P_W.errors %}
+                                    {{ form.Ms_P_W(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Ms_P_W.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Ms_P_W(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Mass_Tol.label(class="form-control-label") }}
+    
+                                {% if form.Mass_Tol.errors %}
+                                    {{ form.Mass_Tol(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Mass_Tol.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Mass_Tol(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Mass_Window.label(class="form-control-label") }}
+    
+                                {% if form.Mass_Window.errors %}
+                                    {{ form.Mass_Window(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Mass_Window.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Mass_Window(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Signal_to_Noise.label(class="form-control-label") }}
+    
+                                {% if form.Signal_to_Noise.errors %}
+                                    {{ form.Signal_to_Noise(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Signal_to_Noise.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Signal_to_Noise(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
 
                         {% elif method == 'LibrarySearch' %}
                             <div class="form-group">
@@ -114,6 +269,160 @@
                                         <span class="text-danger">{{ error }}</span>
                                         <br>
                                     {% endfor %}
+                                {% endif %}
+                            </div>
+
+                            <legend class="border-bottom pb-2 mt-5 stepLable">
+                                D_Set Import
+                            </legend>
+
+                            <div class="form-group">
+                                {{ form.Max_W.label(class="form-control-label") }}
+    
+                                {% if form.Max_W.errors %}
+                                    {{ form.Max_W(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Max_W.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Max_W(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Min_Int.label(class="form-control-label") }}
+    
+                                {% if form.Min_Int.errors %}
+                                    {{ form.Min_Int(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Min_Int.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Min_Int(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Retention_Window.label(class="form-control-label") }}
+    
+                                {% if form.Retention_Window.errors %}
+                                    {{ form.Retention_Window(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Retention_Window.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Retention_Window(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.R_Min.label(class="form-control-label") }}
+    
+                                {% if form.R_Min.errors %}
+                                    {{ form.R_Min(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.R_Min.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.R_Min(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.P_Max.label(class="form-control-label") }}
+    
+                                {% if form.P_Max.errors %}
+                                    {{ form.P_Max(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.P_Max.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.P_Max(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Retention_Time_Tollerance.label(class="form-control-label") }}
+    
+                                {% if form.Retention_Time_Tollerance.errors %}
+                                    {{ form.Retention_Time_Tollerance(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Retention_Time_Tollerance.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Retention_Time_Tollerance(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Ms_P_W.label(class="form-control-label") }}
+    
+                                {% if form.Ms_P_W.errors %}
+                                    {{ form.Ms_P_W(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Ms_P_W.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Ms_P_W(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Mass_Tol.label(class="form-control-label") }}
+    
+                                {% if form.Mass_Tol.errors %}
+                                    {{ form.Mass_Tol(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Mass_Tol.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Mass_Tol(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Mass_Window.label(class="form-control-label") }}
+    
+                                {% if form.Mass_Window.errors %}
+                                    {{ form.Mass_Window(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Mass_Window.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Mass_Window(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.Signal_to_Noise.label(class="form-control-label") }}
+    
+                                {% if form.Signal_to_Noise.errors %}
+                                    {{ form.Signal_to_Noise(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Signal_to_Noise.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.Signal_to_Noise(class="form-control form-control-lg") }}
                                 {% endif %}
                             </div>
                         {% endif %}

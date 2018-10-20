@@ -170,7 +170,7 @@ class Sample_Information(db.Model, UserMixin):
     sample_private = db.Column('Sample_Private',db.String(2), nullable=False)
     sample_is_processed = db.Column('Sample_Is_Processed',db.String(2), nullable=False, default='Y')
     sample_type = db.Column('Sample_Type',db.String(255), nullable=False)
-    sample_job_number = db.Column('Sample_Job_Number',db.String(255), nullable=False, default='012345678')
+    sample_job_number = db.Column('Sample_Job_Number',db.String(255), nullable=False)
     sample_city = db.Column('Sample_City',db.String(255), nullable=False)
     sample_date = db.Column('Sample_Date',db.DateTime, nullable=False, default= datetime.utcnow)
     sample_country = db.Column('Sample_Country',db.String(255), nullable=False)

@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, request, Blueprint, flash
 from application.hams.forms import SelectMethodForm, AcquisitionForm, DeconvLibrarySearch, LibrarySearch, ImportDeconv, AlgorithmnForm
-from application.models import User, Acquisition_Hrms, Ms_System, Sample_Information, Sample_Location, Analytical_Column, Chromatographic_Condition, Chrom_Time, Lc_System, Job
+from application.models import User, Acquisition_Hrms, Ms_System, Sample_Information, Sample_Location, Analytical_Column, Chromatographic_Condition, Chrom_Time, Lc_System, Threshold_Setting
 from application import db
 from application.hams.utils import save_datafile, LibrarySearch_Al, DeconvLibrarySearch_Al, ImportDeconv_Al
 from flask_login import login_required, current_user
@@ -74,6 +74,7 @@ def acquisition(chosenMethod):
 
     if form.validate_on_submit():
         j_id = getJobID()
+        
 
         if chosenMethod == 'ImportDeconv':
             fileList = []
@@ -81,13 +82,25 @@ def acquisition(chosenMethod):
             fileList.append(form.VANFileLow)
             fileList.append(form.VANFileHigh)
 
-            save_datafile(fileList, current_user.user_email, j_id, chosenMethod)
+            d_set = []
+            d_set.append(form.Max_W.data)
+            d_set.append(form.Min_Int.data)
+            d_set.append(form.Retention_Window.data)
+            d_set.append(form.R_Min.data)
+            d_set.append(form.P_Max.data)
+            d_set.append(form.Retention_Time_Tollerance.data)
+            d_set.append(form.Ms_P_W.data)
+            d_set.append(form.Mass_Tol.data)
+            d_set.append(form.Mass_Window.data)
+            d_set.append(form.Signal_to_Noise.data)
+
+            save_datafile_D(fileList, current_user.user_email, j_id, d_set)
 
         elif chosenMethod == 'LibrarySearch':
-            fileList = []
-            fileList.append(form.txtFile)
+            #source =
+            #mode = 
 
-            save_datafile(fileList, current_user.user_email, j_id, chosenMethod)
+            save_datafile_L(form.txtFile, current_user.user_email, j_id, 'ESI', 'POSITIVE')
 
         else:
             fileList = []
@@ -96,9 +109,40 @@ def acquisition(chosenMethod):
             fileList.append(form.VANFileHigh)
             fileList.append(form.txtFile)
 
-            save_datafile(fileList, current_user.user_email, j_id, chosenMethod)
+            d_set = []
+            d_set.append(form.Max_W.data)
+            d_set.append(form.Min_Int.data)
+            d_set.append(form.Retention_Window.data)
+            d_set.append(form.R_Min.data)
+            d_set.append(form.P_Max.data)
+            d_set.append(form.Retention_Time_Tollerance.data)
+            d_set.append(form.Ms_P_W.data)
+            d_set.append(form.Mass_Tol.data)
+            d_set.append(form.Mass_Window.data)
+            d_set.append(form.Signal_to_Noise.data)
+
+            #source =
+            #mode = 
+
+            save_datafile_DL(fileList, current_user.user_email, j_id, d_set, 'ESI', 'POSITIVE')
 
         #Main tables
+        if chosenMethod == 'LibrarySearch' or chosenMethod == 'DeconvLibrarySearch':
+            Threshold_Setting = Threshold_Setting(
+                mas_w = form.Max_W.data, 
+                min_int = form.Min_Int.data, 
+                retention_window = form.Retention_Window.data,
+                r_min = form.R_Min.data,
+                p_max = form.P_Max.data,
+                retention_time_tollerance = form.Retention_Time_Tollerance.data,
+                ms_p_w = form.Ms_P_W.data,
+                mass_tol = form.Mass_Tol.data，
+                mass_window = form.Mass_Window.data,
+                signal_to_noise = form.Signal_to_Noise.data
+            )
+
+            db.session.add(Threshold_Setting)
+
         acquisition_hrms = Acquisition_Hrms(hrms_mode = form.hrms_mode.data, 
                     hrms_source_gas1 = form.hrms_source_gas1.data, 
                     hrms_source_gas2 = form.hrms_source_gas2.data,
@@ -112,6 +156,7 @@ def acquisition(chosenMethod):
                     sample_private = form.sample_private.data, 
                     sample_type = form.sample_type.data,
                     sample_city = form.sample_city.data,
+                    sample_job_number = getJobID(),
                     sample_country  = form.sample_country.data)
 
         analytical_column = Analytical_Column(user_id = getattr(current_user,'id'), 
@@ -122,13 +167,10 @@ def acquisition(chosenMethod):
                     column_inner_diameter  = form.column_inner_diameter.data,
                     column_brand  = form.column_brand.data,
                     column_model  = form.column_model.data)
-        
-        job = Job(j_id = j_id, u_id = getattr(current_user,'id'))
 
         db.session.add(acquisition_hrms)
         db.session.add(sample_information)
         db.session.add(analytical_column)
-        db.session.add(job)
         db.session.commit()
 
         #Sub tables

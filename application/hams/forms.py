@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_login import current_user
-from wtforms import StringField, SubmitField, RadioField, FloatField, BooleanField
+from wtforms import StringField, SubmitField, RadioField, FloatField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange
 from application.models import User
 
@@ -119,7 +119,7 @@ class LibrarySearch(AcquisitionForm):
                                 validators=[FileRequired(), FileAllowed(['txt'])])
 
 class ImportDeconv(AcquisitionForm):
-    xlsxFile = FileField('Target',
+    xlsxFile = FileField('Target', 
                         validators=[FileRequired(), FileAllowed(['xlsx'])])
 
     VANFileLow = FileField('HRMS Data (Low Energy)',
@@ -127,6 +127,26 @@ class ImportDeconv(AcquisitionForm):
 
     VANFileHigh = FileField('HRMS Data (High Energy)',
                             validators=[FileRequired(), FileAllowed(['cdf'])])
+
+    Max_W = FloatField('Max_W', validators=[DataRequired(), NumberRange()], default=15.0)
+
+    Min_Int = IntegerField('Min_Int', validators=[DataRequired(), NumberRange()], default=800.0)
+
+    Retention_Window = FloatField('Retention_Window', validators=[DataRequired(), NumberRange()], default=0.01)
+
+    R_Min = FloatField('R_Min', validators=[DataRequired(), NumberRange()], default=0.85)
+
+    P_Max = FloatField('P_Max', validators=[DataRequired(), NumberRange()], default=0.05)
+
+    Retention_Time_Tollerance = IntegerField('Retention_Time_Tollerance', validators=[DataRequired(), NumberRange()], default=3.0)
+
+    Ms_P_W = FloatField('Ms_P_W', validators=[DataRequired(), NumberRange()], default=15.0)
+
+    Mass_Tol = FloatField('Mass_Tol', validators=[DataRequired(), NumberRange()], default=13.0)
+
+    Mass_Window = FloatField('Mass_Window', validators=[DataRequired(), NumberRange()], default=0.05)
+
+    Signal_to_Noise = FloatField('Signal_to_Noise', validators=[DataRequired(), NumberRange()], default=0.01)
 
 class DeconvLibrarySearch(AcquisitionForm):
     xlsxFile = FileField('Target',
@@ -141,7 +161,25 @@ class DeconvLibrarySearch(AcquisitionForm):
     txtFile = FileField('User Spectra',
                             validators=[FileRequired(), FileAllowed(['txt'])])
 
+    Max_W = FloatField('Max_W', validators=[DataRequired(), NumberRange()], default=15.0)
 
+    Min_Int = IntegerField('Min_Int', validators=[DataRequired(), NumberRange()], default=800.0)
+
+    Retention_Window = FloatField('Retention_Window', validators=[DataRequired(), NumberRange()], default=0.01)
+
+    R_Min = FloatField('R_Min', validators=[DataRequired(), NumberRange()], default=0.85)
+
+    P_Max = FloatField('P_Max', validators=[DataRequired(), NumberRange()], default=0.05)
+
+    Retention_Time_Tollerance = IntegerField('Retention_Time_Tollerance', validators=[DataRequired(), NumberRange()], default=3.0)
+
+    Ms_P_W = FloatField('Ms_P_W', validators=[DataRequired(), NumberRange()], default=15.0)
+
+    Mass_Tol = FloatField('Mass_Tol', validators=[DataRequired(), NumberRange()], default=13.0)
+
+    Mass_Window = FloatField('Mass_Window', validators=[DataRequired(), NumberRange()], default=0.05)
+
+    Signal_to_Noise = FloatField('Signal_to_Noise', validators=[DataRequired(), NumberRange()], default=0.01)
 
 class AlgorithmnForm(FlaskForm):
     submit = SubmitField('Process Job Now')
