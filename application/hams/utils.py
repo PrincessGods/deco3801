@@ -180,3 +180,8 @@ def ProcessedDataToS3(user, JobID):
 def RemoveFromEBS(user):
     command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/template/' + user
     subprocess.call(command, shell=True)
+
+def DownloadFromS3ToLocal(user, JobID):
+    s3 = boto3.resource('s3')
+    key = user + '/' + JobID + '/processed'
+    s3.meta.client.download_file('deco3801mars', key, '/tmp/' + key)
