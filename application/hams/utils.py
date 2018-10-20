@@ -184,6 +184,8 @@ def RemoveFromEBS(user):
 def DownloadFromS3ToLocal(user, JobID):
     s3 = boto3.client('s3')
     key = user + '/' + JobID + '/processed/ULSA/ULSA_01540052918.43.csv'
-    url = s3.download_file(Bucket='deco3801mars', Key=key, Filename='application/static/data/template/download.csv')
+    url = join(current_app.root_path, 
+                'static/data/download/download.csv')
+    s3.download_file(Bucket='deco3801mars', Key=key, Filename='application/static/data/download/download.csv')
     return url
     #s3.meta.client.download_file('deco3801mars', key, 'application/download.csv')
