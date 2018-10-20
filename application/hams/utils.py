@@ -178,5 +178,5 @@ def ProcessedDataToS3(user, JobID):
     subprocess.call(command, shell=True)
 
 def RemoveFromEBS(user):
-    command = 'sudo rm -R -p /home/ubuntu/deco3801/application/static/data/template/' + user
+    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/template/' + user
     subprocess.call(command, shell=True)
