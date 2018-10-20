@@ -110,11 +110,11 @@ def acquisition(chosenMethod):
 
             d_set = []
             d_set.append(float(form.Max_W.data))
-            d_set.append(int(form.Min_Int.data))
+            d_set.append(float(form.Min_Int.data))
             d_set.append(float(form.Retention_Window.data))
             d_set.append(float(form.R_Min.data))
             d_set.append(float(form.P_Max.data))
-            d_set.append(int(form.Retention_Time_Tollerance.data))
+            d_set.append(float(form.Retention_Time_Tollerance.data))
             d_set.append(float(form.Ms_P_W.data))
             d_set.append(float(form.Mass_Tol.data))
             d_set.append(float(form.Mass_Window.data))
