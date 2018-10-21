@@ -13,14 +13,12 @@
             <h5 class="mt-3">My Uploaded Sample</h5>
             <div>
                 {% for sampleInfo in mySample_info %}
-                    <div class="card border-1 mb-4">
                         <div class="card-body">
-                            <h6 class="mt-3">Uploaded Time: {{ sampleInfo.sample_date }}</h6>
+                            <h6 class="">Uploaded Time: {{ sampleInfo.sample_date }}</h6>
                             <li><b>Job number:</b> {{ sampleInfo.sample_job_number}}</li>
                             <li>Sample Locaition(City): {{ sampleInfo.sample_city}}</li>
                             <li>Sample Locaition(Country): {{ sampleInfo.sample_country}}</li>
-                        </div>                     
-                    <div>
+                        </div> 
                 {% endfor %}
             </div>
         </div>
