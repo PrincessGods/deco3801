@@ -16,6 +16,15 @@ def viewpost():
     form = PostForm()
     user_icon = getUserIcon()
     posts = Post.query.all()
+    return render_template('forum.html', title='Forum', 
+                            form=form, icon = user_icon, 
+                            posts = posts)
+
+@forum.route("/forum/post", methods=['GET', 'POST'])
+def viewpost_post():
+    form = PostForm()
+    user_icon = getUserIcon()
+    posts = Post.query.all()
     if form.validate_on_submit():
         post = Post(
             title = form.title.data,
@@ -26,7 +35,7 @@ def viewpost():
         db.session.add(post)
         db.session.commit()
 
-        return redirect(url_for('forum.viewpost'))
+        return redirect(url_for('forum.viewpost_post'))
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
                             posts = posts)
