@@ -202,7 +202,7 @@ def DownloadFromS3ToLocal(user, JobID):
     key = user + '/' + JobID + '/processed/ULSA/ULSA.csv'
     url = join('http://', request.host, 
                 'static/data/download', user, JobID)
-    filename = url + '/download.csv'
+    filename = 'application/static/data/download/' + user + '/' + JobID + '/download.csv'
     s3.download_file(Bucket='deco3801mars', Key=key, Filename=filename)
     return url
     #s3.meta.client.download_file('deco3801mars', key, 'application/download.csv')
