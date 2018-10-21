@@ -45,7 +45,7 @@ def viewpost_post():
 def viewpostDetails(postID):
     form = PostForm()
     user_icon = getUserIcon()
-    post = Post.query.filter_by(author.user_lastname = "Lin").first()
+    post = Post.query.filter(author.user_lastname = "Lin").first()
     print(post)
     # if form.validate_on_submit():
     #     post = Post(
