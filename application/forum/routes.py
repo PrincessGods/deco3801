@@ -36,17 +36,17 @@ def viewpostDetails(postID):
     form = PostForm()
     user_icon = getUserIcon()
     post = Post.query.filter_by(post_id = postID).all()
-    if form.validate_on_submit():
-        post = Post(
-            title = form.title.data,
-            contents = form.content.data,
-            owner = current_user.id
-        )
+    # if form.validate_on_submit():
+    #     post = Post(
+    #         title = form.title.data,
+    #         contents = form.content.data,
+    #         owner = current_user.id
+    #     )
 
-        db.session.add(post)
-        db.session.commit()
+    #     db.session.add(post)
+    #     db.session.commit()
 
-        return redirect(url_for('forum.viewpostDetails'))
+    #     return redirect(url_for('forum.viewpostDetails'))
     return render_template('post_details.html', title='Post Details', 
                             form=form, icon = user_icon, 
                             post = post)
