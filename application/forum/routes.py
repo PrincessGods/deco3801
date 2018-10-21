@@ -36,7 +36,7 @@ def viewpost_post():
         )
         db.session.add(post)
         db.session.commit()
-        return redirect(url_for('forum.viewpost_post'))
+        return redirect(projectpath)
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
                             posts = posts)
@@ -45,7 +45,7 @@ def viewpost_post():
 def viewpostDetails(postID):
     form = PostForm()
     user_icon = getUserIcon()
-    post = db.session.query(Post, User).filter(and_(User.user_lastname == "Lin", Post.owner == User.user_id)).first()
+    post = Post.query.filter_by(post_id = postID).first()
     print(post)
     # if form.validate_on_submit():
     #     post = Post(
