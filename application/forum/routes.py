@@ -27,16 +27,16 @@ def viewpost():
 def viewpost_post():
     form = PostForm()
     user_icon = getUserIcon()
-
-    post = Post(
-        title = form.title.data,
-        contents = form.content.data,
-        owner = current_user.id
-    )
-    db.session.add(post)
-    db.session.commit()
     posts = Post.query.all()
-    
+    if form.validate_on_submit():
+        post = Post(
+            title = form.title.data,
+            contents = form.content.data,
+            owner = current_user.id
+        )
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('forum.viewpost_post'))
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
                             posts = posts)
@@ -45,7 +45,7 @@ def viewpost_post():
 def viewpostDetails(postID):
     form = PostForm()
     user_icon = getUserIcon()
-    post = session.query(Post, User).filter(and_(User.user_lastname == "Lin", Post.owner == User.user_id)).first()
+    post = db.session.query(Post, User).filter(and_(User.user_lastname == "Lin", Post.owner == User.user_id)).first()
     print(post)
     # if form.validate_on_submit():
     #     post = Post(
