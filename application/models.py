@@ -52,7 +52,7 @@ class Post(db.Model):
     owner = db.Column(db.Integer, db.ForeignKey('user.User_ID'), nullable=False)
 
     def __repr__(self):
-        return f"Post('{self.title}', '{self.date_posted}')"
+        return f"Post('{self.title}', '{self.date}')"
 
 class Acquisition_Hrms(db.Model, UserMixin):
     __tablename__ = 'acquisition_hrms'
