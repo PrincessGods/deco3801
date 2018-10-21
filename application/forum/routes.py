@@ -45,7 +45,7 @@ def viewpost_post():
 def viewpostDetails(postID):
     form = PostForm()
     user_icon = getUserIcon()
-    post = Post.query(User).filter(User.user_lastname = "Lin").first()
+    post = session.query(Post, User).filter(and_(User.user_lastname == "Lin", Post.owner == User.user_id)).first()
     print(post)
     # if form.validate_on_submit():
     #     post = Post(
