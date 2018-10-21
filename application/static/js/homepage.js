@@ -111,4 +111,10 @@ $(document).ready(function(){
     $('#u_icon').ready(function(){
         $('#u_icon').css("background", "url(" + $('#iconPath').text() + ") 50% center/cover");
     })
+
+    
+  $("#addNew").click(function(e){
+    $('#postModal').modal("show");
+    e.preventDefault();
+  });
 });
