@@ -18,7 +18,7 @@
                                 <a class="text text-primary" href=#>{{ post.author.user_firstname }} {{ post.author.user_lastname }}</a>
                                 <p class="mb-0 ml-3">{{ post.date.strftime('%Y-%m-%d') }}</p>
                             </div>
-                            <a class="text text-primary" href=#><h3>{{ post.title }}</h3></a>
+                            <a class="text text-primary" href=url_for('users.register')><h3>{{ post.title }}</h3></a>
                             <p class="mb-0 post-text">{{ post.contents }}</p>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
         <div class="w-25 pl-5" id="right">
             <div class="border rounded px-3 py-2 w-100 d-flex flex-column">
                 <legend class="border-bottom mb-3"><h4 class="text-dark">Actions</h4></legend>
-                <button class="btn btn-secondary my-2 mx-auto" id="addNew" href="#">Add New Post</button>
+                <button class="btn btn-secondary my-2 mx-auto w-100" id="addNew" href="#">Add New Post</button>
             </div>
         </div>
     </section>
