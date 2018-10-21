@@ -238,8 +238,8 @@ def download(jobid):
     print(url)
     return redirect(url)
 
-def redirect_delete(URL):
-    redirect(URL)
-    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/download/' + current_user.user_email
-    subprocess.call(command, shell=True)
+#def redirect_delete(URL):
+#    redirect(URL)
+#    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/download/' + current_user.user_email
+#    subprocess.call(command, shell=True)
 
