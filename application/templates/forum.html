@@ -8,11 +8,13 @@
                     <div>
                         {% for post in posts %}
                             <div class="d-flex border rounded mt-4 px-3 py-3">
-                                <div class="post_left"></div>
+                                <div class="post_left">
+                                    <img class="rounded-circle article-img w-100 post_icon" src="{{ url_for('static', filename='imgs/' + post.author.user_icon) }}">
+                                </div>
 
                                 <div class="post_right">
                                     <div class="border-bottom pb-1 mb-3 d-flex">
-                                        <a href=#>{{ post.author.user_firstname }}</a>
+                                        <a class="text text-primary" href=#>{{ post.author.user_firstname }} {{ post.author.user_lastname }}</a>
                                         <p class="mb-0 ml-3">{{ post.date }}</p>
                                     </div>
                                     <a class="text text-primary" href=#><h3>{{ post.title }}</h3></a>
