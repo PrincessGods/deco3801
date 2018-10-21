@@ -111,9 +111,33 @@ body{
   margin-right: 15px;
 }
 
+.post-text{
+  max-height: 120px !important;
+  overflow: scroll;
+}
+
 .post_right{
   width: 710px !important;
   height: 200px !important;
+}
+
+.post-left{
+  width: 100px !important;
+}
+
+.post-right{
+  width: 950px !important;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.4);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
 /*!
