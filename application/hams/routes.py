@@ -230,7 +230,7 @@ def saveJob(chosenMethod):
         #urlopen(url)
     return render_template('saveJob.html', title = "HAMS", form = form, icon = user_icon)
 
-@hams.route("/DownloadJob/<jobid>", methods=['GET', 'POST'])
+@hams.route("/download/<jobid>", methods=['GET', 'POST'])
 def download(jobid):
     url = DownloadFromS3ToLocal(current_user.user_email, jobid)
     print(url)

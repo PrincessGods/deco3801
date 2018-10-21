@@ -18,7 +18,7 @@
                             <li><b>Job number:</b> {{ sampleInfo.sample_job_number }}</li>
                             <li>Sample Locaition(City): {{ sampleInfo.sample_city }}</li>
                             <li>Sample Locaition(Country): {{ sampleInfo.sample_country }}</li>
-                            <a class="btn btn-primary mt-3" href="{{ url_for('hams.DownloadJob', chosenMethod = sampleInfo.sample_job_number) }}">Download Analysis</a>
+                            <a class="btn btn-primary mt-3" href="{{ url_for('hams.download', jobid = sampleInfo.sample_job_number) }}">Download Analysis</a>
                         </div> 
                 {% endfor %}
             </div>
