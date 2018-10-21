@@ -11,16 +11,23 @@ import subprocess
 def save_datafile_L(form_datafile, user, JobID, source, mode):
     f_name, f_ext = os.path.splitext(form_datafile.data.filename)
     fn = f_name + f_ext
+    output_fn = f_name + ".csv"
 
     MetaDataToS3(form_datafile, user, fn, JobID)
     DownloadFromS3(user, form_datafile, JobID)
     
-    command = 'mkdir -p /home/ubuntu/deco3801/application/static/data/template/' + user + '/' + JobID + '/ULSA'
+    command = 'mkdir -p /home/ubuntu/deco3801/application/static/data/template1/' + user + '/' + JobID + '/ULSA_tmp'
+    subprocess.call(command, shell=True)
+
+    command = 'mkdir -p /home/ubuntu/deco3801/application/static/data/template2/' + user + '/' + JobID + '/ULSA'
     subprocess.call(command, shell=True)
 
     LibrarySearch_Al(source, mode, user, JobID)
+
+    command = 'mv /home/ubuntu/deco3801/application/static/data/template1/' + user + '/' + JobID + '/ULSA_tmp/*.csv /home/ubuntu/deco3801/application/static/data/template2/' + user + '/' + JobID + '/ULSA/ULSA.csv'
+    subprocess.call(command, shell=True)
     
-    ProcessedDataToS3(user, JobID)
+    ProcessedDataToS3(user, JobID, output_fn)
     RemoveFromEBS(user)
     
     return fn
@@ -132,8 +139,8 @@ def LibrarySearch_Al(source, mode, user, JobID):
     path_to_spec = '/home/ubuntu/deco3801/application/static/data/unprocessed/' + user + '/' + JobID + '/User_Spectra'
 
     output_ulsa = join(current_app.root_path, 
-                        'static/data/template', user,
-                        JobID, 'ULSA')
+                        'static/data/template1', user,
+                        JobID, 'ULSA_tmp')
 
     # start up the matlab runtime engine
     l = LibrarySearch_v1.initialize()
@@ -173,7 +180,7 @@ def DownloadFromS3(user, file, JobID):
     subprocess.call(command, shell=True)
 
 def ProcessedDataToS3(user, JobID):
-    command = 'sudo aws s3 cp --recursive application/static/data/template/' + user + '/' + JobID + ' s3://deco3801mars/' + user + '/' + JobID + '/processed'
+    command = 'sudo aws s3 cp --recursive application/static/data/template2/' + user + '/' + JobID + ' s3://deco3801mars/' + user + '/' + JobID + '/processed'
 
     subprocess.call(command, shell=True)
 
@@ -183,7 +190,7 @@ def RemoveFromEBS(user):
 
 def DownloadFromS3ToLocal(user, JobID):
     s3 = boto3.client('s3')
-    key = user + '/' + JobID + '/processed/ULSA/*.csv'
+    key = user + '/' + JobID + '/processed/ULSA/ULSA.csv'
     url = join('http://', request.host, 
                 'static/data/download/download.csv')
     s3.download_file(Bucket='deco3801mars', Key=key, Filename='application/static/data/download/download.csv')
