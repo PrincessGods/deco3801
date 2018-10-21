@@ -235,3 +235,4 @@ def download(jobid):
     url = DownloadFromS3ToLocal(current_user.user_email, jobid)
     print(url)
     return redirect(url)
+    return redirect(url_for('users.profile'))
