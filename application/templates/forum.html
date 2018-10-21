@@ -18,7 +18,7 @@
                                 <a class="text text-primary" href=#>{{ post.author.user_firstname }} {{ post.author.user_lastname }}</a>
                                 <p class="mb-0 ml-3">{{ post.date.strftime('%Y-%m-%d') }}</p>
                             </div>
-                            <a class="text text-primary" href=url_for('users.register')><h3>{{ post.title }}</h3></a>
+                            <a class="text text-primary" href="{{ url_for('forum.viewpostDetails', postID = post.post_id) }}"><h3>{{ post.title }}</h3></a>
                             <p class="mb-0 post-text">{{ post.contents }}</p>
                         </div>
                     </div>
