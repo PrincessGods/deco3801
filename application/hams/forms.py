@@ -3,7 +3,6 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_login import current_user
 from wtforms import StringField, SubmitField, RadioField, FloatField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange
-from application.models import User
 
 class SelectMethodForm(FlaskForm):
     methods = RadioField('methods', validators=[DataRequired()], choices=[('LibrarySearch', ''), ('ImportDeconv', ''), 

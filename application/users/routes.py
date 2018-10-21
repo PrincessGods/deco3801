@@ -135,6 +135,5 @@ def reset_token(token):
 @login_required
 def viewJobs():
     user_icon = getUserIcon()
-    ##sample_information = Sample_Information.query.filter_by(user_id = User.id).first()
     mySample_info = Sample_Information.query.filter_by(user_id = current_user.id).all()
     return render_template('viewJobs.html',icon = user_icon, title = "Review My Uploads", mySample_info = mySample_info)

@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
     user_private = db.Column('User_Private', db.String(2), nullable=False)
     user_is_admin = db.Column('User_Is_Admin', db.String(2), nullable=False, default='N')
     user_approved = db.Column('User_Approved', db.String(2), nullable=False, default='Y')
-    ##posts = db.relationship('Post', backref='author', lazy=True)
+    posts = db.relationship('Post', backref='author', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -42,18 +42,13 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.user_firstname}', '{self.user_lastname}','{self.user_email}', '{self.user_icon}')"
 
-class Job(db.Model, UserMixin):
-    j_id = db.Column(db.String(10), primary_key=True)
-    u_id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False,
+    date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
-    content = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    contents = db.Column(db.Text, nullable=False)
+    owner = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
