@@ -201,7 +201,7 @@ def DownloadFromS3ToLocal(user, JobID):
     s3 = boto3.client('s3')
     key = user + '/' + JobID + '/processed/ULSA/ULSA.csv'
     url = join('http://', request.host, 
-                'static/data/download', user, JobID)
+                'static/data/download', user, JobID, 'download.csv')
     filename = 'application/static/data/download/' + user + '/' + JobID + '/download.csv'
     s3.download_file(Bucket='deco3801mars', Key=key, Filename=filename)
     return url
