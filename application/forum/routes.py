@@ -36,6 +36,7 @@ def viewpostDetails(postID):
     form = PostForm()
     user_icon = getUserIcon()
     post = Post.query.filter_by(post_id = postID).all()
+    print(post)
     # if form.validate_on_submit():
     #     post = Post(
     #         title = form.title.data,
