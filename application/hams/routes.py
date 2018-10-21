@@ -236,7 +236,7 @@ def saveJob(chosenMethod):
 def download(jobid):
     url = DownloadFromS3ToLocal(current_user.user_email, jobid)
     print(url)
-    return redirect_delete(url)
+    return redirect(url)
 
 def redirect_delete(URL):
     redirect(URL)
