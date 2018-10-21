@@ -48,7 +48,7 @@ class Post(db.Model):
     date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
     contents = db.Column(db.Text, nullable=False)
-    owner = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    owner = db.Column(db.Integer, db.ForeignKey('user.User_ID'), nullable=False)
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
