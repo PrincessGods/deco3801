@@ -17,16 +17,8 @@ def viewpost():
     user_icon = getUserIcon()
     posts = Post.query.all()
     if form.validate_on_submit():
-        post = Post(
-            title = form.title.data,
-            contents = form.content.data,
-            owner = current_user.id
-        )
-
-        db.session.add(post)
-        db.session.commit()
-
-        return redirect(url_for('forum.viewpost'))
+        projectpath = request.form['projectFilepath']
+        return redirect(projectpath)
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
                             posts = posts)
@@ -35,18 +27,16 @@ def viewpost():
 def viewpost_post():
     form = PostForm()
     user_icon = getUserIcon()
+
+    post = Post(
+        title = form.title.data,
+        contents = form.content.data,
+        owner = current_user.id
+    )
+    db.session.add(post)
+    db.session.commit()
     posts = Post.query.all()
-    if form.validate_on_submit():
-        post = Post(
-            title = form.title.data,
-            contents = form.content.data,
-            owner = current_user.id
-        )
-
-        db.session.add(post)
-        db.session.commit()
-
-        return redirect(url_for('forum.viewpost_post'))
+    
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
                             posts = posts)
