@@ -234,5 +234,5 @@ def saveJob(chosenMethod):
 def download(jobid):
     url = DownloadFromS3ToLocal(current_user.user_email, jobid)
     print(url)
-    return redirect(url)
-    return redirect(url_for('users.profile'))
+    redirect(url)
+    return render_template('viewJobs.html',icon = user_icon, title = "Review My Uploads", mySample_info = mySample_info)
