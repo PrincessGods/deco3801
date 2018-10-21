@@ -43,7 +43,8 @@ class User(db.Model, UserMixin):
         return f"User('{self.user_firstname}', '{self.user_lastname}','{self.user_email}', '{self.user_icon}')"
 
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'forum'
+    post_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
