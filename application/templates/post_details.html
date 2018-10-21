@@ -19,6 +19,7 @@
         </div>
         
         <form class="rounded border p-3 mt-5 mb-4" id="postForm" method="POST" action="">
+            {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <div class="form-group">
                     <label for="message-text" class="text-dark col-form-label text-weight-bold">Reply:</label>

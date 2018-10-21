@@ -47,6 +47,6 @@ def viewpostDetails(postID):
         db.session.commit()
 
         return redirect(url_for('forum.viewpostDetails'))
-    return render_template('forum.html', title='Forum', 
+    return render_template('post_details.html', title='Post Details', 
                             form=form, icon = user_icon, 
                             post = post)
