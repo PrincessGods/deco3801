@@ -27,7 +27,7 @@ def save_datafile_L(form_datafile, user, JobID, source, mode):
     command = 'mv /home/ubuntu/deco3801/application/static/data/template1/' + user + '/' + JobID + '/ULSA_tmp/*.csv /home/ubuntu/deco3801/application/static/data/template2/' + user + '/' + JobID + '/ULSA/ULSA.csv'
     subprocess.call(command, shell=True)
     
-    ProcessedDataToS3(user, JobID, output_fn)
+    ProcessedDataToS3(user, JobID)
     RemoveFromEBS(user)
     
     return fn
@@ -185,7 +185,13 @@ def ProcessedDataToS3(user, JobID):
     subprocess.call(command, shell=True)
 
 def RemoveFromEBS(user):
-    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/template/' + user
+    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/template1/' + user
+    subprocess.call(command, shell=True)
+
+    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/template2/' + user
+    subprocess.call(command, shell=True)
+
+    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/unprocessed/' + user
     subprocess.call(command, shell=True)
 
 def DownloadFromS3ToLocal(user, JobID):
