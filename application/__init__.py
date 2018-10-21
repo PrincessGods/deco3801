@@ -30,6 +30,7 @@ def create_app(config_class=Config):
     application.register_blueprint(main)
     application.register_blueprint(users)
     application.register_blueprint(hams)
+    application.register_blueprint(forum)
     application.register_blueprint(errors)
 
     return application
