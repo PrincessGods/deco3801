@@ -156,7 +156,7 @@ def acquisition(chosenMethod):
                     sample_private = form.sample_private.data, 
                     sample_type = form.sample_type.data,
                     sample_city = form.sample_city.data,
-                    sample_job_number = getJobID(),
+                    sample_job_number = j_id,
                     sample_country  = form.sample_country.data)
 
         analytical_column = Analytical_Column(user_id = getattr(current_user,'id'), 
