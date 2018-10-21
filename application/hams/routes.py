@@ -4,8 +4,10 @@ from application.models import User, Acquisition_Hrms, Ms_System, Sample_Informa
 from application import db
 from application.hams.utils import save_datafile_L, save_datafile_D, save_datafile_DL, DownloadFromS3ToLocal
 from flask_login import login_required, current_user
-import secrets
 from urllib.request import urlopen
+
+import secrets
+import subprocess
 
 hams = Blueprint('hams', __name__)
 
@@ -234,4 +236,10 @@ def saveJob(chosenMethod):
 def download(jobid):
     url = DownloadFromS3ToLocal(current_user.user_email, jobid)
     print(url)
-    return redirect(url)
+    return redirect_delete(url)
+
+def redirect_delete(URL):
+    redirect(URL)
+    command = 'sudo rm -R /home/ubuntu/deco3801/application/static/data/download/' + user
+    subprocess.call(command, shell=True)
+

@@ -195,10 +195,13 @@ def RemoveFromEBS(user):
     subprocess.call(command, shell=True)
 
 def DownloadFromS3ToLocal(user, JobID):
+    command = 'mkdir -p /home/ubuntu/deco3801/application/static/data/download/' + user + '/' + JobID 
+    subprocess.call(command, shell=True)
+
     s3 = boto3.client('s3')
     key = user + '/' + JobID + '/processed/ULSA/ULSA.csv'
     url = join('http://', request.host, 
-                'static/data/download/download.csv')
-    s3.download_file(Bucket='deco3801mars', Key=key, Filename='application/static/data/download/download.csv')
+                'static/data/download', user, JobID)
+    s3.download_file(Bucket='deco3801mars', Key=key, Filename= url + '/download.csv')
     return url
     #s3.meta.client.download_file('deco3801mars', key, 'application/download.csv')
