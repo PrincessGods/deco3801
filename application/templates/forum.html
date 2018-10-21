@@ -5,6 +5,7 @@
     <section class="d-flex w-100 mb-5 pb-2 border-bottom">
 
         <div class="d-flex flex-column mr-auto w-75" id="left">
+            <legend class="border-bottom pb-2 mt-5 stepLable"><h4>Forum</h4></legend>
             <div>
                 {% for post in posts %}
                     <div class="d-flex border rounded mb-4 px-3 py-3">
@@ -28,7 +29,7 @@
         <div class="d-flex flex-column w-25 pl-5" id="right">
             <div class="border rounded px-3 py-2 w-100">
                 <legend class="border-bottom mb-3"><h4 class="text-dark">Actions</h4></legend>
-                <button class="btn btn-secondary my-2" id="addNew" href="#">Add New Post</button>
+                <button class="btn btn-secondary my-2 mx-auto" id="addNew" href="#">Add New Post</button>
             </div>
         </div>
     </section>
