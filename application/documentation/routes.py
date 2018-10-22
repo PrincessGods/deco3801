@@ -22,4 +22,4 @@ def viewpapers():
         return redirect(projectpath)
     return render_template('paper.html', title='Paper', 
                             form=form, icon = user_icon, 
-                            papers = paper, searchform = searchform)
+                            papers = papers, searchform = searchform)
