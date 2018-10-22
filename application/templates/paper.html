@@ -9,7 +9,7 @@
                 {{ searchform.hidden_tag() }}
                 <fieldset class="form-group m-auto">
                     <div class="form-group d-flex">
-                        {{ searchform.select(class="form-control form-control-lg", id="filter") }}
+                        {{ searchform.select(class="form-control form-control-lg border-fight-0", id="filter") }}
                         {{ searchform.search(class="form-control form-control-lg border-left-0 search_bar rounded-0") }}
                         {{ searchform.submit(class="btn btn-secondary search_btn") }}
                     </div>
@@ -18,9 +18,9 @@
             <div>
                 {% for paper in papers %}
                     <div class="card-body border rounded mb-2">
-                        <b><h5 class="">Title: {{ paper.title }}</h5></b>
+                        <b><h4 class="">{{ paper.title }}</h4></b>
                         <li>Uploaded Time: {{ paper.date }}</li>
-                        <li>Publisher: {{ paper.author.user_firstname }} {{ paper.author.user_lastname }}</li>
+                        <li><a href=#>Publisher: {{ paper.author.user_firstname }} {{ paper.author.user_lastname }}</a></li>
                         <li>Author: {{ paper.paper_author }}</li>
                         <a class="btn btn-primary mt-3" href="#">Download Analysis</a>
                     </div> 
