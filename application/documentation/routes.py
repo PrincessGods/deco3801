@@ -30,7 +30,7 @@ def paperPublish():
     form = PaperForm()
     searchform = PaperSearchForm()
     user_icon = getUserIcon()
-    posts = Post.query.all()
+    papers = Paper.query.all()
     if form.validate_on_submit():
         form.paper_file
         path = save_pdf(form.paper_file, current_user.user_email)
