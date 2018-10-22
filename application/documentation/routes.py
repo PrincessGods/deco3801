@@ -32,7 +32,7 @@ def paperPublish():
     user_icon = getUserIcon()
     papers = Paper.query.all()
     if form.validate_on_submit():
-        form.paper_file
+        print("fk")
         path = save_pdf(form.paper_file, current_user.user_email)
         paper = Paper(
             title = form.title.data,
