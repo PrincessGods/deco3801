@@ -25,12 +25,14 @@ def create_app(config_class=Config):
     from application.users.routes import users
     from application.hams.routes import hams
     from application.forum.routes import forum
+    from application.paper.routes import paper
     from application.errors.handlers import errors
     
     application.register_blueprint(main)
     application.register_blueprint(users)
     application.register_blueprint(hams)
     application.register_blueprint(forum)
+    application.register_blueprint(paper)
     application.register_blueprint(errors)
 
     return application

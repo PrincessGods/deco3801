@@ -54,6 +54,19 @@ class Post(db.Model):
     def __repr__(self):
         return f"Post('{self.title}', '{self.date}')"
 
+class Paper(db.Model):
+    __tablename__ = 'paper'
+    paper_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    paper_author = db.Column(db.String(45), nullable=False)
+    date = db.Column(db.DateTime, nullable=False,
+                             default=datetime.utcnow)
+    path = db.Column(db.String(100), nullable=False)
+    owner = db.Column(db.Integer, db.ForeignKey('user.User_ID'), nullable=False)
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.date}')"
+
 class Acquisition_Hrms(db.Model, UserMixin):
     __tablename__ = 'acquisition_hrms'
     id = db.Column('Acqui_Hrms_ID', db.Integer, primary_key=True, nullable=False, autoincrement=True)

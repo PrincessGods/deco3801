@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <section class="d-flex w-100 mb-5 pb-2 border-bottom">
+
+        <div class="d-flex flex-column mr-auto w-75" id="left">
+            <legend class="border-bottom pb-2 mb-4 stepLable"><h3>Paper</h3></legend>
+            <div>
+                {% for paper in papers %}
+                    <div class="card-body border rounded mb-2">
+                        <h6 class="">Title: {{ paper.title }}</h6>
+                        <li><b>Uploaded Time:</b> {{ paper.date }}</li>
+                        <li>Publisher: {{ paper.author.user_firstname }} {{ paper.author.user_lastname }}</li>
+                        <li>Author: {{ paper_author.author }}</li>
+                        <li>Sample Locaition(Country): {{ sampleInfo.sample_country }}</li>
+                        <a class="btn btn-primary mt-3" href="#">Download Analysis</a>
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="w-25 pl-5" id="right">
+            <div class="border rounded px-3 py-2 w-100 d-flex flex-column">
+                <legend class="border-bottom mb-3"><h4 class="text-dark">Sort By</h4></legend>
+                <ul class="nav flex-column nav-pills border rounded mb-3" id="side_nav">
+                    <li class="nav-item border-bottom m-0">
+                        <a class="nav-link rounded-0" href="#">Title</a>
+                    </li>
+                    <li class="nav-item border-bottom m-0">
+                        <a class="nav-link rounded-0" href="#">Date</a>
+                    </li>
+                </ul>
+                <button class="btn btn-secondary my-2 mx-auto w-100" id="addNew" href="#">Add New Paper</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content mt-5">
+                <div class="modal-body">
+                    <form class="px-2 col-12" id="postForm" method="POST" action="{{ url_for('forum.viewpost_post') }}">
+                        {{ form.hidden_tag() }}
+                        <legend class="border-bottom mb-2 mt-2 d-flex">
+                            <h4 class="text-dark">New Post
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </h4>
+                        </legend>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{ form.title.label(class="form-control-label") }}
+                                {{ form.title(class="form-control") }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.content.label(class="form-control-label") }}
+                                {{ form.content(class="form-control", rows="4") }}
+                            </div>
+                        </fieldset>
+
+                        <div class="form-label-group d-flex mt-2">
+                            {{ form.submit(class="btn btn-primary col-2 ml-auto mb-2 text-light") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
