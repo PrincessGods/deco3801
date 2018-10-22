@@ -5,7 +5,16 @@
     <section class="d-flex w-100 mb-5 pb-2 border-bottom">
 
         <div class="d-flex flex-column mr-auto w-75" id="left">
-            <legend class="border-bottom pb-2 mb-4 stepLable"><h3>Paper</h3></legend>
+            <form method="POST" action="" class="m-auto w-100">
+                {{ searchform.hidden_tag() }}
+                <fieldset class="form-group m-auto">
+                    <div class="form-group d-flex">
+                        {{ searchform.select(class="form-control form-control-lg") }}
+                        {{ searchform.search(class="form-control form-control-lg search_bar rounded-0") }}
+                        {{ searchform.submit(class="btn btn-secondary search_btn") }}
+                    </div>
+                </fieldset>
+            </form> 
             <div>
                 {% for paper in papers %}
                     <div class="card-body border rounded mb-2">
