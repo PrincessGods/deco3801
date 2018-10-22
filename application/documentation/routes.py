@@ -25,7 +25,7 @@ def viewpapers():
             title = form.title.data,
             path = path,
             owner = current_user.id,
-            paper_author = form.paper_author
+            paper_author = form.paper_author.data
         )
         db.session.add(paper)
         db.session.commit()
