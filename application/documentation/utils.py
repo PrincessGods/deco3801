@@ -1,8 +1,5 @@
 import secrets
 import os
-import LibrarySearch_v1
-import ImportDeconv_v1
-import DeconvLibrarySearch_v1
 from os.path import join
 from flask import url_for, current_app, request
 import subprocess
@@ -22,5 +19,5 @@ def save_pdf(form_datafile, user):
     return fn_path
 
 def DownloadPdf(file_path):
-    url = join('http://', request.host)
+    url = join('http://', request.host, file_path)
     return url
