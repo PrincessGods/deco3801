@@ -61,18 +61,43 @@
                         <fieldset class="form-group">
                             <div class="form-group">
                                 {{ form.title.label(class="form-control-label") }}
-                                {{ form.title(class="form-control") }}
+
+                                {% if form.title.errors %}
+                                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.title.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.title(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
 
                             <div class="form-group">
                                 {{ form.paper_author.label(class="form-control-label") }}
-                                {{ form.paper_author(class="form-control") }}
+
+                                {% if form.paper_author.errors %}
+                                    {{ form.paper_author(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.paper_author.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.paper_author(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
 
                             <div class="form-group">
-                                {{ form.paper_file.label(class="form-control-label") }}
-                                <br>
-                                {{ form.paper_file(class="") }}
+                                {{ form.paper_file.label() }}
+                                {{ form.paper_file(class="form-control-file") }}
+                                {% if form.paper_file.errors %}
+                                    {% for error in form.paper_file.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         </fieldset>
 
