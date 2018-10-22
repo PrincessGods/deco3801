@@ -1,6 +1,5 @@
 import secrets
 import os
-import boto3
 import LibrarySearch_v1
 import ImportDeconv_v1
 import DeconvLibrarySearch_v1
