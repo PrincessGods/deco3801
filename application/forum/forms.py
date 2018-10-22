@@ -11,3 +11,10 @@ class PostForm(FlaskForm):
     content = StringField('Content:', validators=[DataRequired()], widget=TextArea())
 
     submit = SubmitField('Post')
+
+class PostSearchForm(FlaskForm):
+    select = SelectField('Select', choices=[('title', 'Title'), ('contents', 'Content')], default='Title')
+
+    search = StringField('Search', validators=[DataRequired()]
+                            , render_kw={"placeholder": "Search this site"})
+    submit = SubmitField('Search')

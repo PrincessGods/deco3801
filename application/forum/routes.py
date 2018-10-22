@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from application import db, bcrypt
-from application.forum.forms import PostForm
+from application.forum.forms import PostForm, PostSearchForm
 from application.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -14,6 +14,7 @@ def getUserIcon():
 @forum.route("/forum", methods=['GET', 'POST'])
 def viewpost():
     form = PostForm()
+    searchform = PostSearchForm()
     user_icon = getUserIcon()
     posts = Post.query.all()
     if form.validate_on_submit():
@@ -21,11 +22,12 @@ def viewpost():
         return redirect(projectpath)
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
-                            posts = posts)
+                            posts = posts, searchform = searchform)
 
 @forum.route("/forum/post", methods=['GET', 'POST'])
 def viewpost_post():
     form = PostForm()
+    searchform = PostSearchForm()
     user_icon = getUserIcon()
     posts = Post.query.all()
     if form.validate_on_submit():
@@ -39,7 +41,7 @@ def viewpost_post():
         return redirect(url_for('forum.viewpost_post'))
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
-                            posts = posts)
+                            posts = posts, searchform = searchform)
 
 @forum.route("/forum/<postID>", methods=['GET', 'POST'])
 def viewpostDetails(postID):

@@ -5,7 +5,16 @@
     <section class="d-flex w-100 mb-5 pb-2 border-bottom">
 
         <div class="d-flex flex-column mr-auto w-75" id="left">
-            <legend class="border-bottom pb-2 mb-4 stepLable"><h3>Forum</h3></legend>
+            <form method="POST" action="" class="m-auto w-100">
+                {{ searchform.hidden_tag() }}
+                <fieldset class="form-group m-auto">
+                    <div class="form-group d-flex">
+                        {{ searchform.select(class="form-control form-control-lg border-fight-0", id="filter") }}
+                        {{ searchform.search(class="form-control form-control-lg border-left-0 search_bar rounded-0") }}
+                        {{ searchform.submit(class="btn btn-secondary search_btn") }}
+                    </div>
+                </fieldset>
+            </form> 
             <div>
                 {% for post in posts %}
                     <div class="d-flex border rounded mb-4 px-3 py-3">
@@ -31,10 +40,10 @@
                 <legend class="border-bottom mb-3"><h4 class="text-dark">Sort By</h4></legend>
                 <ul class="nav flex-column nav-pills border rounded mb-3" id="side_nav">
                     <li class="nav-item border-bottom m-0">
-                        <a class="nav-link rounded-0" href="#">Title</a>
+                        <a class="nav-link rounded-0 text-secondary" href="#">Title</a>
                     </li>
                     <li class="nav-item border-bottom m-0">
-                        <a class="nav-link rounded-0" href="#">Date</a>
+                        <a class="nav-link rounded-0 text-secondary" href="#">Date</a>
                     </li>
                 </ul>
                 <button class="btn btn-secondary my-2 mx-auto w-100" id="addNew" href="#">Add New Post</button>
