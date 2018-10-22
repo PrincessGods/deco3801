@@ -36,6 +36,6 @@ def viewpapers():
 
 @documentation.route("/download/<file_path>", methods=['GET', 'POST'])
 def download(file_path):
-    url = DownloadPdf(file_path)
+    url = join('http://', request.host, file_path)
     print(url)
     return redirect(url)
