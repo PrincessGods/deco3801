@@ -13,10 +13,13 @@ def save_pdf(form_datafile, user):
     fn = f_name + f_ext
 
     command = 'mkdir -p /home/ubuntu/deco3801/application/static/paper/' + user
+    subprocess.call(command, shell=True)
+
     file_path = os.path.join(current_app.root_path,
                             'static/paper/', user, fn)
     form_datafile.data.save(file_path)
     fn_path = 'static/paper/' + user + '/' + fn
+    
     return fn_path
 
 def DownloadPdf(user, file_path):
