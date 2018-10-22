@@ -22,7 +22,7 @@
                         <li>Uploaded Time: {{ paper.date }}</li>
                         <li>Publisher: <a class="text-primary" href=#>{{ paper.author.user_firstname }} {{ paper.author.user_lastname }}</a></li>
                         <li>Author: {{ paper.paper_author }}</li>
-                        <a class="btn btn-primary mt-3" href="{{ url_for('documentation.download', file_path = paper.path) }}">Download Paper</a>
+                        <a class="btn btn-primary mt-3" href="{{ url_for('documentation.download', file_path = paper.title) }}">Download Paper</a>
                     </div> 
                 {% endfor %}
             </div>
