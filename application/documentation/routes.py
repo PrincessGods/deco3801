@@ -25,14 +25,15 @@ def viewpapers():
                             form=form, icon = user_icon, 
                             papers = papers, searchform = searchform)
 
-@documentation.route("/forum/publish", methods=['GET', 'POST'])
+@documentation.route("/paper/publish", methods=['GET', 'POST'])
 def paperPublish():
+    print("fk")
     form = PaperForm()
     searchform = PaperSearchForm()
     user_icon = getUserIcon()
     papers = Paper.query.all()
     if form.validate_on_submit():
-        print("fk")
+        
         path = save_pdf(form.paper_file, current_user.user_email)
         paper = Paper(
             title = form.title.data,
