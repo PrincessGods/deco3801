@@ -34,7 +34,7 @@ def viewpapers():
                             form=form, icon = user_icon, 
                             papers = papers, searchform = searchform)
 
-@documentation.route("/download/<file_id>", methods=['GET', 'POST'])
+@documentation.route("/downloadPaper/<file_id>", methods=['GET', 'POST'])
 def download(file_id):
     file_path = Paper.query.filter_by(paper_id = file_id).first()
     url = DownloadPdf(file_path)
