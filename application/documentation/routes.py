@@ -25,7 +25,7 @@ def viewpapers():
                             form=form, icon = user_icon, 
                             papers = papers, searchform = searchform)
 
-@forum.route("/forum/publish", methods=['GET', 'POST'])
+@documentation.route("/forum/publish", methods=['GET', 'POST'])
 def paperPublish():
     form = PaperForm()
     searchform = PaperSearchForm()
@@ -47,7 +47,7 @@ def paperPublish():
                             form=form, icon = user_icon, 
                             papers = papers, searchform = searchform)
 
-@hams.route("/download/<path>", methods=['GET', 'POST'])
+@documentation.route("/download/<path>", methods=['GET', 'POST'])
 def download(path):
     url = DownloadPdf(current_user.user_email, path)
     print(url)
