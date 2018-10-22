@@ -20,6 +20,7 @@ def viewpapers():
     papers = Paper.query.all()
     if form.validate_on_submit():
         path = save_pdf(form.paper_file, current_user.user_email)
+        print(path)
         paper = Paper(
             title = form.title.data,
             path = path,
