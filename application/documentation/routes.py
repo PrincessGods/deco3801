@@ -34,8 +34,8 @@ def viewpapers():
                             form=form, icon = user_icon, 
                             papers = papers, searchform = searchform)
 
-@documentation.route("/download/<path>", methods=['GET', 'POST'])
-def download(path):
-    url = DownloadPdf(current_user.user_email, path)
+@documentation.route("/download/<file_path>", methods=['GET', 'POST'])
+def download(file_path):
+    url = DownloadPdf(file_path)
     print(url)
     return redirect(url)
