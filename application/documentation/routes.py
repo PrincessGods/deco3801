@@ -42,7 +42,7 @@ def paperPublish():
         )
         db.session.add(paper)
         db.session.commit()
-        return redirect(projectpath)
+        return redirect(url_for('documentation.paperPublish'))
     return render_template('paper.html', title='Paper', 
                             form=form, icon = user_icon, 
                             papers = papers, searchform = searchform)

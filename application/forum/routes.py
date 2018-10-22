@@ -36,7 +36,7 @@ def viewpost_post():
         )
         db.session.add(post)
         db.session.commit()
-        return redirect(projectpath)
+        return redirect(url_for('forum.viewpost_post'))
     return render_template('forum.html', title='Forum', 
                             form=form, icon = user_icon, 
                             posts = posts)
