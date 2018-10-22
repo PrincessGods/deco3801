@@ -19,9 +19,9 @@ def save_pdf(form_datafile, user):
                             'static/paper/', user, fn)
     form_datafile.data.save(file_path)
     fn_path = 'static/paper/' + user + '/' + fn
-
+    
     return fn_path
 
 def DownloadPdf(file_path):
-    url = 'http://', request.host, file_path)
+    url = join('http://', request.host, file_path)
     return url
