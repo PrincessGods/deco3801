@@ -22,7 +22,7 @@
                         <li>Uploaded Time: {{ paper.date }}</li>
                         <li>Publisher: <a class="text-primary" href=#>{{ paper.author.user_firstname }} {{ paper.author.user_lastname }}</a></li>
                         <li>Author: {{ paper.paper_author }}</li>
-                        <a class="btn btn-primary mt-3" href="#">Download Analysis</a>
+                        <a class="btn btn-primary mt-3" href="{{ url_for('documentation.download', path = data.path) }}">Download Paper</a>
                     </div> 
                 {% endfor %}
             </div>
@@ -49,7 +49,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content mt-5">
                 <div class="modal-body">
-                    <form class="px-2 col-12" id="postForm" method="POST" action="{{ url_for('forum.viewpost_post') }}">
+                    <form class="px-2 col-12" id="postForm" method="POST" action="{{ url_for('documentation.paperPublish') }}">
                         {{ form.hidden_tag() }}
                         <legend class="border-bottom mb-2 mt-2 d-flex">
                             <h4 class="text-dark">New Post
@@ -67,6 +67,11 @@
                             <div class="form-group">
                                 {{ form.paper_author.label(class="form-control-label") }}
                                 {{ form.paper_author(class="form-control") }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.paper_file.label(class="form-control-label") }}
+                                {{ form.paper_file(class="form-control") }}
                             </div>
                         </fieldset>
 

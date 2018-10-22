@@ -10,6 +10,9 @@ class PaperForm(FlaskForm):
 
     paper_author = StringField('Author:', validators=[DataRequired()])
 
+    paper_file = FileField('Upload Paper:',
+                        validators=[FileRequired(), FileAllowed(['pdf'])])
+
     submit = SubmitField('Publish')
 
 class PaperSearchForm(FlaskForm):
