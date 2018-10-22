@@ -23,5 +23,5 @@ def save_pdf(form_datafile, user):
     return fn_path
 
 def DownloadPdf(file_path):
-    url = join('http://', file_path)
+    url = join('http://', request.host)
     return url
