@@ -19,22 +19,6 @@ def viewpapers():
     user_icon = getUserIcon()
     papers = Paper.query.all()
     if form.validate_on_submit():
-        print("fk")
-        projectpath = request.form['projectFilepath']
-        return redirect(projectpath)
-    return render_template('paper.html', title='Paper', 
-                            form=form, icon = user_icon, 
-                            papers = papers, searchform = searchform)
-
-@documentation.route("/paper/publish", methods=['GET', 'POST'])
-def paperPublish():
-    
-    form = PaperForm()
-    searchform = PaperSearchForm()
-    user_icon = getUserIcon()
-    papers = Paper.query.all()
-    if form.validate_on_submit():
-        
         path = save_pdf(form.paper_file, current_user.user_email)
         paper = Paper(
             title = form.title.data,
@@ -44,7 +28,7 @@ def paperPublish():
         )
         db.session.add(paper)
         db.session.commit()
-        return redirect(url_for('documentation.paperPublish'))
+        return redirect(url_for('documentation.viewpapers'))
     return render_template('paper.html', title='Paper', 
                             form=form, icon = user_icon, 
                             papers = papers, searchform = searchform)
