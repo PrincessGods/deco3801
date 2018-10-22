@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     user_is_admin = db.Column('User_Is_Admin', db.String(2), nullable=False, default='N')
     user_approved = db.Column('User_Approved', db.String(2), nullable=False, default='Y')
     posts = db.relationship('Post', backref='author', lazy=True)
+    papers = db.relationship('Paper', backref='author', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
