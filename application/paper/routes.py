@@ -4,7 +4,7 @@ from application.paper.forms import PaperForm, PaperSearchForm
 from application.models import User, Post, Paper
 from flask_login import login_user, current_user, logout_user, login_required
 
-paper = Blueprint('paper', __name__)
+documentation = Blueprint('documentation', __name__)
 
 def getUserIcon():
     if current_user.is_authenticated:
