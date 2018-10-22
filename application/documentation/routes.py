@@ -19,6 +19,7 @@ def viewpapers():
     user_icon = getUserIcon()
     papers = Paper.query.all()
     if form.validate_on_submit():
+        print("fk")
         projectpath = request.form['projectFilepath']
         return redirect(projectpath)
     return render_template('paper.html', title='Paper', 
@@ -27,7 +28,7 @@ def viewpapers():
 
 @documentation.route("/paper/publish", methods=['GET', 'POST'])
 def paperPublish():
-    print("fk")
+    
     form = PaperForm()
     searchform = PaperSearchForm()
     user_icon = getUserIcon()
