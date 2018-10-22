@@ -25,11 +25,9 @@
                 
                     <a class="navbar-brand py-2 font-weight-bold" href="{{ url_for('main.home') }}">CECEWSN</a>
                     
-                    <!--Add here -->
                     <button class="navbar-toggler my-2 " type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <!--Add here -->
         
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav m-auto">
@@ -54,27 +52,23 @@
                             {% if current_user.is_authenticated %}
                                 <li class="nav-item dropdown py-2">
                                     <p id="iconPath" style="display: none">{{ icon }}</p>
-                                    <div class="nav-link px-auto" id="u_icon" onclick="dropControl()"></div>
+                                    <div class="nav-link px-auto d-flex" onclick="dropControl()">
+                                        <p>Hi, {{ current_user.user_firstname }}</p>
+                                        <div id="u_icon" ></div>
+                                    </div>
                                     <div class="dropdown_menu bg-dark py-0 d-flex" id="dropdown_menu">
-                                        
-                                            <a class="dropdown-item py-2 border-buttom" id="dropdown-item3" href="{{ url_for('users.profile') }}">Profile</a>
-                                            <a class="dropdown-item py-2 border-0" href="{{ url_for('users.logout') }}">Log Out</a>
-                                        
-                                            <a class="dropdown-item py-2" href="{{ url_for('users.register') }}">Sign Up</a>
-                                            <a class="dropdown-item py-2" href="{{ url_for('users.login') }}">Log In</a>
-                                        
+                                        <a class="dropdown-item py-2 border-buttom" id="dropdown-item3" href="{{ url_for('users.profile') }}">Profile</a>
+                                        <a class="dropdown-item py-2 border-0" href="{{ url_for('users.logout') }}">Log Out</a>
                                     </div>
                                 </li>
                             {% else %}
                                 <li class="nav-item py-2">
-                                    <a class="nav-link px-4" href="{{ url_for('users.register') }}">Sign In</a>
+                                    <a class="nav-link px-4" href="{{ url_for('users.register') }}">Sign Up</a>
                                 </li>
                                 <li class="nav-item py-2">
                                     <a class="nav-link px-4" href="{{ url_for('users.login') }}">Log In</a>
                                 </li>
                             {% endif %}
-
-                            
                         </ul>
                     </div>
                 </nav>
