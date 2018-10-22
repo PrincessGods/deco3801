@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from application import db, bcrypt
-from application.paper.forms import PaperForm, PaperSearchForm
+from application.documentation.forms import PaperForm, PaperSearchForm
 from application.models import User, Post, Paper
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -11,7 +11,7 @@ def getUserIcon():
         user_icon = url_for('static', filename='imgs/' + current_user.user_icon)
         return user_icon
 
-@paper.route("/paper", methods=['GET', 'POST'])
+@documentation.route("/paper", methods=['GET', 'POST'])
 def viewpapers():
     form = PaperForm()
     searchform = PaperSearchForm()

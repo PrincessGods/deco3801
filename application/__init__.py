@@ -25,7 +25,7 @@ def create_app(config_class=Config):
     from application.users.routes import users
     from application.hams.routes import hams
     from application.forum.routes import forum
-    from application.paper.routes import documentation
+    from application.documentation.routes import documentation
     from application.errors.handlers import errors
     
     application.register_blueprint(main)
