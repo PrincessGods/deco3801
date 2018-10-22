@@ -13,7 +13,7 @@ class PaperForm(FlaskForm):
     submit = SubmitField('Publish')
 
 class PaperSearchForm(FlaskForm):
-    select = SelectField('Select', choices=[('Title', 'title'), ('Author', 'author')], default='Title')
+    select = SelectField('Select', choices=[('title', 'Title'), ('author', 'Author')], default='Title')
 
     search = StringField('Search', validators=[DataRequired()]
                             , render_kw={"placeholder": "Search this site"})
