@@ -53,7 +53,8 @@
                                 <li class="nav-item dropdown py-2">
                                     <p id="iconPath" style="display: none">{{ icon }}</p>
                                     <div class="nav-link px-2 d-flex" onclick="dropControl()" style="cursor: pointer">
-                                        <div id="u_icon" ></div>
+                                        <p class="my-auto pr-3 text-white">Hi, {{ current_user.user_firstname }}</p>
+                                        <div class="p-0" id="u_icon" ></div>
                                     </div>
                                     <div class="dropdown_menu bg-dark py-0 d-flex" id="dropdown_menu">
                                         <a class="dropdown-item py-2 border-buttom" id="dropdown-item3" href="{{ url_for('users.profile') }}">Profile</a>
