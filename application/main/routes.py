@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint, flash, redirect, url_for
-from application.models import User, Sample_Information, Search_Results, Search_Results
+from application.models import User, Sample_Information, Sample_Location, Search_Results
 from application import db, bcrypt
 from application.main.forms import HomeSearchForm
 from flask_login import current_user
