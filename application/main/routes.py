@@ -20,6 +20,7 @@ def home():
 @main.route("/search/<name>", methods=['GET', 'POST'])
 def search(name):
     form = HomeSearchForm()
+    user_icon = getUserIcon()
     samples = Sample_Information.query.filter_by(sample_type = name).all()
     return render_template('chenical_search.html', title = "Search Result", 
                             form = form, icon = user_icon, samples = samples)
@@ -27,6 +28,7 @@ def search(name):
 @main.route("/searchDetails/<id>", methods=['GET', 'POST'])
 def searchDetails(id):
     form = HomeSearchForm()
+    user_icon = getUserIcon()
     sample = Sample_Information.query.filter_by(sample_id = id).first()
     location = Sample_Location.query.filter_by(sample_id = id).first()
     return render_template('chenical_search.html', title = "Search Result Details", 
