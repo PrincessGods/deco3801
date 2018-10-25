@@ -29,7 +29,7 @@ def search(name):
 def searchDetails(id):
     form = HomeSearchForm()
     user_icon = getUserIcon()
-    sample = Sample_Information.query.filter_by(sample_id = id).first()
+    sample = Sample_Information.query.filter_by(id = id).first()
     location = Sample_Location.query.filter_by(sample_id = id).first()
     return render_template('search_result_detials.html', title = "Search Result Details", 
                             form = form, icon = user_icon, sample = sample,
