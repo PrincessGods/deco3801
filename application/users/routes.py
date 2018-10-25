@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from application import db, bcrypt
 from application.users.forms import (RegistrationForm, LoginForm, UpdateProfileForm,
                                 RequestResetForm, ResetPasswordForm)
-from application.models import User, Sample_Information
+from application.models import User, Sample_Information, Paper
 from flask_login import login_user, current_user, logout_user, login_required
 from application.users.utils import save_picture, send_reset_email
 
@@ -137,3 +137,10 @@ def viewJobs():
     user_icon = getUserIcon()
     mySample_info = Sample_Information.query.filter_by(user_id = current_user.id).all()
     return render_template('viewJobs.html',icon = user_icon, title = "Review My Uploads", mySample_info = mySample_info)
+
+@users.route("/viewSavedPaper")
+@login_required
+def viewSavedPaper():
+    user_icon = getUserIcon()
+    mySaved_papers = Paper.query.filter_by(owner = current_user.id).all()
+    return render_template('viewSavedPaper.html',icon = user_icon, title = "Review My Uploads", mySaved_papers = mySaved_papers)

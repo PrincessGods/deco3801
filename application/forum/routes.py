@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from application import db, bcrypt
-from application.forum.forms import PostForm, PostSearchForm
-from application.models import User, Post
+from application.forum.forms import PostForm, PostSearchForm, CommentsPostForm
+from application.models import User, Post, Comments
 from flask_login import login_user, current_user, logout_user, login_required
 
 forum = Blueprint('forum', __name__)
@@ -45,21 +45,23 @@ def viewpost_post():
 
 @forum.route("/forum/<postID>", methods=['GET', 'POST'])
 def viewpostDetails(postID):
-    form = PostForm()
+    form = CommentsPostForm()
     user_icon = getUserIcon()
     post = Post.query.filter_by(post_id = postID).first()
+    comments = Comments.query.filter_by(post_id = postID).all()
     print(post)
-    # if form.validate_on_submit():
-    #     post = Post(
-    #         title = form.title.data,
-    #         contents = form.content.data,
-    #         owner = current_user.id
-    #     )
+    print(comments)
+    if form.validate_on_submit():
+        new_comment = Comments(
+            post_id = postID,
+            comment_content = form.content.data,
+            user_id = current_user.id
+        )
 
-    #     db.session.add(post)
-    #     db.session.commit()
+        db.session.add(new_comment)
+        db.session.commit()
 
-    #     return redirect(url_for('forum.viewpostDetails'))
+        return redirect(url_for('forum.viewpostDetails', postID = postID))
     return render_template('post_details.html', title='Post Details', 
                             form=form, icon = user_icon, 
-                            post = post)
+                            post=post, comments=comments)

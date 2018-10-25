@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <section class="d-flex w-100 mb-5 pb-2 border-bottom"> 
+        <div class="d-flex flex-column" id="pro-left">
+            <a class="pl-2 pr-5 py-2 border border text-primary not-selected" href="{{ url_for('users.profile') }}">Personal Information</a>
+            <a class="pl-2 pr-5 py-2 border border-top-0 text-primary not-selected" href="{{ url_for('users.viewJobs') }}">Review My Uploads</a>
+            <p class="pl-2 pr-5 py-2 mb-0 selected border-top-0 ">Review My Saved Papers</p>
+        </div>
+
+        <div class="d-flex flex-column ml-auto w-75" id="pro-right">
+            <h5 class="mt-3">My Saved Papers</h5>
+            <div>
+                {% for paper in mySaved_papers %}
+                        <div class="card-body border rounded mb-2">
+                            <h6 class="">Paper Saved Time: {{ paper.date }}</h6>
+                            <li><b>Paper Title:</b> {{ paper.title }}</li>
+                            <li><b>Paper Author:</b> {{ paper.paper_author }}</li>
+                            <a class="btn btn-primary mt-3" href="#">Download This Paper</a>
+                        </div> 
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock content %}

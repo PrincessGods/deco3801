@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <section class="d-flex w-100 mb-5 pb-2 border-bottom">
+
+        <div class="d-flex flex-column mr-auto w-75" id="left">
+            <div class="d-flex border rounded mb-4 px-3 py-3">
+                <legend class="border-bottom pb-2 mt-3 stepLable" style="display: none">
+                    Sample Detials
+                </legend>
+                <p class="text text-dark form-control">{{ sample.sample_type }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_job_number }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_raw_hrms_file_path }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_targets_file_path }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_matrix }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_private }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_is_processed }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_city }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_date }}</p>
+                <p class="text text-dark form-control">{{ sample.sample_country }}</p>
+            </div>
+
+            <div class="d-flex border rounded mb-4 px-3 py-3">
+                <legend class="border-bottom pb-2 mt-3 stepLable" style="display: none">
+                    Sample Location
+                </legend>
+                <p class="text text-dark form-control">{{ sample.sample_date }}</p>
+            </div>
+        </div>
+        
+    </section>
+</div>
+
+{% endblock content %}
+
+

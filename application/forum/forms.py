@@ -18,3 +18,8 @@ class PostSearchForm(FlaskForm):
     search = StringField('Search', validators=[DataRequired()]
                             , render_kw={"placeholder": "Search this site"})
     submit = SubmitField('Search')
+
+class CommentsPostForm(FlaskForm):
+    content = StringField('Reply:', validators=[DataRequired()], widget=TextArea())
+
+    submit = SubmitField('Post a comment')

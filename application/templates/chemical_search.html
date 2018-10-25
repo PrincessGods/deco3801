@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <section class="d-flex w-100 mb-5 pb-2 border-bottom">
+
+        <div class="d-flex flex-column mr-auto w-75">
+            <legend class="border-bottom pb-2 mt-3 stepLable">
+                Search Result
+            </legend>
+            <div>
+                {% for sample in samples %}
+                    <div class="d-flex border rounded mb-4 px-3 py-3">
+                        <a class="text text-primary" href="{{ url_for('main.searchDetails', id = sample.id) }}">{ sample.sample_job_number }}</a>
+                        <p class="text text-dark">{{ sample.sample_date }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </section>
+</div>
+
+{% endblock content %}
+
+

@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
     user_approved = db.Column('User_Approved', db.String(2), nullable=False, default='Y')
     posts = db.relationship('Post', backref='author', lazy=True)
     papers = db.relationship('Paper', backref='author', lazy=True)
+    comments = db.relationship('Comments', backref='author', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -45,7 +46,7 @@ class User(db.Model, UserMixin):
 
 class Post(db.Model):
     __tablename__ = 'forum'
-    post_id = db.Column(db.Integer, primary_key=True)
+    post_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
@@ -54,6 +55,17 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date}')"
+
+class Comments(db.Model):
+    __tablename__ = 'comments_post'
+    id = db.Column('comment_id',db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    post_id = db.Column('post_id',db.Integer, nullable=False)
+    comment_content = db.Column('comment_content',db.Text, nullable=False)
+    user_id = db.Column('user_id',db.Integer,db.ForeignKey('user.User_ID'), nullable=False)
+    date_of_comment = db.Column('date_of_comment',db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Post('{self.date_of_comment}','{self.post_id}','{self.user_id}','{self.id}')"
 
 class Paper(db.Model):
     __tablename__ = 'paper'

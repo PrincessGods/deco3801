@@ -1,5 +1,6 @@
 from flask import render_template, request, Blueprint, flash, redirect, url_for
-from application.models import Post
+from application.models import User, Sample_Information, Search_Results, Search_Results
+from application import db, bcrypt
 from application.main.forms import HomeSearchForm
 from flask_login import current_user
 
@@ -12,19 +13,25 @@ def home():
     form = HomeSearchForm()
     user_icon = getUserIcon()
     if form.validate_on_submit():
-        return redirect(url_for('users.profile'))
+        c_name = form.search.data
+        return redirect(url_for('main.search', name=c_name))
     return render_template('index.html', title = "QAEHS", form = form, icon = user_icon)
 
-@main.route("/search/", methods=['GET', 'POST'])
-def search():
+@main.route("/search/<name>", methods=['GET', 'POST'])
+def search(name):
     form = HomeSearchForm()
-    if form.validate_on_submit():
-        return redirect(url_for('users.profile'))
-    #return render_template('index.html', title = "QAEHS", form = form)
-    #if form.validate_on_submit():
-    #    return redirect(url_for('users.profile'))
-    #else:
-    #    return redirect(url_for('users.login'))
+    samples = Sample_Information.query.filter_by(sample_type = name).all()
+    return render_template('chenical_search.html', title = "Search Result", 
+                            form = form, icon = user_icon, samples = samples)
+
+@main.route("/searchDetails/<id>", methods=['GET', 'POST'])
+def search(id):
+    form = HomeSearchForm()
+    sample = Sample_Information.query.filter_by(sample_id = id).first()
+    location = Sample_Location.query.filter_by(sample_id = id).first()
+    return render_template('chenical_search.html', title = "Search Result Details", 
+                            form = form, icon = user_icon, sample = sample,
+                            location = location)
 
 def getUserIcon():
     if current_user.is_authenticated:
