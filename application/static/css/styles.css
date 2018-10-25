@@ -12,6 +12,11 @@ body{
   border-radius: 50%;
 }
 
+.result_container{
+  border: 3px solid #6f9fd8;
+  border-radius: 10px;
+}
+
 #topNav {
   width: 100%;
   background-color: #6f9fd8; }
