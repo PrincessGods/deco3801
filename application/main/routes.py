@@ -17,6 +17,11 @@ def home():
         return redirect(url_for('main.search', name=c_name))
     return render_template('index.html', title = "QAEHS", form = form, icon = user_icon)
 
+@main.route("/help")
+def help():
+    user_icon = getUserIcon()
+    return render_template('tutorial.html', title = "Help", icon = user_icon)
+
 @main.route("/search/<name>", methods=['GET', 'POST'])
 def search(name):
     form = HomeSearchForm()
