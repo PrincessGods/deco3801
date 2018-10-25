@@ -69,58 +69,19 @@
 
     <section id="grid" class="mt-2">
         <legend class="border-bottom pb-2"><h3>CEC Alerts</h3></legend>
-        <div class="row">
-            <div class="col-sm-11 col-md-4 mr-auto m-sm-auto">
-                <div class="card border-0 mb-4">
-                    <div class="card-body text-center">
-                        <img class="img-fluid" src="{{ url_for('static', filename='imgs/event1.png') }}" alt="Event 1">
-                        <h6 class="mt-3 text-dark">
-                            New Algorithm
-                        </h6>
-                        <p class="text-dark">Great news! A new algorithm for peak picking has been developed which will soon be available for use on CECEWSN. It is hoped that this new algorithm will lead to improved chemical identification with fewer false positives. Over the coming weeks, Dr Saer Samanipour will upload documentation on how this new algorithm works.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-11 col-md-4 m-auto">
-                <div class="card border-0 mb-4">
-                    <div class="card-body text-center">
-                        <img class="img-fluid" src="{{ url_for('static', filename='imgs/event2.png') }}" alt="Event 2">
-                        <h6 class="mt-3 text-dark">
-                            New Updated
-                        </h6>
-                        <p class="text-dark">
-                            Are you analysing for PFAS but don’t have many analytical standards? CECEWSN has just been updated to include spectra for branched PFAS. 
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-11 col-md-4 ml-auto m-sm-auto">
-                <div class="card border-0 mb-4">
-                    <div class="card-body text-center">
-                        <img class="img-fluid" src="{{ url_for('static', filename='imgs/event3.png')}}" alt="Event 3">
-                        <h6 class="mt-3 text-dark">
-                            Chromatography Techniques
-                        </h6>
-                        <p class="text-dark">
-                            Are your hormones giving you separation issues? In this article we discuss chromatography techniques to improve the separation of both anabolic and endogenous steroids.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-11 col-md-4 ml-auto m-sm-auto">
-                <div class="card border-0 mb-4">
-                    <div class="card-body text-center">
-                        <img class="img-fluid" src="{{ url_for('static', filename='imgs/event3.png')}}" alt="Event 3">
-                        <h6 class="mt-3 text-dark">
-                            Conference Announcement
-                        </h6>
-                        <p class="text-dark">
-                            Conference Announcement! The 11th Micropol &amp; Ecohazard Conference will be held from Sunday 20th October to Wednesday 23rd October 2019 in EL Tower, Seoul, Korea. Abstract submission closes on 28 February 2019. See the website for more details: <a href="http://www.micropol2019.org" target="_blank">http://www.micropol2019.org</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="d-flex flex-column">
+            <label class="form-control-label mt-2">New Algorithm</label>
+            <p class="text text-dark mb-3">Great news! A new algorithm for peak picking has been developed which will soon be available for use on CECEWSN. It is hoped that this new algorithm will lead to improved chemical identification with fewer false positives. Over the coming weeks, Dr Saer Samanipour will upload documentation on how this new algorithm works.</p>
+            
+            <label class="form-control-label">New Updated</label>
+            <p class="text text-dark mb-3">Are you analysing for PFAS but don’t have many analytical standards? CECEWSN has just been updated to include spectra for branched PFAS. </p>
+            
+            <label class="form-control-label">Chromatography Techniques</label>
+            <p class="text text-dark mb-3">Are your hormones giving you separation issues? In this article we discuss chromatography techniques to improve the separation of both anabolic and endogenous steroids.</p>
+            
+            <label class="form-control-label">Conference Announcement</label>
+            <p class="text text-dark mb-3">Conference Announcement! The 11th Micropol &amp; Ecohazard Conference will be held from Sunday 20th October to Wednesday 23rd October 2019 in EL Tower, Seoul, Korea. Abstract submission closes on 28 February 2019. See the website for more details: <a class="text-primary" href="http://www.micropol2019.org" target="_blank">http://www.micropol2019.org</a></p>
+        
         </div>
     </section>
 </div>
