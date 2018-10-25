@@ -20,17 +20,13 @@
         
         <div>
             {% for comment in comments %}
-                <div class="d-flex border rounded mb-4 px-3 py-3 mt-4">
-                    <div class="post_left">
-                        <img class="rounded-circle article-img w-100 post_icon" src="{{ url_for('static', filename='imgs/' + post.author.user_icon) }}">
+                <div class="d-flex border rounded py-4 px-3">
+                    <div class="post-left bg-gray border-right d-flex flex-column pr-3">
+                        <img class="rounded mb-3 m-auto w-75" src="{{ url_for('static', filename='imgs/' + comment.author.user_icon) }}">
                     </div>
-
-                    <div class="post_right">
-                        <div class="border-bottom pb-1 mb-3 d-flex">
-                            <p class="text text-primary">{{ comment.author.user_firstname }} {{ comment.author.user_lastname }}</p>                           
-                            <p class="mb-0 ml-3">{{ comment.date_of_comment.strftime('%Y-%m-%d') }}</p>
-                        </div>
-                        <p class="mb-0 post-text">{{ comment.comment_content }}</p>
+        
+                    <div class="post-right my-auto mr-auto pl-4">
+                        <p class="mb-0 text-dark">{{ comment.comment_content }}</p>
                     </div>
                 </div>
             {% endfor %}

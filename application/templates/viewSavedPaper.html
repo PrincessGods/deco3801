@@ -17,7 +17,7 @@
                             <h6 class="">Paper Saved Time: {{ paper.date }}</h6>
                             <li><b>Paper Title:</b> {{ paper.title }}</li>
                             <li><b>Paper Author:</b> {{ paper.paper_author }}</li>
-                            <a class="btn btn-primary mt-3" href="#">Download This Paper</a>
+                            <a class="btn btn-primary mt-3" href="{{ url_for('documentation.download_paper', file_id = paper.paper_id) }}">Download This Paper</a>
                         </div> 
                 {% endfor %}
             </div>

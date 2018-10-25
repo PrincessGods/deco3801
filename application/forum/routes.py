@@ -49,8 +49,6 @@ def viewpostDetails(postID):
     user_icon = getUserIcon()
     post = Post.query.filter_by(post_id = postID).first()
     comments = Comments.query.filter_by(post_id = postID).all()
-    print(post)
-    print(comments)
     if form.validate_on_submit():
         new_comment = Comments(
             post_id = postID,
