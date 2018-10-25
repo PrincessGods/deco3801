@@ -25,7 +25,7 @@ def search(name):
                             form = form, icon = user_icon, samples = samples)
 
 @main.route("/searchDetails/<id>", methods=['GET', 'POST'])
-def search(id):
+def searchDetails(id):
     form = HomeSearchForm()
     sample = Sample_Information.query.filter_by(sample_id = id).first()
     location = Sample_Location.query.filter_by(sample_id = id).first()
