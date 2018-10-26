@@ -862,22 +862,6 @@
                                 {% endif %}
                             </div>
 
-                            <!--Chromatography mobile phase b-->
-                            <div class="form-group">
-                                {{ form.chrom_event_stage.label(class="form-control-label") }}
-
-                                {% if form.chrom_event_stage.errors %}
-                                    {{ form.chrom_event_stage(class="form-control form-control-lg is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for error in form.chrom_event_stage.errors %}
-                                            <span>{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form.chrom_event_stage(class="form-control form-control-lg") }}
-                                {% endif %}
-                            </div>
-
                             <!--Chromatography event stage-->
                             <div class="form-group">
                                 {{ form.chrom_event_stage.label(class="form-control-label") }}
